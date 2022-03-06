@@ -17,7 +17,7 @@ return(
         Rejection
     </Button>
    <CertifiedStudents certificateId={props.certificateId}/>
-   <CertifiedStatus status={status} trainingId={}/>
+   <CertifiedStatus status={status} trainingId={props.trainingId}/>
     </>
 )
 }
