@@ -33,7 +33,7 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
             </>}
         </>}
         {
-            certificateId!=0&&<CertificateDetail certificateId={certificateId}/>
+            certificateId!=0&&<CertificateDetail trainingId={props.trainingId} certificateId={certificateId}/>
         }
     </>
 }
