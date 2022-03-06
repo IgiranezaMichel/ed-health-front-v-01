@@ -2,8 +2,9 @@
 import { Button} from "@mui/material"
 import { CertifiedStudents } from "./CertifiedStudents";
 import { CertifiedStatus } from "./CertifiedStatus";
+import { useState } from "react";
 export const CertifiedStudentList=(props:{certificateId:number})=>{
-    
+    const [status,setStatus]=useState('approved');
 return(
     <>
     <Button variant="contained" className="rounded-0 mx-2">
@@ -16,7 +17,7 @@ return(
         Rejection
     </Button>
    <CertifiedStudents certificateId={props.certificateId}/>
-   <CertifiedStatus/>
+   <CertifiedStatus status={status} trainingId={}/>
     </>
 )
 }
