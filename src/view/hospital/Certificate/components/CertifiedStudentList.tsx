@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button} from "@mui/material"
 import { CertifiedStudents } from "./CertifiedStudents";
+import { CertifiedStatus } from "./CertifiedStatus";
 export const CertifiedStudentList=(props:{certificateId:number})=>{
     
 return(
@@ -15,6 +16,7 @@ return(
         Rejection
     </Button>
    <CertifiedStudents certificateId={props.certificateId}/>
+   <CertifiedStatus/>
     </>
 )
 }
