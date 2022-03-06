@@ -4,7 +4,7 @@ import { Button, Card, CircularProgress, Divider } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { CertifiedStudentList } from "./CertifiedStudentList";
 
-export const CertificateDetail = (props: { certificateId: number }) => {
+export const CertificateDetail = (props: { certificateId: number,trainingId:number }) => {
     const [show, setShow] = useState('');
     const certificate = useFindCertificateById_(props.certificateId);
     return (
@@ -66,7 +66,7 @@ export const CertificateDetail = (props: { certificateId: number }) => {
                             }
                         </div>
                     </Card>
-                <CertifiedStudentList certificateId={props.certificateId}/>
+                <CertifiedStudentList certificateId={props.certificateId} trainingId={props.trainingId}/>
                 </>
             }
         </>
