@@ -3,7 +3,7 @@ import { Button} from "@mui/material"
 import { CertifiedStudents } from "./CertifiedStudents";
 import { CertifiedStatus } from "./CertifiedStatus";
 import { useState } from "react";
-export const CertifiedStudentList=(props:{certificateId:number})=>{
+export const CertifiedStudentList=(props:{certificateId:number,trainingId:number})=>{
     const [status,setStatus]=useState('approved');
 return(
     <>
