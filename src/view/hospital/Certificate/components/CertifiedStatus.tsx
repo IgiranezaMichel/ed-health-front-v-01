@@ -19,14 +19,14 @@ export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
             <div className="p-2">
                 {certifiedStudents.certifiedStudentDetailObj.content.length==0?<Card elevation={3} className="p-4 text-center fw-bold">
                         --No data found --
-                </Card>:<div>
+                </Card>:<div className="mt-2 mb-2">
                     {
                         certifiedStudents.certifiedStudentDetailObj.content.map((data:any)=>{
-                            return <Card className="row col-12 m-auto">
-                                <div className="col-sm-2 d-flex align-content-center align-items-center">
+                            return <Card elevation={4} className="row col-12 m-auto mb-3">
+                                <section className="col-sm-2 d-flex align-content-center align-items-center">
                                     <img src={data.student.user.profilePicture} className="card-img" />
-                                </div>
-                                <div className="col-md-5 d-flex align-items-center">
+                                </section>
+                                <section className="col-md-5 d-flex align-items-center">
                                     <div>
                                     <div className="mb-2"><Person/> {data.student.user.name}</div>
                                     <div className="mb-2"><Email/> {data.student.user.email}</div>
@@ -34,7 +34,7 @@ export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
                                     <div className="mb-2"><Phone/> {data.student.user.phoneNumber}</div>
                                     <div className="mb-2"><CalendarIcon/> {String(data.student.user.dob).split('T')[0]}</div>
                                     </div>
-                                </div>
+                                </section>
                                 <section className="col-md-5 d-flex align-items-center">
                                     <div>
                                         <ul>
