@@ -11,7 +11,6 @@ import { STATUS } from "../../../../enums/Status";
 export const TrainingApplicationDetail = () => {
   const { trainingId } = useParams();
   const [applicantStatus, setApplicantStatus] = useState(STATUS.APPENDING);
-  console.log(applicantStatus)
   return (
     <Navigation items={HospitalMenu}>
       <div className="row col-sm-12 mb-4">
