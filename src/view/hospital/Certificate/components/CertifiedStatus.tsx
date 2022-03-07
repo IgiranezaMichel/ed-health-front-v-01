@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useGetCertifiedStudentByAdminApprovalStatus } from "../../../../controller/viewHooks/TrainingApplication/trainingApplication"
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 import { Card, CircularProgress } from "@mui/material";
-import { CancelPresentationOutlined, Check, CheckBox, Email, Person, Phone, Wc } from "@mui/icons-material";
+import { CancelPresentationOutlined, Check, CheckBox, Email, Person, Phone, SaveAlt, Wc } from "@mui/icons-material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { Modal } from "../../../../components/default/Modal";
 
@@ -11,8 +11,10 @@ export const CertifiedStatus = (props: { status: string, trainingId: number }) =
     const [status, setStatus] = useState('');
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     console.log(certifiedStudents);
-    const addSaveChangesModal = <Modal id="action" title="Update student" actionBtn={<button>Save</button>}>
+    const addSaveChangesModal = <Modal actionBtn={<SaveAlt/>} id="saveChanges" title="Update application" >
+        <div className="p-2">
         Are you sure you want to
+        </div>
     </Modal>
     return (
         <>
@@ -50,8 +52,8 @@ export const CertifiedStatus = (props: { status: string, trainingId: number }) =
                                                         <span style={{ fontFamily: 'fantasy' }}>Department </span>{data.student.department.name}
                                                     </li>
                                                     <li className="nav-link modal-footer">
-                                                        <CheckBox data-toggle="modal" data-target="#action" onClick={() => setStatus('certified')} className="fs-1" />
-                                                        <CancelPresentationOutlined data-toggle="modal" data-target="#action" onClick={() => setStatus('rejected')} className="fs-1" />
+                                                        <CheckBox data-toggle="modal" data-target="#saveChanges" onClick={() => setStatus('certified')} className="fs-1" />
+                                                        <CancelPresentationOutlined data-toggle="modal" data-target="#saveChanges" onClick={() => setStatus('rejected')} className="fs-1" />
                                                     </li>
                                                 </ul>
                                             </div>
