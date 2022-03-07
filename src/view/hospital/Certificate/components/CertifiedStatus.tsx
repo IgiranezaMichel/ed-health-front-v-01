@@ -36,7 +36,14 @@ export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
                                     </div>
                                 </div>
                                 <div className="col-md-5">
-                                    
+                                    <div>
+                                        <ul>
+                                            <li className="mb-2">
+                                                <span style={{fontFamily:'fantasy'}}>School Name</span>{data.student.school.name}
+                                            </li>
+                                            <li className="mb-2">{data.student.department.name}</li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </Card>
                         })
