@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useGetCertifiedStudentByAdminApprovalStatus } from "../../../../controller/viewHooks/TrainingApplication/trainingApplication"
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
-import { Card, CircularProgress } from "@mui/material";
+import { Button, Card, CircularProgress } from "@mui/material";
 import { CancelPresentationOutlined, Check, CheckBox, Email, Person, Phone, SaveAlt, Wc } from "@mui/icons-material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { Modal } from "../../../../components/default/Modal";
@@ -18,6 +18,9 @@ export const CertifiedStatus = (props: { status: string, trainingId: number }) =
     </Modal>
     return (
         <>
+        <div>
+        {addSaveChangesModal}
+        </div>
             {
                 certifiedStudents.isLoading ? <div>
                     <CircularProgress />
@@ -52,7 +55,9 @@ export const CertifiedStatus = (props: { status: string, trainingId: number }) =
                                                         <span style={{ fontFamily: 'fantasy' }}>Department </span>{data.student.department.name}
                                                     </li>
                                                     <li className="nav-link modal-footer">
-                                                        <CheckBox data-toggle="modal" data-target="#saveChanges" onClick={() => setStatus('certified')} className="fs-1" />
+                                                        <Button data-toggle="modal" data-target="#saveChanges">
+                                                        <CheckBox  onClick={() => setStatus('certified')} className="fs-1" />
+                                                        </Button>
                                                         <CancelPresentationOutlined data-toggle="modal" data-target="#saveChanges" onClick={() => setStatus('rejected')} className="fs-1" />
                                                     </li>
                                                 </ul>
@@ -64,7 +69,6 @@ export const CertifiedStatus = (props: { status: string, trainingId: number }) =
                         </div>}
                     </div>
             }
-            {addSaveChangesModal}
         </>
     )
 }
