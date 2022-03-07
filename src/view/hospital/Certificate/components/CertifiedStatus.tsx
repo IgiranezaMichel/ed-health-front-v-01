@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useGetCertifiedStudentByAdminApprovalStatus } from "../../../../controller/viewHooks/TrainingApplication/trainingApplication"
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 import { Card, CircularProgress } from "@mui/material";
-import { Email, Person, Phone, Wc } from "@mui/icons-material";
+import { CancelPresentationOutlined, Check, CheckBox, Email, Person, Phone, Wc } from "@mui/icons-material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 
 export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
@@ -35,18 +35,22 @@ export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
                                     <div className="mb-2"><CalendarIcon/> {String(data.student.user.dob).split('T')[0]}</div>
                                     </div>
                                 </div>
-                                <div className="col-md-5">
+                                <section className="col-md-5 d-flex align-items-center">
                                     <div>
                                         <ul>
-                                            <li className="mb-2">
+                                            <li className="mb-2 nav-link">
                                                 <span style={{fontFamily:'fantasy'}}>School Name </span>{data.student.school.name}
                                             </li>
-                                            <li className="mb-2">
+                                            <li className="mb-2 nav-link">
                                             <span style={{fontFamily:'fantasy'}}>Department </span>{data.student.department.name}
+                                            </li>
+                                            <li className="nav-link modal-footer">
+                                                <CheckBox className="fs-1"/>
+                                                <CancelPresentationOutlined className="fs-1"/>
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
+                                </section>
                             </Card>
                         })
                     }
