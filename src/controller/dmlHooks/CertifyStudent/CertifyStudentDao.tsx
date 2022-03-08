@@ -10,5 +10,5 @@ const registerHandler=()=>{
     .then(data=>setMessage(data.data.certifyStudent))
     .catch(err=>err)
 }
-return {}
+return {message,registerHandler}
 }
