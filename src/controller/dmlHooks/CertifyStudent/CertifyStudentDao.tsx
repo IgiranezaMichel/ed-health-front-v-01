@@ -4,6 +4,6 @@ import { CERTIFY_STUDENT } from "../../../graphQl/mutation/CertifiedStudentMutat
 export const useSaveCertifyStudent=(trainingApplicationId:number,applicationStatus:string,certifyStudentInput:CertifiedStudentInput)=>{
 const [saveCertifyStudent]=useMutation(CERTIFY_STUDENT);
 const registerHandler=()=>{
-    saveCertifyStudent({})
+    saveCertifyStudent({variables:{trainingApplicationId:trainingApplicationId,applicationStatus:applicationStatus,certifyStudentInput:certifyStudentInput}})
 }
 }
