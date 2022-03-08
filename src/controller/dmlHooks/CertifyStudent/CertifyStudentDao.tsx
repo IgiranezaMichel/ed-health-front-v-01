@@ -7,6 +7,7 @@ const [saveCertifyStudent]=useMutation(CERTIFY_STUDENT);
 const [message,setMessage]=useState('');
 const registerHandler=()=>{
     saveCertifyStudent({variables:{trainingApplicationId:trainingApplicationId,applicationStatus:applicationStatus,certifyStudentInput:certifyStudentInput}})
-    .then(data=>setMessage(data.data.certifyStudent));
+    .then(data=>setMessage(data.data.certifyStudent))
+    .catch(err=>err)
 }
 }
