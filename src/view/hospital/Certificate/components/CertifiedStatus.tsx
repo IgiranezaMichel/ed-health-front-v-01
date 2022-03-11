@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useGetCertifiedStudentByAdminApprovalStatus } from "../../../../controller/viewHooks/TrainingApplication/trainingApplication"
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 import { Button, Card, CircularProgress } from "@mui/material";
-import { CancelPresentationOutlined, Check, CheckBox, Email, Person, Phone, Save, SaveAlt, Wc } from "@mui/icons-material";
+import { CancelPresentationOutlined, CheckBox, Email, Person, Phone, Wc } from "@mui/icons-material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { Modal } from "../../../../components/default/Modal";
 import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifyStudent/CertifyStudentDao";
