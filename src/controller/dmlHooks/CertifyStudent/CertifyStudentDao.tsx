@@ -4,7 +4,7 @@ import { useState } from "react";
 import { CertifiedStudentInput } from "../../../typeDefs/CertifiedStudentInput";
 import { CertificateStatus } from "../../../enums/CertificateStatus";
 
-export const useSaveCertifyStudent=(trainingApplicationId:number,applicationStatus:CertificateStatus,certifyStudentInput:CertifiedStudentInput)=>{
+export const useSaveCertifyStudent=(trainingApplicationId:number,applicationStatus:string,certifyStudentInput:CertifiedStudentInput)=>{
 const [saveCertifyStudent]=useMutation(CERTIFY_STUDENT);
 const [message,setMessage]=useState('');
 const [isLoading,setIsLoading]=useState(true);
