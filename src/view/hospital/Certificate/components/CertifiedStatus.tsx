@@ -5,11 +5,14 @@ import { Button, Card, CircularProgress } from "@mui/material";
 import { CancelPresentationOutlined, Check, CheckBox, Email, Person, Phone, SaveAlt, Wc } from "@mui/icons-material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { Modal } from "../../../../components/default/Modal";
+import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifyStudent/CertifyStudentDao";
 
 export const CertifiedStatus = (props: { status: string, trainingId: number }) => {
     const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const [status, setStatus] = useState('');
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
+
+    const certifyStudent=useSaveCertifyStudent(props.trainingId,status,certifyStudentInput);
     console.log(certifiedStudents);
     const addSaveChangesModal = <Modal actionBtn={<SaveAlt/>} id="saveChanges" title="Update application" >
         <div className="p-2">
