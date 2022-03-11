@@ -11,9 +11,11 @@ import { CertificateStatus } from "../../../../enums/CertificateStatus";
 
 export const CertifiedStatus = (props: { status: string, trainingId: number }) => {
     const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
-    const [status, setStatus] = useState('');
+    const [status, setStatus] = useState(CertificateStatus.APPROVED);
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
-    const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>({certificateId:0,CertificateStatus:CertificateStatus.APPROVED,id:0,studentId:0});
+    const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>(
+        {certificateId:0,CertificateStatus:status,id:0,studentId:0}
+        );
     const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,status,certifyStudent);
     console.log(certifiedStudents);
     const addSaveChangesModal = <Modal actionBtn={<SaveAlt/>} id="saveChanges" title="Update application" >
