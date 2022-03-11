@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useGetCertifiedStudentByAdminApprovalStatus } from "../../../../controller/viewHooks/TrainingApplication/trainingApplication"
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 import { Button, Card, CircularProgress } from "@mui/material";
-import { CancelPresentationOutlined, Check, CheckBox, Email, Person, Phone, SaveAlt, Wc } from "@mui/icons-material";
+import { CancelPresentationOutlined, Check, CheckBox, Email, Person, Phone, Save, SaveAlt, Wc } from "@mui/icons-material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { Modal } from "../../../../components/default/Modal";
 import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifyStudent/CertifyStudentDao";
@@ -17,17 +17,12 @@ export const CertifiedStatus = (props: { status: string, trainingId: number }) =
         {certificateId:0,CertificateStatus:status,id:0,studentId:0}
         );
     const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,status,certifyStudent);
-    console.log(certifiedStudents);
-    const addSaveChangesModal = <Modal actionBtn={<SaveAlt/>} id="saveChanges" title="Update application" >
-        <div className="p-2">
-        Are you sure you want to
-        </div>
-    </Modal>
+    const registerCertifyStudent=()=>{
+        saveCertifyStudent.registerHandler();
+        
+    }
     return (
         <>
-        <div>
-        {addSaveChangesModal}
-        </div>
             {
                 certifiedStudents.isLoading ? <div>
                     <CircularProgress />
