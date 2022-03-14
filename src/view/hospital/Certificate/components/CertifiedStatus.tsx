@@ -6,14 +6,15 @@ import { CancelPresentationOutlined, CheckBox, Email, Person, Phone, Wc } from "
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifyStudent/CertifyStudentDao";
 import { CertifiedStudentInput } from "../../../../typeDefs/CertifiedStudentInput";
+import { CertificateStatus } from "../../../../enums/CertificateStatus";
 
 export const CertifiedStatus = (props: { status: string, trainingId: number }) => {
     const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const [studentApplicationStatus, setStudentApplicationStatus] = useState('certified');
-    const [certifyStudentStatus, setCertifyStudentStatus] = useState(CertifiedStatus);
+    const [certifyStudentStatus, setCertifyStudentStatus] = useState(CertificateStatus.APPROVED);
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>(
-        {certificateId:0,CertificateStatus:,id:0,studentId:0}
+        {certificateId:0,CertificateStatus:certifyStudentStatus,id:0,studentId:0}
         );
     const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,studentApplicationStatus,certifyStudent);
     const registerCertifyStudent=()=>{
