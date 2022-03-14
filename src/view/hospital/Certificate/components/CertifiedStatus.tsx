@@ -9,7 +9,7 @@ import { CertifiedStudentInput } from "../../../../typeDefs/CertifiedStudentInpu
 import { CertificateStatus } from "../../../../enums/CertificateStatus";
 
 export const CertifiedStatus = (props: { status: string, trainingId: number }) => {
-    const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
+    const [page,setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const [studentApplicationStatus, setStudentApplicationStatus] = useState('certified');
     const [certifyStudentStatus, setCertifyStudentStatus] = useState(CertificateStatus.APPROVED);
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
