@@ -19,7 +19,6 @@ export const CertifiedStatus = (props: { status: string, trainingId: number }) =
     const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,studentApplicationStatus,certifyStudent);
     const registerCertifyStudent=()=>{
         saveCertifyStudent.registerHandler();
-        
     }
     return (
         <>
