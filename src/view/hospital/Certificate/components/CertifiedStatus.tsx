@@ -4,19 +4,18 @@ import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 import { Button, Card, CircularProgress } from "@mui/material";
 import { CancelPresentationOutlined, CheckBox, Email, Person, Phone, Wc } from "@mui/icons-material";
 import { CalendarIcon } from "@mui/x-date-pickers";
-import { Modal } from "../../../../components/default/Modal";
 import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifyStudent/CertifyStudentDao";
 import { CertifiedStudentInput } from "../../../../typeDefs/CertifiedStudentInput";
-import { CertificateStatus } from "../../../../enums/CertificateStatus";
 
 export const CertifiedStatus = (props: { status: string, trainingId: number }) => {
     const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
-    const [studentApplicatonStatus, setStudentApplicationStatus] = useState('approved');
+    const [studentApplicationStatus, setStudentApplicationStatus] = useState('certified');
+    const [certifyStudentStatus, setCertifyStudentStatus] = useState(CertifiedStatus);
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>(
         {certificateId:0,CertificateStatus:,id:0,studentId:0}
         );
-    const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,status,certifyStudent);
+    const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,studentApplicationStatus,certifyStudent);
     const registerCertifyStudent=()=>{
         saveCertifyStudent.registerHandler();
         
