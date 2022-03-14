@@ -11,7 +11,7 @@ import { CertificateStatus } from "../../../../enums/CertificateStatus";
 
 export const CertifiedStatus = (props: { status: string, trainingId: number }) => {
     const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
-    const [status, setStatus] = useState(CertificateStatus.APPROVED);
+    const [status, setStatus] = useState('approved');
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>(
         {certificateId:0,CertificateStatus:status,id:0,studentId:0}
