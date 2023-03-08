@@ -8,7 +8,7 @@ import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifySt
 import { CertifiedStudentInput } from "../../../../typeDefs/CertifiedStudentInput";
 import { CertificateStatus } from "../../../../enums/CertificateStatus";
 
-export const CertifiedStatus = (props: { status: string, trainingId: number }) => {
+export const CertifiedStatus = (props: { status: string, trainingId: number ,certificateId:number}) => {
     const [page,setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const [studentApplicationStatus, setStudentApplicationStatus] = useState('certified');
     const [certifyStudentStatus, setCertifyStudentStatus] = useState(CertificateStatus.APPROVED);
@@ -16,7 +16,7 @@ export const CertifiedStatus = (props: { status: string, trainingId: number }) =
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     // certifying student hook
     const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>(
-        {certificateId:0,CertificateStatus:certifyStudentStatus,id:0,studentId:0}
+        {certificateId:props.certificateId,CertificateStatus:certifyStudentStatus,id:0,studentId:0}
         );
     const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,studentApplicationStatus,certifyStudent);
     const registerCertifyStudent=()=>{
