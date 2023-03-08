@@ -17,7 +17,7 @@ return(
         Rejection
     </Button>
    {status=='certificate'&&<CertifiedStudents certificateId={props.certificateId}/>}
-   {(status=='approved'||status=='rejected')&&<CertifiedStatus status={status} trainingId={props.trainingId}/>}
+   {(status=='approved'||status=='rejected')&&<CertifiedStatus certificateId={props.certificateId} status={status} trainingId={props.trainingId}/>}
     </>
 )
 }
