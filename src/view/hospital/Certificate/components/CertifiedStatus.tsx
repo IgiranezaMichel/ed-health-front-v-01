@@ -14,6 +14,7 @@ export const CertifiedStatus = (props: { status: string, trainingId: number }) =
     const [certifyStudentStatus, setCertifyStudentStatus] = useState(CertificateStatus.APPROVED);
     //retrieve list of certified person according to the status provided
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
+    // certifying student hook
     const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>(
         {certificateId:0,CertificateStatus:certifyStudentStatus,id:0,studentId:0}
         );
