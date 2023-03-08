@@ -17,7 +17,7 @@ export const CertifiedStatus = (props: { status: string, trainingId: number ,cer
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     // certifying student hook
     const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>(
-        {certificateId:props.certificateId,CertificateStatus:certifyStudentStatus,id:0,studentId:0}
+        {id:0,studentId:0,certificateId:props.certificateId,CertificateStatus:certifyStudentStatus}
         );
     const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,studentApplicationStatus,certifyStudent);
     const registerCertifyStudent=()=>{
