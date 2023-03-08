@@ -12,7 +12,6 @@ import { CertificateStatus } from "../../../../enums/CertificateStatus";
 export const CertifiedStatus = (props: { status: string, trainingId: number ,certificateId:number}) => {
     const [page,setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const [studentApplicationStatus, setStudentApplicationStatus] = useState('certified');
-    const [certifyStudentStatus, setCertifyStudentStatus] = useState(CertificateStatus.APPROVED);
     //retrieve list of certified person according to the status provided
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     // certifying student hook
@@ -20,7 +19,7 @@ export const CertifiedStatus = (props: { status: string, trainingId: number ,cer
         {   id:0,
             studentId:0,
             certificateId:props.certificateId,
-            CertificateStatus:certifyStudentStatus
+            CertificateStatus:CertificateStatus.APPROVED
         });
     const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,studentApplicationStatus,certifyStudent);
     const registerCertifyStudent=()=>{
