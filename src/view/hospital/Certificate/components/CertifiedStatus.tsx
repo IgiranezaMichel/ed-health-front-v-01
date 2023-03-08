@@ -63,9 +63,14 @@ export const CertifiedStatus = (props: { status: string, trainingId: number ,cer
                                                     </li>
                                                     <li className="nav-link modal-footer">
                                                         <Button data-toggle="modal" data-target="#saveChanges">
-                                                        <CheckBox  onClick={() => setCertifyStudent({CertificateStatus:CertificateStatus.APPROVED,certificateId:props.certificateId,id:0,studentId:Number(data.student.id)})} className="fs-1" />
+                                                        <CheckBox  onClick={() =>{ setCertifyStudent({
+                                                            CertificateStatus:CertificateStatus.APPROVED,
+                                                            certificateId:props.certificateId,
+                                                            id:0,studentId:Number(data.student.id)
+                                                        }
+                                                        );setStudentApplicationStatus('certified');registerCertifyStudent()}} className="fs-1" />
                                                         </Button>
-                                                        <CancelPresentationOutlined onClick={() => setCertifyStudent({CertificateStatus:CertificateStatus.DENY,certificateId:props.certificateId,id:0,studentId:Number(data.student.id)})} className="fs-1" />
+                                                        <CancelPresentationOutlined onClick={() => {setCertifyStudent({CertificateStatus:CertificateStatus.DENY,certificateId:props.certificateId,id:0,studentId:Number(data.student.id)});setStudentApplicationStatus('rejected')}} className="fs-1" />
                                                     </li>
                                                 </ul>
                                             </div>
