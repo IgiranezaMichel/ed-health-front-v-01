@@ -81,6 +81,7 @@ query($status:String,$trainingId:Long,$input:PaginationInput){
     size
     content{
       student{
+        id
         user{
           profilePicture
           name
