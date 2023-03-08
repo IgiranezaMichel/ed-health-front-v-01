@@ -17,8 +17,11 @@ export const CertifiedStatus = (props: { status: string, trainingId: number ,cer
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     // certifying student hook
     const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>(
-        {id:0,studentId:0,certificateId:props.certificateId,CertificateStatus:certifyStudentStatus}
-        );
+        {   id:0,
+            studentId:0,
+            certificateId:props.certificateId,
+            CertificateStatus:certifyStudentStatus
+        });
     const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,studentApplicationStatus,certifyStudent);
     const registerCertifyStudent=()=>{
         saveCertifyStudent.registerHandler();
@@ -60,9 +63,9 @@ export const CertifiedStatus = (props: { status: string, trainingId: number ,cer
                                                     </li>
                                                     <li className="nav-link modal-footer">
                                                         <Button data-toggle="modal" data-target="#saveChanges">
-                                                        <CheckBox  onClick={() => setStatus('certified')} className="fs-1" />
+                                                        <CheckBox  onClick={() => setCertifyStudent({CertificateStatus:CertificateStatus.APPROVED,certificateId:props.certificateId,id:0,studentId:Number(data.student.id)})} className="fs-1" />
                                                         </Button>
-                                                        <CancelPresentationOutlined data-toggle="modal" data-target="#saveChanges" onClick={() => setStatus('rejected')} className="fs-1" />
+                                                        <CancelPresentationOutlined onClick={() => setCertifyStudent({CertificateStatus:CertificateStatus.DENY,certificateId:props.certificateId,id:0,studentId:Number(data.student.id)})} className="fs-1" />
                                                     </li>
                                                 </ul>
                                             </div>
