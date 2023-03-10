@@ -29,7 +29,10 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
     const registerCertifyStudent = () => {
         saveCertifyStudent.registerHandler();
     }
-
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        event;
+        setPage({ ...page, pageNumber: value - 1 });
+    };
     return (
         <>
             {
