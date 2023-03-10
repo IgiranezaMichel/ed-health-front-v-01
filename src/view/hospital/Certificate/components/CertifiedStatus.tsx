@@ -25,9 +25,11 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
         });
         console.log('certificate status '+CertificateStatus.APPROVED)
     const saveCertifyStudent = useSaveCertifyStudent(trainingApplicationId, studentApplicationStatus, certifyStudent);
+//    Register certify Student handler
     const registerCertifyStudent = () => {
         saveCertifyStudent.registerHandler();
     }
+
     return (
         <>
             {
