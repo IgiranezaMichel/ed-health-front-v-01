@@ -20,8 +20,9 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
             id: 0,
             studentId: 0,
             certificateId: props.certificateId,
-            CertificateStatus: CertificateStatus.APPROVED
+            CertificateStatus:CertificateStatus.APPROVED
         });
+        console.log('certificate status '+CertificateStatus.APPROVED)
     const saveCertifyStudent = useSaveCertifyStudent(props.trainingId, studentApplicationStatus, certifyStudent);
     const registerCertifyStudent = () => {
         saveCertifyStudent.registerHandler();
@@ -65,14 +66,14 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
                                                         <Button>
                                                             <CheckBox onClick={() => {
                                                                 setCertifyStudent({
-                                                                    CertificateStatus: CertificateStatus.APPROVED,
+                                                                    CertificateStatus:CertificateStatus.APPROVED,
                                                                     certificateId: props.certificateId,
                                                                     id: 0, studentId: Number(data.student.id)
                                                                 }
                                                                 ); setStudentApplicationStatus('certified'); registerCertifyStudent()
                                                             }} className="fs-1" />
                                                         </Button>
-                                                        <CancelPresentationOutlined onClick={() => { setCertifyStudent({ CertificateStatus: CertificateStatus.DENY, certificateId: props.certificateId, id: 0, studentId: Number(data.student.id) }); setStudentApplicationStatus('rejected') }} className="fs-1" />
+                                                        <CancelPresentationOutlined onClick={() => { setCertifyStudent({ CertificateStatus:CertificateStatus.DENY, certificateId: props.certificateId, id: 0, studentId: Number(data.student.id) }); setStudentApplicationStatus('rejected') }} className="fs-1" />
                                                     </li>
                                                 </ul>
                                             </div>
