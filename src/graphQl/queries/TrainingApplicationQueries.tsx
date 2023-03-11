@@ -80,6 +80,7 @@ query($status:String,$trainingId:Long,$input:PaginationInput){
     totalPages
     size
     content{
+      id
       student{
         id
         user{
