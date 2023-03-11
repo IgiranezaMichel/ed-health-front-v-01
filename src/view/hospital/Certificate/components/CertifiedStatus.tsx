@@ -37,8 +37,8 @@ export const CertifiedStatus = (props: { status: string, trainingId: number ,cer
                             --No data found --
                         </Card> : <div className="mt-2 mb-2">
                             {
-                                certifiedStudents.certifiedStudentDetailObj.content.map((data: any) => {
-                                    return <Card elevation={4} className="row col-12 m-auto mb-3">
+                                certifiedStudents.certifiedStudentDetailObj.content.map((data: any,index:number) => {
+                                    return <Card elevation={4} key={index} className="row col-12 m-auto mb-3">
                                         <section className="col-sm-2 d-flex align-content-center align-items-center">
                                             <img src={data.student.user.profilePicture} className="card-img" />
                                         </section>
