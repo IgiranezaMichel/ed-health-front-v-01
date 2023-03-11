@@ -62,7 +62,7 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
                                                         <span style={{ fontFamily: 'fantasy' }}>Department </span>{data.student.department.name}
                                                     </li>
                                                     <li className="nav-link modal-footer">
-                                                        <Button data-toggle="modal" data-target="#saveChanges">
+                                                        <Button>
                                                             <CheckBox onClick={() => {
                                                                 setCertifyStudent({
                                                                     CertificateStatus: CertificateStatus.APPROVED,
