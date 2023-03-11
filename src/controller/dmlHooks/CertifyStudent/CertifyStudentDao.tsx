@@ -4,6 +4,9 @@ import { useState } from "react";
 import { CertifiedStudentInput } from "../../../typeDefs/CertifiedStudentInput";
 
 export const useSaveCertifyStudent=(trainingApplicationId:number,applicationStatus:string,certifyStudentInput:CertifiedStudentInput)=>{
+    console.log(trainingApplicationId)
+    console.log(applicationStatus)
+    console.log(certifyStudentInput)
 const [saveCertifyStudent]=useMutation(CERTIFY_STUDENT);
 const [message,setMessage]=useState('');
 const [isLoading,setIsLoading]=useState(true);
