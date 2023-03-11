@@ -9,20 +9,21 @@ import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifySt
 import { CertifiedStudentInput } from "../../../../typeDefs/CertifiedStudentInput";
 import { CertificateStatus } from "../../../../enums/CertificateStatus";
 
-export const CertifiedStatus = (props: { status: string, trainingId: number ,certificateId:number}) => {
-    const [page,setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
+export const CertifiedStatus = (props: { status: string, trainingId: number, certificateId: number }) => {
+    const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const [studentApplicationStatus, setStudentApplicationStatus] = useState('certified');
     //retrieve list of certified person according to the status provided
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     // certifying student hook
-    const [certifyStudent,setCertifyStudent]=useState<CertifiedStudentInput>(
-        {   id:0,
-            studentId:0,
-            certificateId:props.certificateId,
-            CertificateStatus:CertificateStatus.APPROVED
+    const [certifyStudent, setCertifyStudent] = useState<CertifiedStudentInput>(
+        {
+            id: 0,
+            studentId: 0,
+            certificateId: props.certificateId,
+            CertificateStatus: CertificateStatus.APPROVED
         });
-    const saveCertifyStudent=useSaveCertifyStudent(props.trainingId,studentApplicationStatus,certifyStudent);
-    const registerCertifyStudent=()=>{
+    const saveCertifyStudent = useSaveCertifyStudent(props.trainingId, studentApplicationStatus, certifyStudent);
+    const registerCertifyStudent = () => {
         saveCertifyStudent.registerHandler();
     }
     return (
@@ -37,7 +38,7 @@ export const CertifiedStatus = (props: { status: string, trainingId: number ,cer
                             --No data found --
                         </Card> : <div className="mt-2 mb-2">
                             {
-                                certifiedStudents.certifiedStudentDetailObj.content.map((data: any,index:number) => {
+                                certifiedStudents.certifiedStudentDetailObj.content.map((data: any, index: number) => {
                                     return <Card elevation={4} key={index} className="row col-12 m-auto mb-3">
                                         <section className="col-sm-2 d-flex align-content-center align-items-center">
                                             <img src={data.student.user.profilePicture} className="card-img" />
@@ -62,14 +63,16 @@ export const CertifiedStatus = (props: { status: string, trainingId: number ,cer
                                                     </li>
                                                     <li className="nav-link modal-footer">
                                                         <Button data-toggle="modal" data-target="#saveChanges">
-                                                        <CheckBox  onClick={() =>{ setCertifyStudent({
-                                                            CertificateStatus:CertificateStatus.APPROVED,
-                                                            certificateId:props.certificateId,
-                                                            id:0,studentId:Number(data.student.id)
-                                                        }
-                                                        );setStudentApplicationStatus('certified');registerCertifyStudent()}} className="fs-1" />
+                                                            <CheckBox onClick={() => {
+                                                                setCertifyStudent({
+                                                                    CertificateStatus: CertificateStatus.APPROVED,
+                                                                    certificateId: props.certificateId,
+                                                                    id: 0, studentId: Number(data.student.id)
+                                                                }
+                                                                ); setStudentApplicationStatus('certified'); registerCertifyStudent()
+                                                            }} className="fs-1" />
                                                         </Button>
-                                                        <CancelPresentationOutlined onClick={() => {setCertifyStudent({CertificateStatus:CertificateStatus.DENY,certificateId:props.certificateId,id:0,studentId:Number(data.student.id)});setStudentApplicationStatus('rejected')}} className="fs-1" />
+                                                        <CancelPresentationOutlined onClick={() => { setCertifyStudent({ CertificateStatus: CertificateStatus.DENY, certificateId: props.certificateId, id: 0, studentId: Number(data.student.id) }); setStudentApplicationStatus('rejected') }} className="fs-1" />
                                                     </li>
                                                 </ul>
                                             </div>
