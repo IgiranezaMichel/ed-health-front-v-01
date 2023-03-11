@@ -15,6 +15,7 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
     //retrieve list of certified person according to the status provided
     const certifiedStudents = useGetCertifiedStudentByAdminApprovalStatus(props.status, props.trainingId, page);
     // certifying student hook
+    const [trainingApplicationId,setTrainingApplicationId]=useState(0)
     const [certifyStudent, setCertifyStudent] = useState<CertifiedStudentInput>(
         {
             id: 0,
@@ -23,7 +24,7 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
             CertificateStatus:CertificateStatus.APPROVED
         });
         console.log('certificate status '+CertificateStatus.APPROVED)
-    const saveCertifyStudent = useSaveCertifyStudent(props.trainingId, studentApplicationStatus, certifyStudent);
+    const saveCertifyStudent = useSaveCertifyStudent(trainingApplicationId, studentApplicationStatus, certifyStudent);
     const registerCertifyStudent = () => {
         saveCertifyStudent.registerHandler();
     }
