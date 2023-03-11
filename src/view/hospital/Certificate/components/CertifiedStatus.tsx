@@ -71,10 +71,21 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
                                                                     certificateId: props.certificateId,
                                                                     id: 0, studentId: Number(data.student.id)
                                                                 }
-                                                                ); setStudentApplicationStatus('certified'); registerCertifyStudent()
+                                                                );setTrainingApplicationId(Number(data.id)); 
+                                                                setStudentApplicationStatus('certified'); 
+                                                                registerCertifyStudent()
                                                             }} className="fs-1" />
                                                         </Button>
-                                                        <CancelPresentationOutlined onClick={() => { setCertifyStudent({ CertificateStatus:CertificateStatus.DENY, certificateId: props.certificateId, id: 0, studentId: Number(data.student.id) }); setStudentApplicationStatus('rejected') }} className="fs-1" />
+                                                        <CancelPresentationOutlined onClick={() => {
+                                                                setCertifyStudent({
+                                                                    CertificateStatus:CertificateStatus.DENY,
+                                                                    certificateId: props.certificateId,
+                                                                    id: 0, studentId: Number(data.student.id)
+                                                                }
+                                                                );setTrainingApplicationId(Number(data.id)); 
+                                                                setStudentApplicationStatus('rejected'); 
+                                                                registerCertifyStudent()
+                                                            }} className="fs-1" />
                                                     </li>
                                                 </ul>
                                             </div>
