@@ -43,7 +43,7 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
                         {certifiedStudents.certifiedStudentDetailObj.content.length == 0 ? <Card elevation={3} className="p-4 text-center fw-bold">
                             --No data found --
                         </Card> : <div className="mt-2 mb-2">
-                        <Stack spacing={2} className="mb-4">
+                        <Stack spacing={2} className="mb-4 mt-4">
                                     <div>  Page {certifiedStudents.certifiedStudentDetailObj.pageNumber + 1} out of {certifiedStudents.certifiedStudentDetailObj.totalPages}  <span>
                                         <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
                                             <option value="10">10</option>
