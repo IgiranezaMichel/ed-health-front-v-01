@@ -69,7 +69,7 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                                                 </div>
                                                 <div className="mt-1">
                                                     <Tooltip placement="top" title="Reject certificate">
-                                                        <Button variant="contained"><Cancel /></Button>
+                                                        <Cancel /> 
                                                     </Tooltip>
                                                 </div>
                                             </div>
