@@ -73,9 +73,7 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                                                     </Tooltip>
                                                 </div>
                                             </div>
-
                                         </section>
-
                                     </Card>
                                 })
                                 }
