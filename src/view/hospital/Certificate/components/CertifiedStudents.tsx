@@ -67,7 +67,7 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                                                 <div style={{ width: '50px', height: '50px' }}>
                                                     <QrCode url="/student-certificate/" style={{ width: '100%', height: '100%' }} pathVariable={btoa(data.id + '')} />
                                                 </div>
-                                                <div className="mt-1">
+                                                <div className="mt-1 modal-footer">
                                                     <Tooltip placement="top" title="Reject certificate">
                                                         <Cancel /> 
                                                     </Tooltip>
