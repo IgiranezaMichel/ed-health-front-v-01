@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Cancel, Description, Email, Person2Outlined, Sort, Wc } from "@mui/icons-material"
-import { Button, Card, Pagination, Stack, Tooltip } from "@mui/material"
+import { Card, Pagination, Stack, Tooltip } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao";
 import { useState } from "react";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
