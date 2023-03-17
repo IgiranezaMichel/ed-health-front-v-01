@@ -16,6 +16,11 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
         event;
         setPage({ ...page, pageNumber: value - 1 });
     };
+    const saveCertifyStudent = useSaveCertifyStudent(trainingApplicationId, studentApplicationStatus, certifyStudent);
+    //    Register certify Student handler
+        const registerCertifyStudent = () => {
+            saveCertifyStudent.registerHandler();
+        }
     return (
         <>
             {
