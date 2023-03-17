@@ -6,6 +6,7 @@ import { useState } from "react";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import QrCode from "../../../../components/default/QrCode";
+import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifyStudent/CertifyStudentDao";
 
 export const CertifiedStudents = (props: { certificateId: number }) => {
     const [page, setPage] = useState<PaginationInput>({
