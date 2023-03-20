@@ -88,14 +88,14 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                                                     <Tooltip placement="top" title="Reject certificate">
                                                         <Cancel onClick={() => {
                                                                 setCertifyStudent({
-                                                                    CertificateStatus:CertificateStatus.APPROVED,
+                                                                    CertificateStatus:CertificateStatus.DENY,
                                                                     certificateId: props.certificateId,
                                                                     id: 0, studentId: Number(data.student.id)
                                                                 }
                                                                 );setTrainingApplicationId(Number(data.id)); 
                                                                 setStudentApplicationStatus('rejected'); 
                                                                 registerCertifyStudent()
-                                                            }}/> 
+                                                            }}/>
                                                     </Tooltip>
                                                 </div>
                                             </div>
