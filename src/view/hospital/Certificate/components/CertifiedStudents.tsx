@@ -2,7 +2,7 @@
 import { Cancel,Email, Person2Outlined, Sort, Wc } from "@mui/icons-material"
 import { Card, Pagination, Stack, Tooltip } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import QrCode from "../../../../components/default/QrCode";
@@ -27,10 +27,24 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
             certificateId: props.certificateId,
             CertificateStatus:CertificateStatus.APPROVED
         });
+    useEffect(
+        ()=>{
+
+        },[trainingApplicationId]
+    )
     const [studentApplicationStatus, setStudentApplicationStatus] = useState('certified');
     const saveCertifyStudent = useSaveCertifyStudent(trainingApplicationId, studentApplicationStatus, certifyStudent);
     //    Register certify Student handler
-        const registerCertifyStudent = () => {
+        const registerCertifyStudent = (studentId:number,trainingApplicationId1:number) => {
+            setTrainingApplicationId(trainingApplicationId);
+            console.log(studentId+' '+trainingApplicationId1+' '+trainingApplicationId)
+            setCertifyStudent({
+                CertificateStatus:CertificateStatus.DENY,
+                certificateId: props.certificateId,
+                id: 0, studentId:studentId
+            }
+            ); 
+            setStudentApplicationStatus('rejected');
             saveCertifyStudent.registerHandler();
         }
     return (
@@ -87,14 +101,7 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                                                 <div className="mt-1 modal-footer">
                                                     <Tooltip placement="top" title="Reject certificate">
                                                         <Cancel onClick={() => {
-                                                                setCertifyStudent({
-                                                                    CertificateStatus:CertificateStatus.DENY,
-                                                                    certificateId: props.certificateId,
-                                                                    id: 0, studentId: Number(data.student.id)
-                                                                }
-                                                                );setTrainingApplicationId(Number(data.id)); 
-                                                                setStudentApplicationStatus('rejected'); 
-                                                                registerCertifyStudent()
+                                                            registerCertifyStudent(Number(data.student.id),Number(data.id));
                                                             }}/>
                                                     </Tooltip>
                                                 </div>
