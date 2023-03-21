@@ -1,4 +1,4 @@
-import { ContactPage, Description, DocumentScannerRounded, ReadMore, SchoolOutlined } from "@mui/icons-material"
+import { ContactPage, Description, DocumentScannerRounded, ReadMore} from "@mui/icons-material"
 import { Button, Skeleton, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material"
 import { CalendarIcon } from "@mui/x-date-pickers"
 import { FC, ReactNode } from "react"
@@ -52,11 +52,11 @@ export const Training: FC<item> = (item) => {
                                                 <Tooltip placement="top" title="Training details">
                                                     <Button onClick={() => navigate('/hospital/training-detail/' + data.id)}><Description /></Button>
                                                 </Tooltip>
-                                                {(data.ncnmApprovalStatus == 'approved')&&<Tooltip TransitionComponent={Zoom} placement="top" title="View Certificate">
-                                                    <Button onClick={()=>navigate('/hospital/certificate/'+data.id)}><DocumentScannerRounded /></Button>
+                                                {(data.ncnmApprovalStatus == 'approved') && <Tooltip TransitionComponent={Zoom} placement="top" title="View Certificate">
+                                                    <Button onClick={() => navigate('/hospital/certificate/' + data.id)}><DocumentScannerRounded /></Button>
                                                 </Tooltip>}
-                                               {(data.ncnmApprovalStatus == 'approved')&&<Tooltip TransitionComponent={Zoom} placement="top" title="Applicant">
-                                                    <Button><ContactPage onClick={()=>navigate("/hospital/training-applicant-detail/"+data.id)}/></Button>
+                                                {(data.ncnmApprovalStatus == 'approved') && <Tooltip TransitionComponent={Zoom} placement="top" title="Applicant">
+                                                    <Button><ContactPage onClick={() => navigate("/hospital/training-applicant-detail/" + data.id)} /></Button>
                                                 </Tooltip>}
                                                 <Tooltip TransitionComponent={Zoom} placement="top" title="Extend deadline">
                                                     <Button><ReadMore /></Button>
