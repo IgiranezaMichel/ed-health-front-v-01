@@ -1,5 +1,5 @@
 import { ContactPage, Description, DocumentScannerRounded, ReadMore} from "@mui/icons-material"
-import { Button, Skeleton, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material"
+import { Button, CircularProgress, Skeleton, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material"
 import { CalendarIcon } from "@mui/x-date-pickers"
 import { FC, ReactNode } from "react"
 import { useNavigate } from "react-router-dom"
@@ -14,10 +14,8 @@ export const Training: FC<item> = (item) => {
     return (
         <>
             {
-                !hasLoaded && <div className="d-flex justify-content-center align-content-center">
-                    <Skeleton />
-                    <Skeleton animation="wave" />
-                    <Skeleton animation={false} />
+                !hasLoaded && <div className="d-flex align-items-center justify-content-center align-content-center">
+                    <CircularProgress className="m-auto"/>
                 </div>
             }
             {hasLoaded &&
@@ -68,7 +66,9 @@ export const Training: FC<item> = (item) => {
                             }
                         </TableBody>
                     </Table>
-                    
+                    {trainingList.length==0&&<div className="text-center p-4 border">
+                        No data found
+                        </div>}
                 </section>
             }
         </>)
