@@ -21,7 +21,7 @@ export const Training: FC<item> = (item) => {
                 </div>
             }
             {hasLoaded &&
-                <div>
+                <section>
                     <div className="bg">
                         {item.children}
                     </div>
@@ -68,7 +68,8 @@ export const Training: FC<item> = (item) => {
                             }
                         </TableBody>
                     </Table>
-                </div>
+                    
+                </section>
             }
         </>)
 }
