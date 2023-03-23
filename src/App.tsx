@@ -76,12 +76,6 @@ function App() {
       <Route path='/hospital/certificate' element={<Certificate/>}/>
       <Route path='/hospital/certificate/:trainingId' element={<TrainingCertificate/>}/>
       <Route path='/:name/logout' element={<Logout/>}/>
-      
-      {/* <Route path='/hospital/notification' element={<HospitalNotification/>}/>
-      <Route path='/hospital/setting' element={<HospitalUserSetting/>}/>
-      <Route path='/hospital/training' element={<ViewTraining/>}/>
-      <Route path='/hospital/certificate' element={<ViewCertificate/>}/>
-      <Route path='/hospital/job' element={<ViewJob/>}/> */}
     </Routes>
  </Router>
    </>
