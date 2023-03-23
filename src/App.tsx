@@ -49,9 +49,8 @@ function App() {
       <Route path='/admin/school' element={<SchoolManagement/>}/>
       <Route path='/:user/school-detail/:id' element={<SchoolDetail/>}/>
       <Route path='/admin/hospital' element={<HospitalManagement/>}/> 
- 
+ {/* ncnm  */}
       <Route path='/ncnm' element={<NcnmDashboard/>}/>
-
       <Route path='/ncnm/school' element={<NcnmSchool/>}/>
       <Route path='/ncnm/hospital' element={<NcnmHospital/>}/>
       <Route path='/ncnm/training' element={<NcnmTraining/>}/>
