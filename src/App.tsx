@@ -32,7 +32,6 @@ import { StudentTraining } from './view/student/training'
 import { JobPublished } from './view/student/job'
 import { StudentCertificate } from './view/student/certificate'
 import { TrainingCertificate } from './view/hospital/Certificate/index'
-// import { TrainingApplicantDetail } from './view/hospital/Training/components/TrainingApplicantDetail'
 function App() {
   return (
    <>
