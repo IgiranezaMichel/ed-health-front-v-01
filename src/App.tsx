@@ -62,6 +62,7 @@ function App() {
           <Route path='/school' element={<SchoolDashBoard />} />
           <Route path='/school/student' element={<SchoolStudents />} />
           <Route path='/school/activity' element={<SchoolActivity />} />
+          {/* hospital */}
           <Route path='/hospital' element={<HospitalDashboard />} />
           <Route path='/hospital/training' element={<HospitalTraining />} />
           <Route path='/hospital/training-detail/:id' element={<HospitalTrainingDetail />} />
