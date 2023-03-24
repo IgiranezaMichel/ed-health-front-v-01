@@ -43,6 +43,7 @@ function App() {
           <Route path='/student/job' element={<JobPublished />} />
           <Route path='/student/certificate' element={<StudentCertificate />} />
           <Route path='/:name/setting' element={<Setting />} />
+          {/* admin */}
           <Route path='/admin' element={<AdminHome />} />
           <Route path='/admin/users' element={<UserManagement />} />
           <Route path='/admin/school' element={<SchoolManagement />} />
