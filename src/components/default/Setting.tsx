@@ -39,7 +39,7 @@ export const Setting = () => {
         
       }
     return (
-        <main className="row col-sm-10 m-auto d-flex justify-content-center align-content-center my-5">
+        <Card elevation={7} className="row col-sm-10 m-auto d-flex justify-content-center align-content-center my-5">
             <Card className="col-sm-6 p-0 rounded-0 m-auto d-flex justify-content-center align-content-center">
                 <div>
                 <img src={userData.profilePicture} className="card-img border-0 rounded-0" alt="" />
@@ -86,6 +86,6 @@ export const Setting = () => {
                 </div>
                </section>
             </Card>
-        </main>
+        </Card>
     )
 }
