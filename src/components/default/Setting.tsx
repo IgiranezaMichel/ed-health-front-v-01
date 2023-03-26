@@ -8,6 +8,7 @@ import { REGISTER_USER } from "../../graphQl/mutation/UserMutations";
 import { AccountHolderInput } from "../../typeDefs/AccountHolderInput";
 
 export const Setting = () => {
+    
     const [updateUser] = useMutation(REGISTER_USER);
     const user = JSON.parse(String(localStorage.getItem("userData")));
     const [edit, setEdit] = useState(false);
@@ -22,6 +23,7 @@ export const Setting = () => {
         profilePicture: user.profilePicture,
         role: Role.ADMIN
     });
+
     const imgHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (e.target.files && e.target.files[0]) {
             const file = e.target.files[0];
@@ -32,11 +34,12 @@ export const Setting = () => {
             reader.readAsDataURL(file);
         }
     }
+
     const updateUserHandler = () => {
         updateUser({ variables: { input: userData } }).then(data => { localStorage.removeItem("userData"); localStorage.setItem("userData", JSON.stringify(user)); alert(data.data.registerUser.name + " Saved successful") }
         ).catch(err => err);
-
     }
+
     return (
         <Card elevation={7} className="row col-sm-10 m-auto d-flex justify-content-center align-content-center my-5">
             <Card className="col-sm-6 p-0 rounded-0 m-auto d-flex justify-content-center align-content-center">
