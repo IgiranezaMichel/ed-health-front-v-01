@@ -22,8 +22,6 @@ query($id:Long){
   findCertificateById(id:$id){
     title
     description
-    signature
-    stamp
     timeStamp
     training{
       title
