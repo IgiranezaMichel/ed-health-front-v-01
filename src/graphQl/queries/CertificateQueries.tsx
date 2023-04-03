@@ -9,7 +9,18 @@ query($input:PaginationInput){
       timeStamp
       training{
         title
+        trainers{
+          id
+        }
+        hospital{
+          name
+          logo
+        }
       }
+      accountHolder{
+        name
+      }
+      userSignature
     }
     pageNumber
     totalPages
