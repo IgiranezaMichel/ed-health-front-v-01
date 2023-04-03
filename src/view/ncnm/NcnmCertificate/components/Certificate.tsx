@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { List, Sort } from "@mui/icons-material"
-import { CircularProgress, Pagination, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
+import { Card, CircularProgress, Pagination, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import { useState } from "react"
 import { useCertificatePage } from "../../../../controller/viewHooks/useCertificatePage"
 import { PaginationInput } from "../../../../typeDefs/PaginationInput"
@@ -36,6 +36,9 @@ export const Certificate=()=> {
                 </select><Sort /></span>
                 <Pagination count={certificatesDetail.totalPages} onChange={handleChange} page={certificatesDetail.pageNumber + 1} />
             </div>
+            <Card>
+
+            </Card>
             <Table className="col-12">
               <TableHead>
                 <TableRow className="bg-info">
