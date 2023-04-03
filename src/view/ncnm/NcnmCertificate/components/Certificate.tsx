@@ -36,9 +36,18 @@ export const Certificate=()=> {
                 </select><Sort /></span>
                 <Pagination count={certificatesDetail.totalPages} onChange={handleChange} page={certificatesDetail.pageNumber + 1} />
             </div>
-            <Card>
-
-            </Card>
+            {certificatesDetail.content.map((data:any,index:any)=>{
+                  return <Card key={index} elevation={5} className="mb-3 p-2">
+                    <div>
+                      <span style={{fontFamily:'fantasy'}}>Certificate {data.title}</span>
+                    </div>
+                    <TableCell>{index+1}</TableCell>
+                    <TableCell></TableCell>
+                    <TableCell>{String(data.timeStamp).split('T')[0]}</TableCell>
+                    <TableCell>{String(data.timeStamp).split('T')[0]}</TableCell>
+                    <TableCell className="text-center"><List onClick={()=>setCertificateId(Number(data.id))}/></TableCell>
+                  </Card>
+                })}
             <Table className="col-12">
               <TableHead>
                 <TableRow className="bg-info">
