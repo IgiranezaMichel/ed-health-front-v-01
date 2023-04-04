@@ -39,37 +39,12 @@ export const Certificate=()=> {
             {certificatesDetail.content.map((data:any,index:any)=>{
                   return <Card key={index} elevation={5} className="mb-3 p-2">
                     <div>
-                      <span style={{fontFamily:'fantasy'}}>Certificate {data.title}</span>
+                      <span className="d-block" style={{fontFamily:'fantasy'}}>Certificate {data.title}</span>
+                      <span>Total Trainer <span className="badge bg-success fw-bold">{data.training.trainers.length}</span></span>
                     </div>
-                    <TableCell>{index+1}</TableCell>
-                    <TableCell></TableCell>
-                    <TableCell>{String(data.timeStamp).split('T')[0]}</TableCell>
-                    <TableCell>{String(data.timeStamp).split('T')[0]}</TableCell>
                     <TableCell className="text-center"><List onClick={()=>setCertificateId(Number(data.id))}/></TableCell>
                   </Card>
                 })}
-            <Table className="col-12">
-              <TableHead>
-                <TableRow className="bg-info">
-                  <TableCell className="fw-bold">#</TableCell>
-                  <TableCell className="fw-bolder">Title</TableCell>
-                  <TableCell className="fw-bolder">Published Date</TableCell>
-                  <TableCell className="fw-bolder">Total Candidate</TableCell>
-                  <TableCell className="fw-bolder text-center">Action</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {certificatesDetail.content.map((data:any,index:any)=>{
-                  return <TableRow>
-                    <TableCell>{index+1}</TableCell>
-                    <TableCell>{data.title}</TableCell>
-                    <TableCell>{String(data.timeStamp).split('T')[0]}</TableCell>
-                    <TableCell>{String(data.timeStamp).split('T')[0]}</TableCell>
-                    <TableCell className="text-center"><List onClick={()=>setCertificateId(Number(data.id))}/></TableCell>
-                  </TableRow>
-                })}
-              </TableBody>
-            </Table>
         </div>:certificateId!=0?<CertificateDetail certificateId={certificateId}/>:<></>
         
       }
