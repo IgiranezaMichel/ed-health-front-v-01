@@ -37,10 +37,16 @@ export const Certificate=()=> {
                 <Pagination count={certificatesDetail.totalPages} onChange={handleChange} page={certificatesDetail.pageNumber + 1} />
             </div>
             {certificatesDetail.content.map((data:any,index:any)=>{
-                  return <Card key={index} elevation={5} className="mb-3 p-2">
-                    <div>
+                  return <Card key={index} elevation={5} className="mb-3 p-2 col-sm-12 m-auto row">
+                    <div className="col-md-4">
                       <span className="d-block" style={{fontFamily:'fantasy'}}>Certificate {data.title}</span>
                       <span>Total Trainer <span className="badge bg-success fw-bold">{data.training.trainers.length}</span></span>
+                    </div>
+                    <div className="col-md-5">
+                      <div className="float-md-end">
+                        <img src={data.training.hospital.logo} height={70}/>
+                        <div>{data.training.hospital.name} </div>
+                      </div>
                     </div>
                     <TableCell className="text-center"><List onClick={()=>setCertificateId(Number(data.id))}/></TableCell>
                   </Card>
