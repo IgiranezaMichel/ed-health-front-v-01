@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { List, Sort } from "@mui/icons-material"
+import { List, LocalHospital, Sort } from "@mui/icons-material"
 import { Card, CircularProgress, Pagination, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import { useState } from "react"
 import { useCertificatePage } from "../../../../controller/viewHooks/useCertificatePage"
@@ -38,16 +38,21 @@ export const Certificate=()=> {
             </div>
             {certificatesDetail.content.map((data:any,index:any)=>{
                   return <Card key={index} elevation={5} className="mb-3 p-2 col-sm-12 m-auto row">
-                    <div className="col-md-4">
-                      <span className="d-block" style={{fontFamily:'fantasy'}}>Certificate {data.title}</span>
-                      <span>Total Trainer <span className="badge bg-success fw-bold">{data.training.trainers.length}</span></span>
-                    </div>
-                    <div className="col-md-5">
-                      <div className="float-md-end">
-                        <img src={data.training.hospital.logo} height={70}/>
-                        <div>{data.training.hospital.name} </div>
-                      </div>
-                    </div>
+                      <section className="col-md-3">
+                        <img src={data.training.hospital.logo} className="card-img"/>
+                        <div className="text-center"><LocalHospital/> {data.training.hospital.name} </div>
+                        <div className="text-center"><LocalHospital/> {data.training.hospital.name} </div>
+                    </section>
+                    <section className="col-md-4 d-flex align-items-center">
+                   <div>
+                   <span className="d-block"><span style={{fontFamily:'fantasy'}}>Training title</span> {data.training.title}</span>
+                    <span className="d-block"><span style={{fontFamily:'fantasy'}}>Certificate Name </span>Certificate {data.title}</span>
+                    <span className="d-block"><span style={{fontFamily:'fantasy'}}>Issued Date </span>{String(data.timeStamp).split('T')[0]} {String(data.timeStamp).split('T')[1].split('.')[0]}</span>
+                      <span style={{fontFamily:'fantasy'}}>Total Trainer </span><span className="badge bg-success fw-bold">{data.training.trainers.length}</span>
+                      <span className="d-block" style={{fontFamily:'fantasy'}}>Signed by </span>
+                   </div>
+                    </section>
+                  
                     <TableCell className="text-center"><List onClick={()=>setCertificateId(Number(data.id))}/></TableCell>
                   </Card>
                 })}
