@@ -9,7 +9,19 @@ query($input:PaginationInput){
       timeStamp
       training{
         title
+        location{
+          name
+          Location{
+            name
+            Location{
+              name
+            }
+          }
+        }
         trainers{
+          id
+        }
+        applicantList{
           id
         }
         hospital{
