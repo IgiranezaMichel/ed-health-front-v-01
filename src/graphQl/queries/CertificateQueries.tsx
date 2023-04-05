@@ -15,6 +15,15 @@ query($input:PaginationInput){
         hospital{
           name
           logo
+          location{
+            name
+            Location{
+              name
+              Location{
+                name
+              }
+            }
+          }
         }
       }
       accountHolder{
