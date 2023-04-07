@@ -49,7 +49,7 @@ export const ShowApplicantStatus = (props: { trainingId: number, status: string 
                                     <option value="20">20</option>
                                 </select>
                             </span>
-                                <span className="float-end"> Sort by<select onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
+                                <span className="float-md-end"> Sort by<select onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
                                     <option selected={page.sort == 'training.title' ? true : false} value={"training.title"}>Title</option>
                                     <option selected={page.sort == 'student.user.name' ? true : false} value="student.user.name">Name</option>
                                     <option selected={page.sort == 'studentApprovalTimeStamp' ? true : false} value="studentApprovalTimeStamp">Application date</option>
