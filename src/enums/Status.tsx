@@ -1,5 +1,7 @@
 export enum STATUS{
 APPENDING="appending",
 CANCEL="cancelled",
-APPROVE="approved"
+APPROVE="approved",
+CERTIFIED="certified",
+REJECTED="rejected"
 }
