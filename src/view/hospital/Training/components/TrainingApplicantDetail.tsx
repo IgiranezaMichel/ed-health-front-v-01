@@ -43,6 +43,13 @@ export const TrainingApplicationDetail = () => {
           >
           <ListAltRounded /> Cancel
         </Button>
+        <Button style={{ clipPath: ' polygon(75% 0%, 90% 50%, 75% 100%, 0% 100%, 14% 50%, 0% 0%)',marginLeft:'-30px'}}
+          onClick={() => setApplicantStatus(STATUS.CERTIFIED)}
+          variant={applicantStatus == STATUS.CERTIFIED ? "contained" : "outlined"} 
+          className={applicantStatus == STATUS.CERTIFIED ?"p-4 fw-bolder":"p-4 text-white fw-bolder bg-dark"}
+          >
+          <ListAltRounded /> Certified
+        </Button>
       </div>
       <ShowApplicantStatus trainingId={Number(trainingId)} status={applicantStatus} />
     </Navigation>
