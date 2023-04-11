@@ -1,5 +1,5 @@
 import { BusinessCenterOutlined, DataSaverOn, DoNotDisturb, Edit, HdrStrongOutlined, ListAltOutlined, Sort, Visibility } from "@mui/icons-material"
-import { Card, Divider, Pagination, Skeleton, Stack } from "@mui/material"
+import { Button, Card, Divider, Pagination, Skeleton, Stack } from "@mui/material"
 import { CalendarIcon } from "@mui/x-date-pickers"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -52,17 +52,19 @@ export const Job = () => {
             </section>
           </main>
           {/* modal */}
+          <Card elevation={4} variant="elevation" className="bg-body-secondary p-3">
           <div className="mb-3" style={{ clear: 'right' }}>
             <button data-bs-toggle="modal"
               data-bs-target={'#createJob'} className="rounded bg-primary text-white"><DataSaverOn /></button>
           </div>
           <div className="col-sm-12" style={{ clear: 'right' }}>
-            <button onClick={() => { setIsSelected(0); setStatus(JobStatus.ACTIVE) }} className={selected == 0 ? "bg-primary text-white fw-bold" : "bg-white"}><ListAltOutlined />Active Jobs</button>
-            <button onClick={() => { setIsSelected(1); setStatus(JobStatus.INACTIVE) }} className={selected == 1 ? "bg-primary text-white fw-bold" : "bg-white"}><HdrStrongOutlined />Expired Date Jobs</button>
-            <button onClick={() => { setIsSelected(2); setStatus(JobStatus.SUSPEND) }} className={selected == 2 ? "bg-info text-white fw-bold" : "bg-white"}><DoNotDisturb />Suspended Jobs</button>
-            <button onClick={() => { setIsSelected(3); setStatus(JobStatus.CANCEL) }} className={selected == 3 ? "bg-danger text-white fw-bold" : "bg-white"}><DoNotDisturb />Canceled Jobs</button>
+            <Button onClick={() => { setIsSelected(0); setStatus(JobStatus.ACTIVE) }} variant={selected == 0 ? "contained" : "outlined"} className="rounded-0 fw-bold"><ListAltOutlined />Active Jobs</Button>
+            <Button onClick={() => { setIsSelected(1); setStatus(JobStatus.INACTIVE) }} variant={selected == 1 ? "contained" : "outlined"} className="rounded-0 fw-bold"><HdrStrongOutlined />Expired Date Jobs</Button>
+            <Button onClick={() => { setIsSelected(2); setStatus(JobStatus.SUSPEND) }} variant={selected == 2 ? "contained" : "outlined"} className="rounded-0 fw-bold"><DoNotDisturb />Suspended Jobs</Button>
+            <Button onClick={() => { setIsSelected(3); setStatus(JobStatus.CANCEL) }} variant={selected == 3 ? "contained" : "outlined"} className="rounded-0 fw-bold"><DoNotDisturb />Canceled Jobs</Button>
             
           </div>
+          </Card>
           <JobModal />
           <Divider className="mt-4" />
           <Stack spacing={2}>
@@ -93,8 +95,8 @@ export const Job = () => {
             {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               listOfPostedJob.map((data: any, index) => {
-                return <div key={index} className="card-deck col-sm-6 col-md-4 col-lg-4 mb-3">
-                  <Card className="card">
+                return <div key={index} className="card-deck col-sm-12 mb-3">
+                  <Card className="col-sm-12 row m-auto">
                     <img style={{ width: '100%', height: '30dvh', objectFit: 'cover' }} src={data.picture} alt="" />
                     <div className="card-body">
                       <h6 className="card-title fw-bold">{data.title}</h6>
