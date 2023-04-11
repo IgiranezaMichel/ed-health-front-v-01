@@ -106,6 +106,8 @@ export const Job = () => {
                         className="badge bg-primary">{data.numberOfEmployee}</span>
                       </div>
                       <span ><CalendarIcon />{String(data.deadline).split('T')[0]} {String(data.deadline).split('T')[1]}</span>
+                      <div className="card-text"><span>{data.description}</span>
+                      </div>
                       <div className="modal-footer ">
                         <Edit  onClick={()=>navigate({pathname:"/hospital/job-detail/"+data.id})}   className="p-1 bg-info mx-1" />
                         <Visibility  onClick={()=>navigate({pathname:"/hospital/job-detail/"+data.id})} className="p-1 mx-1 bg-primary text-white" />
