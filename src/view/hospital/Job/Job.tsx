@@ -102,8 +102,7 @@ export const Job = () => {
                     </div>
                     <div className="col-md-10">
                       <h6 className="card-title fw-bold">{data.title}</h6>
-                      <div className="card-text"><b>Position</b> <span
-                        className="badge bg-primary">{data.numberOfEmployee}</span>
+                      <div className="card-text"><b style={{fontFamily:'serif'}}>Position</b> <span className="badge bg-primary">{data.numberOfEmployee}</span>
                       </div>
                       <span ><CalendarIcon />{String(data.deadline).split('T')[0]} {String(data.deadline).split('T')[1]}</span>
                       <div className="card-text"><span>{data.description}</span>
