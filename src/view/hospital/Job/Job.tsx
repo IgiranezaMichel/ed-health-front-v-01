@@ -97,8 +97,10 @@ export const Job = () => {
               listOfPostedJob.map((data: any, index) => {
                 return <div key={index} className="card-deck col-sm-12 mb-3">
                   <Card className="col-sm-12 row m-auto">
-                    <img style={{ width: '100%', height: '30dvh', objectFit: 'cover' }} src={data.picture} alt="" />
-                    <div className="card-body">
+                    <div className="col-md-2">
+                    <img className="card-img" src={data.picture} alt="" />
+                    </div>
+                    <div className="col-md-10">
                       <h6 className="card-title fw-bold">{data.title}</h6>
                       <div className="card-text"><b>Position</b> <span
                         className="badge bg-primary">{data.numberOfEmployee}</span>
