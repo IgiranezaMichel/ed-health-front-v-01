@@ -1,6 +1,6 @@
 import { BusinessCenterOutlined, DataSaverOn, DoNotDisturb, Edit, HdrStrongOutlined, ListAltOutlined, Sort, Visibility } from "@mui/icons-material"
-import { Button, Card, Divider, Pagination, Skeleton, Stack } from "@mui/material"
-import { CalendarIcon } from "@mui/x-date-pickers"
+import { Button, Card, Divider, Pagination, Skeleton, Stack, Tooltip } from "@mui/material"
+import { CalendarIcon, TimeIcon } from "@mui/x-date-pickers"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { HospitalMenu } from "../../../MenuBarItems/HospitalMenu"
@@ -95,8 +95,7 @@ export const Job = () => {
             {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               listOfPostedJob.map((data: any, index) => {
-                return <div key={index} className="card-deck col-sm-12 mb-3">
-                  <Card className="col-sm-12 row m-auto">
+                return   <Card key={index} className="col-sm-12 row m-auto">
                     <div className="col-md-2">
                     <img className="card-img" src={data.picture} alt="" />
                     </div>
@@ -104,17 +103,26 @@ export const Job = () => {
                       <h6 className="card-title fw-bold">{data.title}</h6>
                       <div className="card-text"><b style={{fontFamily:'serif'}}>Position</b> <span className="badge bg-primary">{data.numberOfEmployee}</span>
                       </div>
-                      <span ><CalendarIcon />{String(data.deadline).split('T')[0]} {String(data.deadline).split('T')[1]}</span>
+                      <div className="text-sm-end">
+                      <span ><TimeIcon/> {String(data.deadline).split('T')[0]} {String(data.deadline).split('T')[1]}</span>
+                      </div>
+                      <Divider className="border-2"/>
                       <div className="card-text"><span>{data.description}</span>
                       </div>
-                      <div className="modal-footer ">
-                        <Edit  onClick={()=>navigate({pathname:"/hospital/job-detail/"+data.id})}   className="p-1 bg-info mx-1" />
-                        <Visibility  onClick={()=>navigate({pathname:"/hospital/job-detail/"+data.id})} className="p-1 mx-1 bg-primary text-white" />
-                        <DoNotDisturb className="p-1 bg-danger text-white" />
+                      <div className="modal-footer p-2">
+                      <Tooltip placement="top" title={"Edit "+data.title+" Job"}>
+                      <Edit  onClick={()=>navigate({pathname:"/hospital/job-detail/"+data.id})}   className="p-1 fs-2 bg-info mx-1 rounded-circle" />
+                      </Tooltip>
+                        <Tooltip placement="top" title={"View "+data.title+" Job Detail"}>
+                        <Visibility  onClick={()=>navigate({pathname:"/hospital/job-detail/"+data.id})} className="p-1 fs-2 mx-1 bg-primary text-white rounded-circle" />
+                        </Tooltip>
+                      
+                        <Tooltip placement="top" title={"Cancel "+data.title+" Job"}>
+                        <DoNotDisturb className="p-1 fs-2 border bg-danger text-white rounded-circle" />
+                        </Tooltip>
                       </div>
                     </div>
                   </Card>
-                </div>
               })
             }
           </div>
