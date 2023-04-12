@@ -1,6 +1,6 @@
 import { BusinessCenterOutlined, DataSaverOn, DoNotDisturb, Edit, HdrStrongOutlined, ListAltOutlined, Sort, Visibility } from "@mui/icons-material"
 import { Button, Card, Divider, Pagination, Skeleton, Stack, Tooltip } from "@mui/material"
-import { CalendarIcon, TimeIcon } from "@mui/x-date-pickers"
+import { TimeIcon } from "@mui/x-date-pickers"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { HospitalMenu } from "../../../MenuBarItems/HospitalMenu"
@@ -40,7 +40,7 @@ export const Job = () => {
           </div>
         }
        </div>
-        {jobHasFinishLoading && 
+        {jobHasFinishLoading &&
         <main className="container-lg">
           <main className="row col-sm-12 mt-4" style={{ clear: 'left' }}>
 
