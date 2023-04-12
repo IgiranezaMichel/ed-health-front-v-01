@@ -96,11 +96,12 @@ export const Job = () => {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               listOfPostedJob.map((data: any, index) => {
                 return   <Card key={index} className="col-sm-12 row m-auto border p-0">
-                    <div className="col-md-3">
+                    <section className="col-md-3">
                     <img className="card-img" src={data.picture} alt="" />
-                    </div>
-                    <div className="col-md-9">
-                      <h6 className="card-title fw-bold">{data.title}</h6>
+                    </section>
+                    <section className="col-md-9 d-flex align-items-center">
+                     <div className="col-md-12">
+                     <h6 className="card-title fw-bold">{data.title}</h6>
                       <div className="card-text"><b style={{fontFamily:'serif'}}>Position</b> <span className="badge bg-primary">{data.numberOfEmployee}</span>
                       </div>
                       <div className="text-sm-end">
@@ -121,7 +122,8 @@ export const Job = () => {
                         <DoNotDisturb className="p-1 fs-2 border bg-danger text-white rounded-circle" />
                         </Tooltip>
                       </div>
-                    </div>
+                     </div>
+                    </section>
                   </Card>
               })
             }
