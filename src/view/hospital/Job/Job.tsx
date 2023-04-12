@@ -67,7 +67,7 @@ export const Job = () => {
           </Card>
           <JobModal />
           <Divider className="mt-4" />
-          <Stack spacing={2}>
+          <Stack spacing={6} className="mb-4">
             <div>  Page {jobPageNumber + 1} out of {jobTotalPage}  <span>
               <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
               >
@@ -95,11 +95,11 @@ export const Job = () => {
             {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               listOfPostedJob.map((data: any, index) => {
-                return   <Card key={index} className="col-sm-12 row m-auto">
-                    <div className="col-md-2">
+                return   <Card key={index} className="col-sm-12 row m-auto border p-0">
+                    <div className="col-md-3">
                     <img className="card-img" src={data.picture} alt="" />
                     </div>
-                    <div className="col-md-10">
+                    <div className="col-md-9">
                       <h6 className="card-title fw-bold">{data.title}</h6>
                       <div className="card-text"><b style={{fontFamily:'serif'}}>Position</b> <span className="badge bg-primary">{data.numberOfEmployee}</span>
                       </div>
