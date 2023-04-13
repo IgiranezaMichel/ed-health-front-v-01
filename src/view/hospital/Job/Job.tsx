@@ -105,10 +105,10 @@ export const Job = () => {
                         <div className="card-text"><b style={{ fontFamily: 'serif' }}>Position</b> <span className="badge bg-primary">{data.numberOfEmployee}</span>
                         </div>
                         <div className="text-sm-end">
-                          <span ><TimeIcon /> {String(data.deadline).split('T')[0]} {String(data.deadline).split('T')[1]}</span>
+                          <span style={{ fontFamily: 'serif' }}><TimeIcon /> {String(data.deadline).split('T')[0]} {String(data.deadline).split('T')[1]}</span>
                         </div>
                         <Divider className="border-2" />
-                        <div className="card-text"><span>{data.description}</span>
+                        <div className="card-text mt-1"><span>{data.description}</span>
                         </div>
                         <div className="modal-footer p-2">
                           <Tooltip placement="top" title={"Edit " + data.title + " Job"}>
