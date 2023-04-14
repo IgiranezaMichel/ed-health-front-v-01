@@ -127,6 +127,11 @@ export const Job = () => {
                   </Card>
                 })
               }
+              {
+                listOfPostedJob.length==0&&<Card variant="elevation" className="fw-bold p-4 border text-center">
+                  -- No data found --
+                </Card>
+              }
             </div>
           </main>}
       </Navigation>
