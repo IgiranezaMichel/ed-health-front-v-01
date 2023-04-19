@@ -3,7 +3,7 @@ import { CalendarMonthOutlined, ListAltOutlined, Person2, Phone } from "@mui/ico
 import { Card, CircularProgress } from "@mui/material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import useFindCertificateById from "../../../../controller/viewHooks/useFindCertificateById";
-import { MuiCharts } from "../../../../muiCharts";
+import { PIE_CHART_DEFAULT } from "../../../../components/default/PIECHART";
 
 export const CertificateDetail = (props: { certificateId: number }) => {
     const { certificateDetail, isLoadingCertificate } = useFindCertificateById(props.certificateId);
@@ -14,13 +14,13 @@ export const CertificateDetail = (props: { certificateId: number }) => {
             {isLoadingCertificate && <div className="d-flex justify-content-center align-items-center">
                 <CircularProgress />
             </div>}
-            {!isLoadingCertificate && <div className="col-12 m-auto row">
+            {!isLoadingCertificate && <Card elevation={5} className="col-12 m-auto row">
                 <Card className="mt-4 p-0 col-md-7 rounded-0">
-                    <MuiCharts />
+                    <PIE_CHART_DEFAULT items={[{label:'',value:10}]} centerLabel="Certified status"/>
                 </Card>
                 <Card className="mt-4 col-md-5 rounded-0">
                     <img width={50} height={50} className="rounded-circle" src={certificateDetail.training.hospital.logo} alt={certificateDetail.training.hospital.name} />
-                    <div className="mb-1"><b>Hospital </b>{certificateDetail.training.hospital.name}</div>
+                    <div className="mb-1"><b style={{fontFamily:'monospace'}}>Hospital </b>{certificateDetail.training.hospital.name}</div>
                     <div>{certificateDetail.training.description}</div>
                     <div className="mb-1"><b>Training Title</b>{certificateDetail.training.title}</div>
                     <div className="mb-1"><b>Total Participant </b><span
@@ -61,7 +61,7 @@ export const CertificateDetail = (props: { certificateId: number }) => {
                         })}
                     </div>
                 </Card>
-            </div>}
+            </Card>}
         </>
     )
 }
