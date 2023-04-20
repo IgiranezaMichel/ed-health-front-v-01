@@ -52,6 +52,7 @@ query($input:PaginationInput){
 export const FIND_CERTIFICATE_BY_ID=gql`
 query($id:Long){
   findCertificateById(id:$id){
+    id
     title
     description
     timeStamp
