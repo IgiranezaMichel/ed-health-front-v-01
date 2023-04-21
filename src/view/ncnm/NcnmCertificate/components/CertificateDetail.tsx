@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CalendarMonthOutlined, ListAltOutlined, Person2, Phone, Visibility, VisibilityOff } from "@mui/icons-material";
+import { CalendarMonthOutlined, Person2, Phone, Visibility, VisibilityOff } from "@mui/icons-material";
 import { Button, Card, CircularProgress } from "@mui/material";
-import { CalendarIcon } from "@mui/x-date-pickers";
 import useFindCertificateById from "../../../../controller/viewHooks/useFindCertificateById";
 import { PIE_CHART_DEFAULT } from "../../../../components/default/PIECHART";
 import { useState } from "react";
@@ -9,8 +8,6 @@ import { useState } from "react";
 export const CertificateDetail = (props: { certificateId: number }) => {
     const { certificateDetail, isLoadingCertificate } = useFindCertificateById(props.certificateId);
     const [showTrainer,setShowTrainer]=useState(false);
-    console.log(certificateDetail)
-    console.log(isLoadingCertificate);
     return (
         <>
             {isLoadingCertificate && <div className="d-flex justify-content-center align-items-center">
@@ -57,20 +54,20 @@ export const CertificateDetail = (props: { certificateId: number }) => {
                     </div>
                    </section>}
                 </Card>
-                <Card className="col-sm-6 mt-2 rounded-0" elevation={9}>
-                    <div className="fw-bold p-3 fs-4">Certificate</div>
-                    <span className=""><b>Title </b>{certificateDetail.title}</span>
-                    <div>
-                       <b>Description</b> {certificateDetail.description}
-                    </div>
-                    <div><span>Prepared By </span><b>{certificateDetail.training.hospital.name}</b></div>
-                   <div> <span className="float-end mb-2" style={{clear:'both'}}><CalendarIcon/> <b>{String(certificateDetail.timeStamp).split('T')[0]}</b></span></div>
-                   <div className="mt-4 ">
-                    <ListAltOutlined/>
-                   </div>
-                Certificate
-                </Card>
-                
+        <Card elevation={5} className="p-2 mt-3">
+            <div className="float-end mt-3">
+                <img src={certificateDetail.training.hospital.logo} height={80} /><br />
+                <span>{certificateDetail.training.hospital.name} </span>
+            </div>
+
+            <div>
+                <div style={{ fontFamily: 'fantasy' }} className="display-2 d-block">Certificate
+                </div>
+                <div style={{ fontFamily: 'fantasy' }} className="display-6 d-block">
+                    {certificateDetail.title}
+                </div>
+            </div>
+        </Card>  
             </Card>}
         </>
     )
