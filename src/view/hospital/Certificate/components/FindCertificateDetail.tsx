@@ -4,6 +4,12 @@ export const FindCertificateDetail=(props:{trainingId:number})=>{
     const certificateList=useFindCertificateByTrainingId_(props.trainingId);
     return(
         <>
+        {
+            certificateList.isLoading?<></>
+            :<>
+            
+            </>
+        }
         </>
     )
 }
