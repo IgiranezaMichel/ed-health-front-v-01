@@ -8,7 +8,9 @@ const {data,refetch}=useQuery(_FIND_CERTIFICATE_BY_TRAINING_ID,{variables:{train
 const [certificateList,setCertificateList]=useState<any>([]);
 useEffect(
     ()=>{
-        
+        const fetchData=async()=>{
+            return await data;
+        }
     }
 )
 
