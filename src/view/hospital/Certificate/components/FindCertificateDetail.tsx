@@ -1,3 +1,4 @@
+import { CircularProgress } from "@mui/material";
 import { useFindCertificateByTrainingId_ } from "../../../../controller/viewHooks/Certificate/CertificateQueries"
 
 export const FindCertificateDetail=(props:{trainingId:number})=>{
@@ -5,7 +6,9 @@ export const FindCertificateDetail=(props:{trainingId:number})=>{
     return(
         <>
         {
-            certificateList.isLoading?<></>
+            certificateList.isLoading?<>
+            <CircularProgress/>
+            </>
             :<>
             
             </>
