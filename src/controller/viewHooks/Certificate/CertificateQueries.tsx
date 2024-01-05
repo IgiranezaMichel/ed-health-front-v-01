@@ -12,7 +12,9 @@ useEffect(
         const fetchData=async()=>{
             return await data;
         }
-        fetchData().then(data=>{setCertificateList(data.findCertificateByTrainingId)})
+        fetchData().then(data=>{
+            setCertificateList(data.findCertificateByTrainingId);
+        })
 
     }
 )
