@@ -19,5 +19,5 @@ useEffect(
 
     }
 )
-return{certificateList}
+return{certificateList,isLoading}
 }
