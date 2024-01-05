@@ -15,9 +15,9 @@ useEffect(
         fetchData().then(data=>{
             setCertificateList(data.findCertificateByTrainingId);
             setIsLoading(false);
-        })
+        });
 
     }
 )
-
+return{certificateList}
 }
