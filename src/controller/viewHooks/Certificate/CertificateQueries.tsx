@@ -16,7 +16,6 @@ useEffect(
             setCertificateList(data.findCertificateByTrainingId);
             setIsLoading(false);
         });
-
     }
 )
 return{certificateList,isLoading,refetch}
