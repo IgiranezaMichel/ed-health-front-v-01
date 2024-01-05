@@ -6,13 +6,14 @@ import { useEffect, useState } from "react";
 export const useFindCertificateByTrainingId=(trainingId:number)=>{
 const {data,refetch}=useQuery(_FIND_CERTIFICATE_BY_TRAINING_ID,{variables:{trainingId:trainingId}});
 const [certificateList,setCertificateList]=useState<any>([]);
+const [isLoading,setIsLoading]=useState(true);
 useEffect(
     ()=>{
         const fetchData=async()=>{
             return await data;
         }
-        fetchData().then(data=>setCertificateList(data.findCertificateByTrainingId))
-        
+        fetchData().then(data=>{setCertificateList(data.findCertificateByTrainingId)})
+
     }
 )
 
