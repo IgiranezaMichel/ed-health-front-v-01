@@ -11,6 +11,7 @@ useEffect(
         const fetchData=async()=>{
             return await data;
         }
+        fetchData()
     }
 )
 
