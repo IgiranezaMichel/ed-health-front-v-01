@@ -3,6 +3,7 @@ import { useFindCertificateByTrainingId_ } from "../../../../controller/viewHook
 
 export const FindCertificateDetail=(props:{trainingId:number})=>{
     const certificateList=useFindCertificateByTrainingId_(props.trainingId);
+    alert(props.trainingId)
     console.log(certificateList.certificateList)
     return(
         <>
