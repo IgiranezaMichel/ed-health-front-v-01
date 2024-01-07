@@ -10,7 +10,6 @@ export const useFindTrainingById=(id:number)=>{
     const [applicantList,setApplicantList]=useState<any>([]);
     const [trainingRequirementList,setTrainingRequirementList]=useState<any>([]);
     const [trainerList,setTrainerList]=useState<any>([]);
-    // const [isFindingTraining,setIsFindingTraining]=useState(false);
     useEffect(
      ()=>{
          const fetchData=async()=>{
