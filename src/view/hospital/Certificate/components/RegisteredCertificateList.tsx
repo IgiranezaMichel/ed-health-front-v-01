@@ -15,7 +15,7 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
                         return <Card elevation={4} className="border m-2 p-2">
                             <div className="fs-4 fw-bold" style={{ fontFamily: 'cursive' }}>Certificate {data.title}</div>
                             <Divider />
-                            has been approved by {data.accountHolder.name}
+                            has been approved by <b>{data.accountHolder.name}</b>
                             <div className="modal-footer">
                                 <RemoveRedEyeRounded />
                             </div>
