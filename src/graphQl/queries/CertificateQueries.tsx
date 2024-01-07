@@ -55,7 +55,7 @@ query($id:Long){
 `
 export const _FIND_CERTIFICATE_BY_TRAINING_ID=gql`
 query($trainingId:Long){
-  findCertificateByTrainingId(trainingId:1){
+  findCertificateByTrainingId(trainingId:$trainingId){
     title
     accountHolder{
       name
