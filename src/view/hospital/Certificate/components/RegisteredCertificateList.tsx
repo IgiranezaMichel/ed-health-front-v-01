@@ -15,7 +15,7 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
             {
                 certificateList.certificateList.map((data:any)=>{
                     return <Card elevation={4} className="border m-2 p-2">
-                       <div>Certificate {data.title}</div>
+                       <div className="fs-4 fw-bold">Certificate {data.title}</div>
                        <Divider/>
                        has been approved by {data.accountHolder.name}
                        <div className="modal-footer">
