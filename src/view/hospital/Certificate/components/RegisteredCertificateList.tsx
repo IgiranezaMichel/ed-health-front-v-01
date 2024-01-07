@@ -15,6 +15,9 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
                        <div>Certificate {data.title}</div>
                        <Divider/>
                        has been approved by {data.accountHolder.name}
+                       <div className="modal-footer">
+                        
+                       </div>
                     </Card>
                 })
             }
