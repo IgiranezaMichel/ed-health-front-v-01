@@ -5,7 +5,7 @@ import QRCode from "react-qr-code";
 export default function QrCode(props:{certificateId:number,style:CSSProperties}) {
   return (
     <div>
-       <QRCode style={props.style} width={100} value={'localhost:/check-certificate/'+props.certificateId+''}/>
+       <QRCode style={props.style} value={'localhost:/check-certificate/'+props.certificateId+''}/>
     </div>
   )
 }
