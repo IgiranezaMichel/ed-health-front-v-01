@@ -16,11 +16,12 @@ export const useFindTrainingById=(id:number)=>{
             return await findTraining.data.findTrainingById;
          }
          fetchData().then(data=>{
-            setIsFindingTraining(false);
             setTrainingDetail(data);
             setApplicantList(data.applicantList);
             setTrainingRequirementList(data.trainingRequirementList);
-            setTrainerList(data.trainers)}).catch(err=>console.log(err));
+            setTrainerList(data.trainers);
+            setIsFindingTraining(false);
+         }).catch(err=>console.log(err));
      }
     )
     const refreshTrainingDetail=()=>{
