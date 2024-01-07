@@ -2,7 +2,6 @@ import { Card } from "@mui/material"
 import { useFindCertificateByTrainingId_ } from "../../../../controller/viewHooks/Certificate/CertificateQueries";
 
 export const RegisteredCertificateList = (props: { trainingId: number }) => {
-    alert(props.trainingId)
     const certificateList=useFindCertificateByTrainingId_(props.trainingId);
     console.log(certificateList.certificateList)
     return <>
