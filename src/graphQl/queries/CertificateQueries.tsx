@@ -64,6 +64,9 @@ query($trainingId:Long){
     certifiedStudentList{
       id
     }
+    certifiedStudentList{
+      id
+    }
   }
 }
 `
