@@ -21,5 +21,8 @@ useEffect(
 return{certificateList,isLoading,refetch}
 }
 export const useFindCertificateById_=(id:number)=>{
-const certificateDetails=useQuery(_FIND_CERTIFICATE_BY_ID);
+const {data,refetch}=useQuery(_FIND_CERTIFICATE_BY_ID,{variables:{id:id}});
+const [certificateList,setCertificateList]=useState<any>([]);
+const [isLoading,setIsLoading]=useState(true);
+
 }
