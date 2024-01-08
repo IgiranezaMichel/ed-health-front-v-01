@@ -24,5 +24,15 @@ export const useFindCertificateById_=(id:number)=>{
 const {data,refetch}=useQuery(_FIND_CERTIFICATE_BY_ID,{variables:{id:id}});
 const [certificate,setCertificate]=useState<any>({});
 const [isLoading,setIsLoading]=useState(true);
-
+useEffect(
+    ()=>{
+        const fetchData=async()=>{
+            return await data;
+        }
+        fetchData().then(data=>{
+            setCertificate(data.findCertificateById);
+            setIsLoading(false);
+        });
+    }
+)
 }
