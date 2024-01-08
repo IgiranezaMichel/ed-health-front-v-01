@@ -20,3 +20,6 @@ useEffect(
 )
 return{certificateList,isLoading,refetch}
 }
+export const useFindCertificateById_=()=>{
+
+}
