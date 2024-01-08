@@ -2,6 +2,7 @@
 import { Card, CircularProgress, Divider } from "@mui/material"
 import { useFindCertificateByTrainingId_ } from "../../../../controller/viewHooks/Certificate/CertificateQueries";
 import {RemoveRedEyeRounded } from "@mui/icons-material";
+import { TimeIcon } from "@mui/x-date-pickers";
 export const RegisteredCertificateList = (props: { trainingId: number }) => {
     const certificateList = useFindCertificateByTrainingId_(props.trainingId);
     console.log(certificateList.certificateList)
@@ -16,6 +17,9 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
                             <div className="fs-4 fw-bold" style={{ fontFamily: 'cursive' }}>Certificate {data.title}</div>
                             <div>
                                 <span style={{fontFamily:'fantasy',fontWeight:'lighter'}}>Total certified Person</span> <span className="badge bg-info text-dark fw-bold">{data.certifiedStudentList.length}</span>
+                            </div>
+                            <div className="text-md-end">
+                                <span style={{fontWeight:'lighter'}}>{String(data.timeStamp).split('T')[0]} {String(data.timeStamp).split('T')[1].split('.')[0]}</span>
                             </div>
                             <Divider />
                             has been approved by <b>{data.accountHolder.name}</b>
