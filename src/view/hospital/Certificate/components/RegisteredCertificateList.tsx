@@ -7,7 +7,7 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
     const certificateList = useFindCertificateByTrainingId_(props.trainingId);
     const[certificateId,setCertificateId]=useState(0);
     return <>
-        <>
+        {certificateId==0&&<>
             {certificateList.isLoading ? <div className="fw-bold p-4 text-center">
                 <CircularProgress />
             </div> : <>
@@ -30,6 +30,6 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
                     })
                 }
             </>}
-        </>
+        </>}
     </>
 }
