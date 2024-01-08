@@ -71,3 +71,6 @@ query($trainingId:Long){
   }
 }
 `
+export const _FIND_CERTIFICATE_BY_ID=gql`
+
+`
