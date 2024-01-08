@@ -24,7 +24,7 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
                             <Divider />
                             Approved by <b>{data.accountHolder.name}</b>
                             <div className="modal-footer">
-                                <RemoveRedEyeRounded />
+                                <RemoveRedEyeRounded onClick={()=>setCertificateId(Number(data.id))}/>
                             </div>
                         </Card>
                     })
