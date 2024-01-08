@@ -3,6 +3,7 @@ import { Card, CircularProgress, Divider } from "@mui/material"
 import { useFindCertificateByTrainingId_ } from "../../../../controller/viewHooks/Certificate/CertificateQueries";
 import { RemoveRedEyeRounded } from "@mui/icons-material";
 import { useState } from "react";
+import { CertificateDetail } from "./CertificateDetail";
 export const RegisteredCertificateList = (props: { trainingId: number }) => {
     const certificateList = useFindCertificateByTrainingId_(props.trainingId);
     const[certificateId,setCertificateId]=useState(0);
@@ -31,5 +32,8 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
                 }
             </>}
         </>}
+        {
+            certificateId!=0&&<CertificateDetail certificateId={certificateId}/>
+        }
     </>
 }
