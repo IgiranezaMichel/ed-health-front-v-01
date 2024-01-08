@@ -35,5 +35,5 @@ useEffect(
         });
     }
 )
-return {refetch,certificate}
+return {refetch,certificate,isLoading}
 }
