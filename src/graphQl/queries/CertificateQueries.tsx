@@ -72,5 +72,20 @@ query($trainingId:Long){
 }
 `
 export const _FIND_CERTIFICATE_BY_ID=gql`
-
+query{
+ findCertificateById(id:102){
+  title
+  description
+  accountHolder{
+    name
+  }
+  userSignature
+  hospitalStamp
+  timeStamp
+  certifiedStudentList{
+    id
+  }
+}
+  
+}
 `
