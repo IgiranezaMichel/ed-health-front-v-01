@@ -2,9 +2,10 @@
 import { Card, CircularProgress, Divider } from "@mui/material"
 import { useFindCertificateByTrainingId_ } from "../../../../controller/viewHooks/Certificate/CertificateQueries";
 import { RemoveRedEyeRounded } from "@mui/icons-material";
+import { useState } from "react";
 export const RegisteredCertificateList = (props: { trainingId: number }) => {
     const certificateList = useFindCertificateByTrainingId_(props.trainingId);
-    console.log(certificateList.certificateList)
+    const[certificateId,setCertificateId]=useState(0);
     return <>
         <>
             {certificateList.isLoading ? <div className="fw-bold p-4 text-center">
