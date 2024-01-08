@@ -1,3 +1,3 @@
-export const CertificateDetail=()=>{
+export const CertificateDetail=(props:{certificateId:number})=>{
     
 }
