@@ -21,7 +21,7 @@ export const RegisteredCertificateList = (props: { trainingId: number }) => {
                                 <span style={{fontWeight:'lighter'}}>{String(data.timeStamp).split('T')[0]} {String(data.timeStamp).split('T')[1].split('.')[0]}</span>
                             </div>
                             <Divider />
-                            has been approved by <b>{data.accountHolder.name}</b>
+                             Approved by <b>{data.accountHolder.name}</b>
                             <div className="modal-footer">
                                 <RemoveRedEyeRounded />
                             </div>
