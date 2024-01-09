@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useFindCertificateById_ } from "../../../../controller/viewHooks/Certificate/CertificateQueries";
+import { CircularProgress } from "@mui/material";
 
 export const CertificateDetail=(props:{certificateId:number})=>{
     const [show,setShow]=useState('');
@@ -7,7 +8,7 @@ export const CertificateDetail=(props:{certificateId:number})=>{
     return(
         <>
         {certificate.isLoading&&<div>
-            
+            <CircularProgress/>
         </div>
             
         }
