@@ -88,6 +88,7 @@ query($id:Long){
   training{
     hospital{
       logo
+      name
     }
 }
   
