@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useFindCertificateById_ } from "../../../../controller/viewHooks/Certificate/CertificateQueries";
-import { Card, CircularProgress, Divider } from "@mui/material";
+import { Card, CircularProgress} from "@mui/material";
 
 export const CertificateDetail=(props:{certificateId:number})=>{
     const [show,setShow]=useState('');
@@ -13,8 +13,8 @@ export const CertificateDetail=(props:{certificateId:number})=>{
         <Card className="m-2 border border-5 p-3">
         <div className="p-2">
             <div className="float-end mt-3">
-                <img src={trainingDetail.hospital.logo} height={80} /><br />
-                <span>{trainingDetail.hospital.name} </span>
+                <img src={certificate.certificate.hospital.logo} height={80} /><br />
+                <span>{certificate.certificate.hospital.name} </span>
             </div>
 
             <div>
