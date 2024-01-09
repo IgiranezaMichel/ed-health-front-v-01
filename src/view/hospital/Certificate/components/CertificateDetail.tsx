@@ -55,7 +55,7 @@ export const CertificateDetail=(props:{certificateId:number})=>{
 
                 <div className="mx-5">
                     <div className="text-center fw-bold">
-                        <img src={certificate.certificate.userSignature} alt="" />
+                        <img src={certificate.certificate.userSignature}  />
                     </div>
                     <Divider className="border border-dark "/>
                 {String(certificate.certificate.accountHolder.name)}
