@@ -91,6 +91,6 @@ query($id:Long){
       name
     }
 }
-  
+ }
 }
 `
