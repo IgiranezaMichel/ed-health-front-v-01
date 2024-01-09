@@ -85,6 +85,10 @@ query($id:Long){
   certifiedStudentList{
     id
   }
+  training{
+    hospital{
+      logo
+    }
 }
   
 }
