@@ -31,13 +31,9 @@ export const CertificateDetail=(props:{certificateId:number})=>{
                 <div>Proudly to represented to </div>
                 <b style={{ fontFamily: 'cursive' }} className="display-6 d-block">Name Surname</b>
             </section>
-            <div style={{fontFamily: 'fantasy'}}>
+            <div className="mt-3">
                     {certificate.certificate.description}
                  </div>
-            <section className="mt-3">
-           certificate
-            </section>
-
             <div className="d-flex justify-content-center my-4">
                 <div className="mx-5">
                     <div className="text-center fw-bold">Approve date</div>
@@ -47,15 +43,15 @@ export const CertificateDetail=(props:{certificateId:number})=>{
 
                 <div className="mx-5">
                     <div className="text-center fw-bold">
-                        <img src={certificate.certificate.userSignature} alt="" />
+                        <img src={certificate.certificate.hospitalStamp} alt="" />
                     </div>
                     <Divider className="border border-dark "/>
-                {String(certificate.certificate.accountHolder.name)}
+                {String(certificate.certificate.training.hospital.name)}
                 </div>
 
                 <div className="mx-5">
                     <div className="text-center fw-bold">
-                        <img src={certificate.certificate.userSignature}  />
+                        <img src={certificate.certificate.userSignature} />
                     </div>
                     <Divider className="border border-dark "/>
                 {String(certificate.certificate.accountHolder.name)}
