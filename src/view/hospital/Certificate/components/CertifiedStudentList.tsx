@@ -1,6 +1,7 @@
 import { Button } from "@mui/material"
 
 export const CertifiedStudentList=(props:{certificateId:number})=>{
+    
 return(
     <>
     <Button variant="contained" className="rounded-0 mx-2">
