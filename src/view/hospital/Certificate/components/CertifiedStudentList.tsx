@@ -8,6 +8,7 @@ export const CertifiedStudentList=(props:{certificateId:number})=>{
         pageNumber:0,pageSize:10,sort:"id"
     })
    const certificateObj= useFindCertifiedStudentByCertificateIdPage(props.certificateId,page); 
+   console.log(certificateObj)
 return(
     <>
     <Button variant="contained" className="rounded-0 mx-2">
@@ -19,6 +20,11 @@ return(
     <Button variant="outlined" className=" mx-1 rounded-0">
         Rejection
     </Button>
+    {
+        !certificateObj.isLoading&&<div>
+            
+        </div>
+    }
     </>
 )
 }
