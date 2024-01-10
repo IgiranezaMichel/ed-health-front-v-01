@@ -1,8 +1,13 @@
 import { Button } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao"
+import { useState } from "react";
+import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 
 export const CertifiedStudentList=(props:{certificateId:number})=>{
-    useFindCertifiedStudentByCertificateIdPage(props.certificateId); 
+    const [page,setPage]=useState<PaginationInput>({
+        pageNumber:0,pageSize:10,sort:"id"
+    })
+   const certificateObj= useFindCertifiedStudentByCertificateIdPage(props.certificateId); 
 return(
     <>
     <Button variant="contained" className="rounded-0 mx-2">
