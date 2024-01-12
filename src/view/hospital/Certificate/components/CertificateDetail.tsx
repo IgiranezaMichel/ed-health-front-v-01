@@ -25,7 +25,7 @@ export const CertificateDetail = (props: { certificateId: number }) => {
                             <div>
                                 <div style={{ fontFamily: 'fantasy' }} className="display-2 d-block">Certificate
                                 </div>
-                                <div style={{ fontFamily: 'fantasy' }}>
+                                <div style={{ fontFamily: 'fantasy' }} className="display-6 d-block">
                                     {certificate.certificate.title}
                                 </div>
                             </div>
