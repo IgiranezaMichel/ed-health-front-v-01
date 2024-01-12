@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useFindCertificateById_ } from "../../../../controller/viewHooks/Certificate/CertificateQueries";
 import { Button, Card, CircularProgress, Divider } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { CertifiedStudentList } from "./CertifiedStudentList";
 
 export const CertificateDetail = (props: { certificateId: number }) => {
     const [show, setShow] = useState('');
@@ -63,9 +64,9 @@ export const CertificateDetail = (props: { certificateId: number }) => {
                             </div>
                             </section>
                             }
-
                         </div>
                     </Card>
+                <CertifiedStudentList certificateId={props.certificateId}/>
                 </>
             }
         </>
