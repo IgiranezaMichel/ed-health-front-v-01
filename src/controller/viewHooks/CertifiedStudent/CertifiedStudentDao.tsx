@@ -24,8 +24,8 @@ useEffect(
 return{isLoading,refetch,studentCertificateObj}
 }
 export const useFindCertifiedStudentByCertificateId=(certificateId:number)=>{
-    const {data,refetch} =useQuery(FIND_STUDENT_CERTIFIED_PAGE_BY_CERTIFICATE_ID,{variables:{certificateId:certificateId}});
-    const [studentCerified,setStudentCertified]=useState<any>({});
+const {data,refetch} =useQuery(FIND_STUDENT_CERTIFIED_PAGE_BY_CERTIFICATE_ID,{variables:{certificateId:certificateId}});
+const [studentCerified,setStudentCertified]=useState<any>({});
 const [isLoading,setIsLoading]=useState(true);
 
 
