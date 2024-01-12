@@ -28,5 +28,22 @@ query($studentId:Long,$input:PaginationInput){
 }
 `
 export const FIND_STUDENT_CERTIFIED_PAGE_BY_CERTIFICATE_ID=gql`
-
+query($certificateId:Long,$input:PaginationInput){
+  getCertifiedStudentPage(certificateId:$certificateId,input:$input){
+    content{
+      student{
+        user{
+          name
+          gender
+          email
+          phoneNumber
+          profilePicture
+          dob
+        }
+        school{name}
+        department{name}
+      }
+    }
+  }
+}
 `
