@@ -32,6 +32,7 @@ query($certificateId:Long,$input:PaginationInput){
   getCertifiedStudentPage(certificateId:$certificateId,input:$input){
     content{
       student{
+        id
         user{
           name
           gender
