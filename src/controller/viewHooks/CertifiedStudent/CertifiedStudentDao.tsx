@@ -33,7 +33,10 @@ useEffect(
             return await data;
         }
         fetchData()
-        .then(data=>setStudentCertifiedObj(data.getCertifiedStudentPage))
+        .then(data=>{
+            setStudentCertifiedObj(data.getCertifiedStudentPage);
+            setIsLoading(false);
+        })
     }
 )
 
