@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
 import {useQuery } from "@apollo/client";
-import { GET_STUDENT_CERTIFICATE_PAGE } from "../../../graphQl/queries/CertifiedStudent";
+import { FIND_STUDENT_CERTIFIED_PAGE_BY_CERTIFICATE_ID, GET_STUDENT_CERTIFICATE_PAGE } from "../../../graphQl/queries/CertifiedStudent";
 
 export const useGetAllStudentCertificatePage=(studentId:number,input:PaginationInput)=>{
 const [studentCertificateObj,setStudentCertificateObj]=useState<any>({});
@@ -24,5 +24,7 @@ useEffect(
 return{isLoading,refetch,studentCertificateObj}
 }
 export const useFindCertifiedStudentByCertificateId=(certificateId:number)=>{
+    const {data,refetch} =useQuery(FIND_STUDENT_CERTIFIED_PAGE_BY_CERTIFICATE_ID,{variables:{certificateId:certificateId}});
+    
 
 }
