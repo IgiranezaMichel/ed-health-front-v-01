@@ -23,6 +23,6 @@ useEffect(
 )
 return{isLoading,refetch,studentCertificateObj}
 }
-export const useFindCertifiedStudentByCertificateId=()=>{
-    
+export const useFindCertifiedStudentByCertificateId=(certificateId:number)=>{
+
 }
