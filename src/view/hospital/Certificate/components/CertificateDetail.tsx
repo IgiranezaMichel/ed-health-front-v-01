@@ -15,7 +15,7 @@ export const CertificateDetail = (props: { certificateId: number }) => {
                     <Card className="m-2 border border-5 p-3">
                         <Button onClick={()=>show==''?setShow('showCertificate'):setShow('')}>
                         {show=='showCertificate'?<Visibility/>:<VisibilityOff/>}
-                        </Button>
+                        </Button> || <span className="mx-2">Student having this certificate <span className="badge bg-primary">{certificate.certificate.certifiedStudentList.length}</span></span>
                         <div className="p-2">
                             <div className="float-end mt-3">
                                 <img src={certificate.certificate.training.hospital.logo} height={80} /><br />
