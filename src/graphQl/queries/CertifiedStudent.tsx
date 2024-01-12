@@ -27,3 +27,6 @@ query($studentId:Long,$input:PaginationInput){
     }
 }
 `
+export const FIND_STUDENT_CERTIFIED_PAGE_BY_CERTIFICATE_ID=gql`
+
+`
