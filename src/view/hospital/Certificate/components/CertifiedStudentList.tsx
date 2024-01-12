@@ -1,4 +1,4 @@
-export const CertifiedStudentList=(props:{treainingId:number})=>{
+export const CertifiedStudentList=(props:{certificateId:number})=>{
 return(
     <>
     </>
