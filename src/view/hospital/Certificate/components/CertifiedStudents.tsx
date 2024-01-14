@@ -32,7 +32,7 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                                         </select>
                                     </span>
                                         <span className="float-end">
-                                            Sort by <select className="custom-select p-1">
+                                            Sort by <select onChange={(e)=>setPage({...page,sort:e.target.value})} className="custom-select p-1">
                                                 <option value="id">Select item below</option>
                                                 <option value="student.user.name">Name</option>
                                                 <option value="student.user.email">Email</option>
