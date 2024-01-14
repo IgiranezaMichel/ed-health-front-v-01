@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
 import { useQuery } from "@apollo/client";
-import { GET_STUDENT_TRAINING_APPLICATION_PAGE, GET_TRAINING_APPLICANT_PAGE_BY__HOSPITAL_APPROVAL_STATUS } from "../../../graphQl/queries/TrainingApplicationQueries";
+import { GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS, GET_STUDENT_TRAINING_APPLICATION_PAGE, GET_TRAINING_APPLICANT_PAGE_BY__HOSPITAL_APPROVAL_STATUS } from "../../../graphQl/queries/TrainingApplicationQueries";
 
 export const useGetTrainingApplicantPage = (status: string, trainingId: number, input: PaginationInput) => {
     const { data, refetch } = useQuery(GET_TRAINING_APPLICANT_PAGE_BY__HOSPITAL_APPROVAL_STATUS, { variables: { status: status, trainingId: trainingId, input: input } });
@@ -40,4 +40,9 @@ export const useGetStudentTrainingApplicationPage = (studentId: number, status: 
         }
     )
     return { trainingApplicationDetail, refetch, hasFinishLoading }
+}
+export const useGetCertifiedStudentByAdminApprovalStatus=(status:string,trainingId:number,input:PaginationInput)=>{
+    const {data,refetch}=useQuery(GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS,
+        {variables:{status:status,trainingId:trainingId,input:input}});
+        
 }
