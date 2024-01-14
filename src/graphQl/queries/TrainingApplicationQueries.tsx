@@ -73,3 +73,29 @@ query($input:PaginationInput,$studentId:Long,$status:String){
   }
 }
 `
+export const GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS=gql`
+query($status:String,$trainingId:Long,$input:PaginationInput){
+  getTrainingApplicantPageByHospitalApprovalStatus(status:$status,trainingId:$trainingId,input:$input){
+    pageNumber
+    totalPages
+    size
+    content{
+      student{
+        user{
+          name
+          gender
+          email
+          phoneNumber
+          dob
+        }
+        school{
+          name
+        }
+        department{
+          name
+        }
+      }
+    }
+  }
+}
+`
