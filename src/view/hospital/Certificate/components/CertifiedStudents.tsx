@@ -15,7 +15,7 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         event;
         setPage({ ...page, pageNumber: value - 1 });
-      };
+    };
     return (
         <>
             {
@@ -23,28 +23,29 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                     {
                         certificateObj.studentCertifiedObj.content.length != 0 ?
                             <>
-                            <Stack spacing={2} className="mb-4">
-                    <div>  Page {certificateObj.studentCertifiedObj.pageNumber + 1} out of {certificateObj.studentCertifiedObj.totalPages}  <span>
-                        <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="30">30</option>
-                        </select>
-                    </span>
-                        <span className="float-end">
-                            Sort by <select  className="custom-select p-1">
-                                <option value="">Select item below</option>
-                                <option value="">Select item below</option>
-                                <option value="">Select item below</option>
-                            </select>
-                            <Sort/></span>
-                        <Pagination
-                            count={certificateObj.studentCertifiedObj.totalPages}
-                            page={certificateObj.studentCertifiedObj.pageNumber + 1}
-                        onChange={handleChange}
-                        />
-                    </div>
-                </Stack>
+                                <Stack spacing={2} className="mb-4">
+                                    <div>  Page {certificateObj.studentCertifiedObj.pageNumber + 1} out of {certificateObj.studentCertifiedObj.totalPages}  <span>
+                                        <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </span>
+                                        <span className="float-end">
+                                            Sort by <select className="custom-select p-1">
+                                                <option value="id">Select item below</option>
+                                                <option value="student.user.name">Name</option>
+                                                <option value="student.user.email">Email</option>
+                                                <option value="student.school.name">School</option>
+                                            </select>
+                                            <Sort /></span>
+                                        <Pagination
+                                            count={certificateObj.studentCertifiedObj.totalPages}
+                                            page={certificateObj.studentCertifiedObj.pageNumber + 1}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </Stack>
                                 {certificateObj.studentCertifiedObj.content.map((data: any, index: number) => {
                                     return <Card elevation={3} key={index} className="mb-3 col-sm-12 row m-auto">
                                         <section className="col-md-2 d-flex align-items-center">
@@ -63,23 +64,24 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                                             <div>
                                                 <div className="mb-2"><span style={{ fontFamily: 'fantasy' }}>Study at </span> {data.student.school.name}</div>
                                                 <div className="mb-2"><span style={{ fontFamily: 'fantasy' }}>Department</span> {data.student.department.name}</div>
-                                                <div style={{width:'50px',height:'50px'}}>
-                                                    <QrCode url="/student-certificate/" style={{width:'100%',height:'100%'}} pathVariable={btoa(data.id+'')}/>
+                                                <div style={{ width: '50px', height: '50px' }}>
+                                                    <QrCode url="/student-certificate/" style={{ width: '100%', height: '100%' }} pathVariable={btoa(data.id + '')} />
                                                 </div>
                                                 <div className="mt-1">
-                                            <Tooltip placement="top" title="Reject certificate">
-                                            <Button variant="contained"><Cancel/></Button>
-                                            </Tooltip>
-                                            <Tooltip placement="top" title="Description">
-                                            <Button variant="outlined" className="mx-1 rounded-0"><Description/></Button>
-                                            </Tooltip>
-                                        </div>
+                                                    <Tooltip placement="top" title="Reject certificate">
+                                                        <Button variant="contained"><Cancel /></Button>
+                                                    </Tooltip>
+                                                    <Tooltip placement="top" title="Description">
+                                                        <Button variant="outlined" className="mx-1 rounded-0"><Description /></Button>
+                                                    </Tooltip>
+                                                </div>
                                             </div>
-                                            
+
                                         </section>
-                                        
+
                                     </Card>
-                                })}
+                                })
+                                }
                             </> :
                             <div className="p-3 text-center border fw-bold">
                                 -- No certified student found --
