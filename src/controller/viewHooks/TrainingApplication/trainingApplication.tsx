@@ -45,4 +45,5 @@ export const useGetCertifiedStudentByAdminApprovalStatus=(status:string,training
     const {data,refetch}=useQuery(GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS,
         {variables:{status:status,trainingId:trainingId,input:input}});
         
+        
 }
