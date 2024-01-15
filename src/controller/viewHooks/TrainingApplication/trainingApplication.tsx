@@ -47,7 +47,11 @@ export const useGetCertifiedStudentByAdminApprovalStatus=(status:string,training
         {variables:{status:status,trainingId:trainingId,input:input}});
 useEffect(
     ()=>{
-        
+        const fetchData=async()=>{
+            return await data;
+        }
+        fetchData()
+        .then(data=>data)
     }
 )
         
