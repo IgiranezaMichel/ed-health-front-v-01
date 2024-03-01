@@ -1,0 +1,42 @@
+import { gql } from "@apollo/client";
+
+export const GET_TRAINING_APPLICANT_PAGE_BY__HOSPITAL_APPROVAL_STATUS=gql`
+query($status:String,$trainingId:Long,$input:PaginationInput){
+  getTrainingApplicantPageByHospitalApprovalStatus(status:$status,trainingId:$trainingId,input:$input){
+      pageNumber
+    totalPages
+    size
+    content{
+      hospitalApprovalStatus
+      hospitalApprovalTimeStamp
+      student{
+        id
+        user{
+          name
+          email
+          phoneNumber
+          profilePicture
+          password
+        }
+        department{
+          name
+        }
+        status
+        school{
+          name
+          logo
+          location{
+            name
+            Location{
+              name
+              Location{
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+}
+}
+`

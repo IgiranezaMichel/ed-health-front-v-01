@@ -1,0 +1,80 @@
+import { gql } from "@apollo/client";
+
+export const GET_ALL_SCHOOL=gql`
+query($input:PaginationInput){
+    schoolPageList(input:$input){
+    pageNumber
+    totalPages
+    size
+    content{
+      id
+      name
+      logo
+      location{
+        name
+        Location{
+          name
+          Location{
+            name
+          }
+        }
+      }
+      facultyList{
+        name
+        id
+        departmentList{
+        id
+        name
+        totalCredit
+        totalCourse        
+      }
+      }
+    }
+  }
+}
+`
+export const FIND_SCHOOL_BY_ID = gql`
+query($id:Long){
+    findSchoolById(id:$id){
+    id
+    name
+    logo
+    location{
+      name
+      Location{
+        name
+        Location{
+          name
+        }
+      }
+    }
+    facultyList{
+      id
+      name
+      departmentList{
+        id
+        name
+        totalCredit
+      }
+    }
+  }
+}
+`
+export const FIND_FACULTY_BY_SCHOOL_BY_ID=gql`
+query($id:Long){
+    findSchoolById(id:$id){
+    id
+    name
+    logo
+    facultyList{
+      id
+      name
+      departmentList{
+        id
+        name
+        totalCredit
+      }
+    }
+  }
+}
+`

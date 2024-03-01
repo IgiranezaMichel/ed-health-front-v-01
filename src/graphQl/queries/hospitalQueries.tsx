@@ -1,0 +1,143 @@
+import { gql } from "@apollo/client";
+export const GET_ALL_HOSPITAL=gql`
+query($input:PaginationInput){
+  getAllHospital(input:$input){
+    content{
+      id
+      name
+      logo
+      description
+      timeStamp
+      location{
+        name
+        Location{
+          name
+          Location{name}
+        }
+      }
+    }
+    pageNumber
+    totalPages
+    size
+  }
+}
+`
+export const HOSPITAL_LIST=gql`
+query($sortBy:String){
+  getAllHospital(sortBy:$sortBy){
+    id
+    name
+    logo
+    timeStamp
+    location{
+      id
+      name
+      Location{
+        id
+        name
+        Location{
+          id
+          name
+        }
+      }
+    }
+  }
+}
+`
+export const SEARCH_HOSPITAL=gql`
+query($input:String){
+  searchHospital(search:$input){
+    id
+  name
+  location{
+    name
+    type
+  }
+  }
+}
+`
+export const HOSPITAL_PAGINATION=gql`
+query($input:PaginationInput){
+  hospitalPagination(input:$input){
+  content{
+    id
+    name
+    location
+    logo
+    timeStamp
+  }
+  pageNumber
+  size
+    }
+}
+`
+export const FIND_HOSPITAL_BY_ID=gql`
+query($id:Long!)
+{
+  findHospitalById(id:$id){
+    id
+    logo
+    name
+    description
+    timeStamp
+    hospitalAdminList{
+      position
+      user{
+        id
+        name
+        email
+        profilePicture
+      }
+    }
+    jobList{ 
+      title
+      id
+    }
+    location{
+  name
+  Location{
+    name
+    Location{
+      name
+    }
+  }
+}
+    hospitalTrainingList{
+      id
+      title
+      deadline
+      description
+      ncnmApprovalStatus
+      trainers{
+        id
+        phoneNumber
+        trainerTitle
+        name
+        profilePicture
+      }
+    }
+  }
+}
+`
+export const FIND_HOSPITAL_AND_NCNm_APPROVAL_STATUS=gql`
+query($hospitalId:Long,$ncnmApprovalStatus:String,$input:PaginationInput){
+  findListOfTrainingByHospitalIdAndNcnmApprovalStatus(
+    hospitalId:$hospitalId,ncnmApprovalStatus:$ncnmApprovalStatus,input:$input){
+    totalPages
+    pageNumber
+    size
+    content{
+      id
+      title
+      description
+      trainers{
+        trainerTitle
+        name
+        phoneNumber
+      }
+      deadline
+      ncnmApprovalStatus
+    }
+  }
+}
+`
