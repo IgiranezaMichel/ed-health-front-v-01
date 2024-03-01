@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from "react";
-import { useAppendingTraining } from "../../../controller/viewHooks/training/useAppendingTraining";
 import { STATUS } from "../../../enums/Status";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
 import { Navigation } from "../../../components/default/Navigation";
@@ -10,16 +9,18 @@ import {  Card, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom 
 import { TimeIcon } from "@mui/x-date-pickers";
 import { DashboardCard } from "../../../components/default/DashboardCard";
 import { PIE_CHART_DEFAULT } from "../../../components/default/PIECHART";
+import { TrainingDetail } from "./TrainingDetail";
+import { useNcnmTrainingApprovalStatusPage} from "../../../controller/viewHooks/training/useNcnmTrainingApprovalStatus";
 
 export const StudentTraining = () => {
     const [page, setPage] = useState<PaginationInput>({
         pageNumber: 0, pageSize: 10, sort: "id"
     })
-    const { appendingTrainingDetail, isLoadingAppendingTrainingData } = useAppendingTraining(STATUS.APPENDING, page);
-    console.log(appendingTrainingDetail)
+    const training = useNcnmTrainingApprovalStatusPage(page,STATUS.APPENDING);
+    const [trainingId,setTrainingId]=useState(0);
     return (
         <Navigation items={StudentMenu}>
-            <div>
+            {trainingId==0&&<div>
             <div className="row m-auto container-xxl g-1">
             <div className="col-sm-6">
             <Card elevation={4} >
@@ -38,10 +39,10 @@ export const StudentTraining = () => {
             </Card>
             </div>
             </div>
-                {!isLoadingAppendingTrainingData && <div>
+                {training.hasFinishLoading && <div>
                     
                     <span className="display-6 d-block" style={{clear:'both'}}><NewReleases className="fs-1" /> Training</span>
-                    {appendingTrainingDetail.content.length != 0 &&
+                    {training.trainingObj.content.length != 0 &&
                         <div>
                             <Table>
                                 <TableHead>
@@ -55,7 +56,7 @@ export const StudentTraining = () => {
                                 </TableHead>
                                 <TableBody>
                                     {
-                                        appendingTrainingDetail.content.map((data: any, index: any) => {
+                                        training.trainingObj.content.map((data: any, index: any) => {
                                             return <TableRow key={index}>
                                                 <TableCell>{index + 1}</TableCell>
                                                 <TableCell>{data.title}</TableCell>
@@ -63,27 +64,29 @@ export const StudentTraining = () => {
                                                 <TableCell><TimeIcon />{data.deadline}</TableCell>
                                                 <TableCell>
                                                     <Tooltip TransitionComponent={Zoom} className="m-1" placement="top" title={"Check detail of " + data.title}>
-                                                        <span><Description /></span>
+                                                        <span><Description onClick={()=>setTrainingId(Number(data.id))}/></span>
                                                     </Tooltip>
                                                     <Tooltip TransitionComponent={Zoom} className="m-1" placement="top" title={"Apply for " + data.title}>
-                                                        <span><CreateNewFolder /></span>
+                                                        <span><CreateNewFolder onClick={()=>setTrainingId(Number(data.id))}/></span>
                                                     </Tooltip>
                                                 </TableCell>
                                             </TableRow>
-
                                         })
                                     }
                                 </TableBody>
                             </Table>
                         </div>
                     }
-                    {appendingTrainingDetail.content.length == 0 &&
+                    {training.trainingObj.content.length == 0 &&
                         <div className="p-2 fw-bold text-center bg-primary text-white">
                             -- No New training found --
                         </div>
                     }
                 </div>}
-            </div>
+            </div>}
+            {trainingId!=0&&<div>
+                <TrainingDetail trainingId={trainingId}/>
+            </div>}
         </Navigation>
     )
 }
