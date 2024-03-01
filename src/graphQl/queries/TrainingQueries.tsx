@@ -57,7 +57,12 @@ query($id:Long){
     }
     location{
       name
-      type
+      Location{
+        name
+        Location{
+          name
+        }
+      }
     }
     hospital{
       name
@@ -137,5 +142,19 @@ findListOfNcnmApprovalStatusAfterDeadline(ncnmApprovalStatus:$status,input:$inpu
     }
   }
 }
+}
+`
+export const FIND_TRAINING_BY_NCNM_APPROVAL_STATUS=gql`
+query($input:PaginationInput,$status:String){
+  findTrainingByNcnmApprovalStatusAndTrainingDeadlinePage(input:$input,status:$status){
+    content{
+      id
+      title
+      hospital{
+        name
+      }
+      deadline
+    }
+  }
 }
 `
