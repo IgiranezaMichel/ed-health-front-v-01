@@ -8,7 +8,6 @@ import { useState } from "react"
 import { PaginationInput } from "../../../typeDefs/PaginationInput"
 import { JobStatus } from "../../../enums/JobStatus"
 import { TimeIcon } from "@mui/x-date-pickers"
-import { BAR_CHART } from "../../../components/default/BARCHART"
 import { PIE_CHART_DEFAULT } from "../../../components/default/PIECHART"
 import { DashboardCard } from "../../../components/default/DashboardCard"
 
@@ -25,7 +24,7 @@ export const JobPublished = () => {
             <Card elevation={4} className="col-sm-6 float-end">
                 <DashboardCard icon={<BusinessCenter className="float-md-end fs-1" />} subtitleDescription="Job successful analysis" />
                 <div className="col-12 py-1">
-                <PIE_CHART_DEFAULT centerLabel="Job" items={[{value:1,label:'Success'}]}/>
+                    <PIE_CHART_DEFAULT centerLabel="Job" items={[{ value: 1, label: 'Success' }]} />
                 </div>
                 <div className="modal-footer p-1">
                     <Button variant="contained" className="m-1">New Jobs</Button>
