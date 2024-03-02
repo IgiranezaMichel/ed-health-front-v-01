@@ -5,3 +5,8 @@ mutation($trainingId:Long,$trainingStatus:String){
     changeApplicantStatusByHospitalAdmin(trainingId:$trainingId,trainingStatus:$trainingStatus)
 }
 `
+export const REGISTER_STUDENT_TRAINING_APPLICATION=gql`
+mutation($studentId:Long,$trainingId:Long,$studentApprovalStatus:String){
+registerStudentTrainingApplication(studentId:$studentId,trainingId:$trainingId,studentApprovalStatus:$studentApprovalStatus)
+}
+`
