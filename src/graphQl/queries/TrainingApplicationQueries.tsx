@@ -40,3 +40,33 @@ query($status:String,$trainingId:Long,$input:PaginationInput){
 }
 }
 `
+export const GET_STUDENT_TRAINING_APPLICATION_PAGE=gql`
+query($input:PaginationInput,$studentId:Long,$status:String){
+  getStudentTrainingApplicationPage(input:$input,studentId:$studentId,status:$status){
+    pageNumber
+    totalPages
+    size
+    content{
+       training{
+        title
+        description
+        deadline
+        timeStamp
+        hospital{
+          name
+          logo
+        }
+        location{
+          name
+          Location{
+            name
+            Location{
+              name
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`
