@@ -5,12 +5,13 @@ import { PaginationInput } from "../../../typeDefs/PaginationInput";
 import { Navigation } from "../../../components/default/Navigation";
 import { StudentMenu } from "../../../MenuBarItems/StudentMenu";
 import { BusinessCenter, CreateNewFolder, Description, NewReleases } from "@mui/icons-material";
-import {  Card, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material";
+import {  Button, Card, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material";
 import { TimeIcon } from "@mui/x-date-pickers";
 import { DashboardCard } from "../../../components/default/DashboardCard";
 import { PIE_CHART_DEFAULT } from "../../../components/default/PIECHART";
 import { TrainingDetail } from "./TrainingDetail";
 import { useNcnmTrainingApprovalStatusPage} from "../../../controller/viewHooks/training/useNcnmTrainingApprovalStatus";
+import { StudentTrainingApplicationStatus } from "./StudentTrainingApplicationStatus";
 
 export const StudentTraining = () => {
     const [page, setPage] = useState<PaginationInput>({
@@ -18,6 +19,7 @@ export const StudentTraining = () => {
     })
     const training = useNcnmTrainingApprovalStatusPage(page,STATUS.APPENDING);
     const [trainingId,setTrainingId]=useState(0);
+    const [showPage,setShowPage]=useState('training');
     return (
         <Navigation items={StudentMenu}>
             {trainingId==0&&<div>
@@ -39,7 +41,17 @@ export const StudentTraining = () => {
             </Card>
             </div>
             </div>
-                {training.hasFinishLoading && <div>
+            {
+                <>
+                 <div className="modal-footer py-3">
+                    <Button className="mx-1" variant="contained">Available training</Button>
+                    <Button className="mx-1" variant="outlined">My Application</Button>
+                 </div>
+                <StudentTrainingApplicationStatus />
+                </>
+            }
+                <>
+                {training.hasFinishLoading && showPage=='training'&&<div>
                     
                     <span className="display-6 d-block" style={{clear:'both'}}><NewReleases className="fs-1" /> Training</span>
                     {training.trainingObj.content.length != 0 &&
@@ -83,6 +95,8 @@ export const StudentTraining = () => {
                         </div>
                     }
                 </div>}
+                </>
+
             </div>}
             {trainingId!=0&&<div>
                 <TrainingDetail trainingId={trainingId}/>
