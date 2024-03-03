@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BusinessCenter, CreateNewFolder, Description, LocalHospital, LocationOn, NewReleases, People } from "@mui/icons-material"
+import { BusinessCenter,LocalHospital, LocationOn, NewReleases, People } from "@mui/icons-material"
 import { StudentMenu } from "../../../MenuBarItems/StudentMenu"
 import { Navigation } from "../../../components/default/Navigation"
-import { Button, Card, Divider, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material"
+import { Button, Card, Divider,} from "@mui/material"
 import { useFindJobsPostedPage } from "../../../controller/viewHooks/jobHooks"
 import { useState } from "react"
 import { PaginationInput } from "../../../typeDefs/PaginationInput"
@@ -25,16 +25,16 @@ export const JobPublished = () => {
     return (
         <Navigation items={StudentMenu}>
        { jobId == 0 &&<>
-        <Card elevation={4} className="col-sm-6 float-end">
+        <Card elevation={4} className="col-sm-6 float-end" style={{clear:'both'}}>
                 <DashboardCard icon={<BusinessCenter className="float-md-end fs-1" />} subtitleDescription="Job successful analysis" />
                 <div className="col-12 py-1">
                     <PIE_CHART_DEFAULT centerLabel="Job" items={[{ value: 1, label: 'Success' }]} />
                 </div>
-                <div className="modal-footer p-1">
+            </Card>
+            <div className="p-1" style={{clear:'both'}}>
                     <Button onClick={() => setShow('newJobs')} variant={show == 'newJobs' ? "contained" : "outlined"} className="m-1">New Jobs</Button>
                     <Button onClick={() => setShow('history')} variant={show == 'history' ? "contained" : "outlined"} className="m-1">history</Button>
                 </div>
-            </Card>
             <div className="fw-bold py-2" style={{ clear: 'both' }}>
                 <NewReleases />Recent posted Jobs
             </div>
@@ -54,7 +54,7 @@ export const JobPublished = () => {
                         <div>
                             {job.description}
                             <div className="text-md-end">
-                                Deadline <TimeIcon /> {job.deadline}
+                                Deadline <TimeIcon /> {String(job.deadline).split('T')[0]}
                             </div>
                             <div className="modal-footer">
                                 <Button onClick={() => setJobId(Number(job.id))} className="bg-primary text-white fw-bold">Apply</Button>
