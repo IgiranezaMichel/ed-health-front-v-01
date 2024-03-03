@@ -8,6 +8,7 @@ query($studentId:Long,$status:String,$input:PaginationInput){
       timeStamp
       job{
         title
+        deadline
         description
         status
         numberOfEmployee
