@@ -57,3 +57,30 @@ query($id:Long){
   }
 }
 `
+export const FIND_JOB_APPLICATION_BY_JOB_ID_AND_STATUS=gql`
+ query($jobId:Long,$input:PaginationInput,$status:String){
+  findJobApplicationByJobIdAndJobStatus(jobId:$jobId,input:$input,status:$status){
+    pageNumber
+    totalPages
+    size
+    content{
+      student{
+        school{
+          name
+        }
+        user{
+          name
+          profilePicture
+          email
+          phoneNumber
+          gender
+        }
+        department{
+          name
+        }
+			status
+      }
+    }
+  }
+}
+`
