@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { FIND_JOB_BY_ID, FIND_POSTED_JOBS_PAGE, LIST_OF_POSTED_JOB_BY_HOSPITAL } from "../../graphQl/queries/JobQueries";
@@ -44,6 +45,7 @@ fetchData().then(data=>{setJobDetail(data.findJobById);setJobDetailIsLoading(fal
     )
     return {jobDetail,jobDetailIsLoading}
 }
+
 export const useFindJobsPostedPage=(input:PaginationInput,status:string)=>{
 const {data,refetch}=useQuery(FIND_POSTED_JOBS_PAGE,{variables:{input:input,status:status}});
 const [finishLoading,setFinishLoading]=useState(false);
