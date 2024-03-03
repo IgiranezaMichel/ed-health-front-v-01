@@ -28,6 +28,7 @@ query($id:Long){
     deadline
     status
     numberOfEmployee
+    timeStamp
     hospital{
       name
       location{
