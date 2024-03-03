@@ -16,12 +16,13 @@ import { ToastProps } from "../../../typeDefs/ToastProps";
 import { useFindJobApplicationByJobIdAndStatus} from "../../../controller/viewHooks/JobApplication/JobApplicationDao";
 import { STATUS } from "../../../enums/Status";
 import { Modal } from "../../../components/default/Modal";
+import { useChangeJobApplicantStatusByHospitalAdmin } from "../../../controller/dmlHooks/JobApplication/JobApplicationController";
 
 export const JobDetail = () => {
   const { id } = useParams();
   const [page, setPage] = useState<PaginationInput>({
     pageNumber: 0,
-    pageSize: 8,
+    pageSize:10,
     sort: "id"
   });
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -51,11 +52,15 @@ export const JobDetail = () => {
   const [status, setStatus] = useState<any>(STATUS.APPENDING);
   const [applicationStatus, setApplicationStatus] = useState<any>('');
   const jobApplication = useFindJobApplicationByJobIdAndStatus(Number(id), page,status);
+  const saveStatus=useChangeJobApplicantStatusByHospitalAdmin(Number(id),applicationStatus);
   const saveApplicationStatus=()=>{
-    
+    saveStatus.saveJobApplicationStatusHandler();
+    if(saveStatus.hasFinishLoading){
+    alert(saveStatus.result);
+    jobApplication.refetch();}
   }
   const applicationModal=<Modal id="applicationModal" title={status+" Application"} actionBtn={
-  <Button className="text-white bg-primary fw-bold">Yes</Button>}>
+  <Button onClick={()=>saveApplicationStatus()} className="text-white bg-primary fw-bold">Yes</Button>}>
     <div className="p-5 text-center">
     are you sure you want to {status} this application?
     </div>
@@ -90,7 +95,7 @@ export const JobDetail = () => {
             <Divider className="border border-2 border-dark-subtle" />
 
             <div className="card-body p-3">
-              <h4 className="card-title fw-bold">Job Requirement</h4>
+              <h4 className="card-title fw-bold py-2">Job Requirement</h4>
               {
                 showRequirement && jobDetail.jobRequirement.map((data: any, index: number) => {
                   return <li key={index}>{data.description}</li>
@@ -112,9 +117,10 @@ export const JobDetail = () => {
           <Card className="card text-white bg-primary p-2 mt-4">
             <div className="card-body">
               <h4 className="card-title">Applicant</h4>
-              <Button className="btn text-black border fw-bold rounded-0 bg-info mx-2">Appending</Button>
-              <Button className="btn text-black border fw-bold rounded-0 bg-white mx-2">Approved</Button>
-              <Button className="btn text-black border fw-bold rounded-0 bg-white mx-2">Rejected</Button>
+              <Button onClick={()=>setStatus(STATUS.APPENDING)} className={status==STATUS.APPENDING?"btn text-black border fw-bold rounded-0 bg-info mx-2":"btn text-black border fw-bold rounded-0 bg-white mx-2"}>Appending</Button>
+              <Button onClick={()=>setStatus(STATUS.APPROVE)} className={status==STATUS.APPROVE?"btn text-black border fw-bold rounded-0 bg-info mx-2":"btn text-black border fw-bold rounded-0 bg-white mx-2"}>Approved</Button>
+              <Button onClick={()=>setStatus(STATUS.CANCEL)} className={status==STATUS.CANCEL?"btn text-black border fw-bold rounded-0 bg-info mx-2":"btn text-black border fw-bold rounded-0 bg-white mx-2"}>Rejected</Button>
+
             </div>
             <div className="mx-4">  Page {jobApplication.jobApplication.pageNumber+ 1} out of {jobApplication.jobApplication.totalPages}  <span>
               <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
@@ -161,10 +167,10 @@ export const JobDetail = () => {
                 <Divider className="border border-2 border-black" />
                 <div className="modal-footer pt-3">
                   <Tooltip placement="top" TransitionComponent={Zoom} title="Reject Application">
-                    <Cancel onClick={()=>applicationStatus(STATUS.CANCEL)} data-bs-toggle="modal" data-bs-target="#applicationModal" className="text-danger mx-1 mb-2" />
+                    <Cancel onClick={()=>setApplicationStatus(STATUS.CANCEL)} data-bs-toggle="modal" data-bs-target="#applicationModal" className="text-danger mx-1 mb-2" />
                   </Tooltip>
                   <Tooltip placement="top" TransitionComponent={Zoom} title="Approve Application">
-                    <CheckCircle onClick={()=>applicationStatus(STATUS.APPROVE)} data-bs-toggle="modal" data-bs-target="#applicationModal" className="text-success mx-1 mb-2" />
+                    <CheckCircle onClick={()=>setApplicationStatus(STATUS.APPROVE)} data-bs-toggle="modal" data-bs-target="#applicationModal" className="text-success mx-1 mb-2" />
                   </Tooltip>
                   <Tooltip placement="top" TransitionComponent={Zoom} title="Application Detail">
                     <ListAlt  className="mx-1 mb-2" />
@@ -173,6 +179,10 @@ export const JobDetail = () => {
               </Card>
             })
             }
+            {!jobApplication.isLoading&&jobApplication.jobApplication.content.length==0&&
+            <div className="text-center fw-bold text-white bg-primary p-4 mt-2">
+              -- No data found --
+              </div>}
           </>
           {applicationModal}
           <Toast message={toastProps.message} severity={toastProps.severity} open={toastProps.open} />
