@@ -21,17 +21,28 @@ query($input:PaginationInput,$hospitalId:Long,$status:String){
 `
 export const  FIND_JOB_BY_ID=gql`
 query($id:Long){
-    findJobById(id:$id){
+  findJobById(id:$id){
+    id
     title
+    description
     deadline
-    timeStamp
     status
-    picture
+    numberOfEmployee
+    hospital{
+      name
+      location{
+        name
+        Location{
+          name
+          Location{
+            name
+          }
+        }
+      }
+    }
     jobRequirement{
-      id
       description
     }
- 
   }
 }
 `
@@ -39,10 +50,12 @@ export const FIND_POSTED_JOBS_PAGE=gql`
 query($input:PaginationInput,$status:String){
   findJobsPostedPage(input:$input,status:$status){
     content{
+      id
       title
       deadline
       timeStamp
       numberOfEmployee
+      description
       hospital{
         name
         location{
