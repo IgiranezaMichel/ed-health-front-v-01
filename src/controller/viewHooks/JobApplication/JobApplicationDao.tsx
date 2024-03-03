@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@apollo/client";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
-import { GET_JOB_APPLICATION_DETAIL, GET_STUDENT_JOB_APPLICATION } from "../../../graphQl/queries/JobApplicationQueries";
+import {FIND_JOB_APPLICATION_BY_JOB_ID_AND_STATUS, GET_JOB_APPLICATION_DETAIL, GET_STUDENT_JOB_APPLICATION } from "../../../graphQl/queries/JobApplicationQueries";
 import { useEffect, useState } from "react";
 
 export const useGetStudentJobApplicationList = (studentId: number, status: string, input: PaginationInput) => {
@@ -34,6 +34,26 @@ export const useJobApplicationDetail=(id: number) => {
             fetchData()
                 .then(data => {
                     setJobApplication(data.getJobApplicationDetail);
+                    setIsLoading(false);
+                })
+                .catch(err => err)
+        }
+    )
+    return { isLoading, jobApplication, refetch }
+}
+
+export const useFindJobApplicationByJobIdAndStatus=(jobId:number,input:PaginationInput,status:string)=>{
+    const [isLoading, setIsLoading] = useState(false);
+    const [jobApplication, setJobApplication] = useState<any>({});
+    const { data, refetch } = useQuery(FIND_JOB_APPLICATION_BY_JOB_ID_AND_STATUS, { variables: { jobId:jobId,input:input,status:status } });
+    useEffect(
+        () => {
+            const fetchData = async () => {
+                return await data;
+            }
+            fetchData()
+                .then(data => {
+                    setJobApplication(data.findJobApplicationByJobIdAndJobStatus);
                     setIsLoading(false);
                 })
                 .catch(err => err)
