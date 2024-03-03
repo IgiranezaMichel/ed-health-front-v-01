@@ -53,6 +53,7 @@ export const JobDetail = () => {
   const [applicationStatus, setApplicationStatus] = useState<any>('');
   const jobApplication = useFindJobApplicationByJobIdAndStatus(Number(id), page,status);
   const saveStatus=useChangeJobApplicantStatusByHospitalAdmin(Number(id),applicationStatus);
+
   const saveApplicationStatus=()=>{
     saveStatus.saveJobApplicationStatusHandler();
     if(saveStatus.hasFinishLoading){
