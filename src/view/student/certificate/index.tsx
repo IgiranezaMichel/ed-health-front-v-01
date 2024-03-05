@@ -11,6 +11,7 @@ export const StudentCertificate = () => {
     const student = JSON.parse(String(localStorage.getItem("Student")));
     const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const studentCertificate = useGetAllStudentCertificatePage(Number(student.id), page);
+    console.log(studentCertificate)
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         event;
         setPage({ ...page, pageNumber: value - 1 });
@@ -27,7 +28,7 @@ export const StudentCertificate = () => {
             <div className="fs-5 fw-bolder mb-3">
                 <WorkspacePremium /> My Certificates
             </div>
-            {!studentCertificate.isLoading&&studentCertificate.studentCertificateObj.content.length!=0&&<>
+            {!studentCertificate.isLoading && studentCertificate.studentCertificateObj.content.length != 0 && <>
                 <div className="row g-3 mt-4">
                     <Stack spacing={2} className="mb-4">
                         <div>  Page {studentCertificate.studentCertificateObj.pageNumber + 1} out of {studentCertificate.studentCertificateObj.totalPages}  <span>
@@ -64,9 +65,11 @@ export const StudentCertificate = () => {
                     </div>
                 </Card>
             </>}
-            {!studentCertificate.isLoading&&studentCertificate.studentCertificateObj.content.length==0&&<div className="bg-primary fw-bold text-white text-center p-3">
-            -- No data found --
-            </div>}
+            {!studentCertificate.isLoading && studentCertificate.studentCertificateObj.content.length == 0 &&
+                <div className="bg-primary fw-bold text-white text-center p-3">
+                    -- No data found --
+                </div>
+            }
             {certificateModal}
         </Navigation>
     )
