@@ -4,13 +4,14 @@ import { useParams } from "react-router-dom";
 import { HospitalMenu } from "../../../../MenuBarItems/HospitalMenu";
 import { DashboardCard } from "../../../../components/default/DashboardCard";
 import { Navigation } from "../../../../components/default/Navigation";
-import {ShowApplicantStatus } from "./TrainingApplicantByStatus";
+import { ShowApplicantStatus } from "./TrainingApplicantByStatus";
 import { useState } from "react";
 import { STATUS } from "../../../../enums/Status";
 
 export const TrainingApplicationDetail = () => {
   const { trainingId } = useParams();
-  const [applicantStatus,setApplicantStatus]=useState(STATUS.APPENDING);
+  const [applicantStatus, setApplicantStatus] = useState(STATUS.APPENDING);
+  console.log(applicantStatus)
   return (
     <Navigation items={HospitalMenu}>
       <div className="row col-sm-12 mb-4">
@@ -21,15 +22,27 @@ export const TrainingApplicationDetail = () => {
           <DashboardCard title="Admin Approval status" />
         </div>
       </div>
-      <div className="">
-        <Button onClick={()=>setApplicantStatus(STATUS.APPENDING)} variant={applicantStatus==STATUS.APPENDING?"contained":"outlined"} className="m-2 fw-bolder">
+      <div className="mb-2">
+        <Button style={{ clipPath: ' polygon(75% 0%, 90% 50%, 75% 100%, 0% 100%, 5% 50%, 0% 0%)' }}
+          onClick={() => setApplicantStatus(STATUS.APPENDING)}
+          variant={applicantStatus == STATUS.APPENDING ? "contained" : "outlined"}
+          className={applicantStatus == STATUS.APPENDING ?"p-4 fw-bolder":"p-4 text-white fw-bolder bg-dark"}
+          >
           <ListAltRounded /> Appending
         </Button>
-        <Button onClick={()=>setApplicantStatus(STATUS.APPROVE)} variant={applicantStatus==STATUS.APPROVE?"contained":"outlined"} className="m-2 fw-bolder">
+        <Button style={{ clipPath: ' polygon(75% 0%, 86% 50%, 75% 100%, 0% 100%, 14% 50%, 0% 0%)',marginLeft:'-30px'}}
+          onClick={() => setApplicantStatus(STATUS.APPROVE)}
+          variant={applicantStatus == STATUS.APPROVE ? "contained" : "outlined"} 
+          className={applicantStatus == STATUS.APPROVE ?"p-4 fw-bolder":"p-4 text-white fw-bolder bg-dark"}
+          >
           <ListAltRounded /> Approved
         </Button>
-        <Button onClick={()=>setApplicantStatus(STATUS.CANCEL)} variant={applicantStatus==STATUS.CANCEL?"contained":"outlined"} className="m-2 fw-bolder">
-          <ListAltRounded /> Cancelled
+        <Button style={{ clipPath: ' polygon(75% 0%, 90% 50%, 75% 100%, 0% 100%, 14% 50%, 0% 0%)',marginLeft:'-30px'}}
+          onClick={() => setApplicantStatus(STATUS.CANCEL)}
+          variant={applicantStatus == STATUS.CANCEL ? "contained" : "outlined"} 
+          className={applicantStatus == STATUS.CANCEL ?"p-4 fw-bolder":"p-4 text-white fw-bolder bg-dark"}
+          >
+          <ListAltRounded /> Cancel
         </Button>
       </div>
       <ShowApplicantStatus trainingId={Number(trainingId)} status={applicantStatus} />
