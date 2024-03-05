@@ -17,7 +17,7 @@ export const StudentTraining = () => {
     const [page, setPage] = useState<PaginationInput>({
         pageNumber: 0, pageSize: 10, sort: "id"
     })
-    const training = useNcnmTrainingApprovalStatusPage(page, STATUS.APPENDING);
+    const training = useNcnmTrainingApprovalStatusPage(page, STATUS.APPROVE);
     const [trainingId, setTrainingId] = useState(0);
     const [showPage, setShowPage] = useState('newTraining');
     return (
