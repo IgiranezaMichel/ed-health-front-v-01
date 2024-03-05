@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Cancel, CheckBoxOutlined, InsertDriveFile, LocalFireDepartment, LocationOn, Person2, Save,School, Sort, Wc } from "@mui/icons-material";
-import { Card, Pagination, Tooltip } from "@mui/material";
+import { Cancel, CheckBoxOutlined, Email, InsertDriveFile, LocationOn, Person2, Phone, Save,School, Sort, Wc } from "@mui/icons-material";
+import { Card, Divider, Pagination, Tooltip } from "@mui/material";
 import { useState } from "react";
 import { useGetTrainingApplicantPage } from "../../../../controller/viewHooks/TrainingApplication/trainingApplication";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
@@ -13,14 +13,15 @@ export const ShowApplicantStatus = (props: { trainingId: number, status: string 
     const [page, setPage] = useState<PaginationInput>({
         pageNumber: 0,
         pageSize: 10,
-        sort: "id"
+        sort: "training.title"
     });
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         event
         setPage({ ...page, pageNumber: value - 1 });
     };
     const { isLoadingApplicant, refetchApplicants, trainingApplicants } = useGetTrainingApplicantPage(props.status, Number(props.trainingId), page);
-    const { isRegisterTrainingApplicationStatus, saveTrainingApplicationStatusHandler, saveTrainingApplicationStatusResult } = useUpdateTrainingApplicantStatusByHospitalAdmin(Number(props.trainingId), status);
+    const [trainingApplicationId,setTrainingApplicationId]=useState(0);
+    const { isRegisterTrainingApplicationStatus, saveTrainingApplicationStatusHandler, saveTrainingApplicationStatusResult } = useUpdateTrainingApplicantStatusByHospitalAdmin(Number(trainingApplicationId), status);
     const changeStatusModal = <Modal actionBtn={<Save
         onClick={() => {
             saveTrainingApplicationStatusHandler();
@@ -49,10 +50,10 @@ export const ShowApplicantStatus = (props: { trainingId: number, status: string 
                                 </select>
                             </span>
                                 <span className="float-end"> Sort by<select onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
-                                    <option selected={page.sort == 'title' ? true : false} value={"title"}>Title</option>
-                                    <option selected={page.sort == 'description' ? true : false} value="description">Description</option>
-                                    <option selected={page.sort == 'deadline' ? true : false} value="deadline">Deadline</option>
-                                    <option selected={page.sort == 'location' ? true : false} value="location">Location</option>
+                                    <option selected={page.sort == 'training.title' ? true : false} value={"training.title"}>Title</option>
+                                    <option selected={page.sort == 'student.user.name' ? true : false} value="student.user.name">Name</option>
+                                    <option selected={page.sort == 'studentApprovalTimeStamp' ? true : false} value="studentApprovalTimeStamp">Application date</option>
+                                    <option selected={page.sort == 'student.school' ? true : false} value="student.school">School</option>
                                 </select><Sort /></span>
                                 <Pagination
                                     count={trainingApplicants.totalPages}
@@ -60,41 +61,51 @@ export const ShowApplicantStatus = (props: { trainingId: number, status: string 
                                     onChange={handleChange}
                                 />
                     </div>}
-                        {trainingApplicants.content.length != 0 && <div className="col-sm-3 ">
+                        {trainingApplicants.content.length != 0 && <div>
                             
                             {trainingApplicants.content.map((data: any, index: any) => {
-                                return <Card elevation={4} key={index} className="col-12 mt-2">
-                                    <div className="text-center">
-                                        <img src={data.student.user.profilePicture} height={150} />
-                                    </div>
-                                    <div className="m-2">
+                                return <Card elevation={4} key={index} className="col-12 row m-auto">
+                                    <section className="text-center col-md-4 text-center">
+                                        <img src={data.student.user.profilePicture} height={'150px'} />
+                                    </section>
+                                    <section className="col-md-4 d-flex justify-content-center align-items-center">
+                                        <div>
                                         <div className="mb-1"><Person2 /> {data.student.user.name}</div>
-                                        <div className="mb-1"><Wc /> {data.student.user.gender}</div>
-                                        <div className="mb-1">
+                                        <div className="mb-1"><Wc/> {data.student.user.gender}</div>
+                                        <div className="mb-1"><Phone/> {data.student.user.phoneNumber}</div>
+                                        <div className="mb-1"><Email/> {data.student.user.email}</div>
+                                        </div>
+                                    </section>
+                                      <section className="col-md-4 d-flex justify-content-center align-items-center">
+                                      <div>
+                                      <div className="mb-1">
                                             <Tooltip placement="top" title={"studied at " + data.student.school.name}>
                                                 <span><School /> {data.student.school.name}</span>
                                             </Tooltip>
                                         </div>
                                         <div className="mb-1">
-                                            <Tooltip placement="top" title={"Department of " + data.student.department.name}>
-                                                <span><LocalFireDepartment /> {data.student.department.name}</span>
+                                            <Tooltip placement="top" title={data.student.school.name + " is located at " + data.student.school.location.name + '/' + data.student.school.location.Location.Location.name + '/' + data.student.school.location.Location.name}>
+                                                <span><LocationOn />{data.student.school.location.name} || {data.student.school.location.Location.Location.name} || {data.student.school.location.Location.name}</span>
                                             </Tooltip>
                                         </div>
                                         <div className="mb-1">
-                                            <Tooltip placement="top" title={data.student.school.name + " is located at " + data.student.school.location.name + '/' + data.student.school.location.Location.Location.name + '/' + data.student.school.location.Location.name}>
-                                                <span><LocationOn />{data.student.school.location.name}/{data.student.school.location.Location.Location.name}/{data.student.school.location.Location.name}</span>
+                                            <Tooltip placement="top" title={"Department of " + data.student.department.name}>
+                                                <span><b style={{fontFamily:'fantasy'}}>Department </b>{data.student.department.faculty.name} || {data.student.department.name}</span>
                                             </Tooltip>
                                         </div>
+                                        
                                         <div className="mb-1">
                                             <Tooltip title={data.student.user.name + ' has ' + data.student.status + ' at ' + data.student.school.name}>
-                                                <span>Student status <b>{data.student.status}</b></span>
+                                                <span><b style={{fontFamily:'fantasy'}}>Student Completion status</b> <>{data.student.status}</></span>
                                             </Tooltip>
                                         </div>
-                                    </div>
+                                      </div>
+                                      </section>
+                                      <Divider className="border border-2 border-primary my-1"/>
                                     <div className="modal-footer py-2">
                                         <InsertDriveFile className="m-1" data-bs-toggle="modal" data-bs-target="#saveChanges" onClick={() => setStatus(STATUS.CANCEL)} />
-                                        {props.status != 'approved' && <CheckBoxOutlined className="m-1" data-bs-toggle="modal" data-bs-target="#saveChanges" onClick={() => setStatus(STATUS.APPROVE)} />}
-                                        {props.status != 'cancelled' && <Cancel className="m-1" data-bs-toggle="modal" data-bs-target="#saveChanges" onClick={() => setStatus(STATUS.CANCEL)} />}
+                                        {props.status != 'approved' && <CheckBoxOutlined className="m-1" data-bs-toggle="modal" data-bs-target="#saveChanges" onClick={() => {setStatus(STATUS.APPROVE);setTrainingApplicationId(data.id)}} />}
+                                        {props.status != 'cancelled' && <Cancel className="m-1" data-bs-toggle="modal" data-bs-target="#saveChanges" onClick={() => {setStatus(STATUS.CANCEL);setTrainingApplicationId(data.id)}} />}
                                     </div>
                                 </Card>
                             })}
