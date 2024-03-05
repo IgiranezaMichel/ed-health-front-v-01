@@ -49,20 +49,15 @@ export const Training: FC<item> = (item) => {
                                             <TableCell><CalendarIcon />{String(data.deadline).split('T')[0]}</TableCell>
                                             <TableCell>{data.ncnmApprovalStatus}</TableCell>
                                             <TableCell>
-                                                {!(data.ncnmApprovalStatus == 'appending') && 
-                                                <Tooltip placement="top" title="Training details">
-                                                    <Button onClick={() => navigate('/hospital/training-detail/' + data.id)}><SchoolOutlined /></Button>
-                                                </Tooltip>
-                                                }
                                                 <Tooltip placement="top" title="Training details">
                                                     <Button onClick={() => navigate('/hospital/training-detail/' + data.id)}><Description /></Button>
                                                 </Tooltip>
-                                                <Tooltip TransitionComponent={Zoom} placement="top" title="View Certificate">
+                                                {(data.ncnmApprovalStatus == 'approved')&&<Tooltip TransitionComponent={Zoom} placement="top" title="View Certificate">
                                                     <Button><DocumentScannerRounded /></Button>
-                                                </Tooltip>
-                                                <Tooltip TransitionComponent={Zoom} placement="top" title="Applicant">
+                                                </Tooltip>}
+                                               {(data.ncnmApprovalStatus == 'approved')&&<Tooltip TransitionComponent={Zoom} placement="top" title="Applicant">
                                                     <Button><ContactPage onClick={()=>navigate("/hospital/training-applicant-detail/"+data.id)}/></Button>
-                                                </Tooltip>
+                                                </Tooltip>}
                                                 <Tooltip TransitionComponent={Zoom} placement="top" title="Extend deadline">
                                                     <Button><ReadMore /></Button>
                                                 </Tooltip>
