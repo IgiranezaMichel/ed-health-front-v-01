@@ -7,11 +7,12 @@ query($studentId:Long,$input:PaginationInput){
     totalPages
     size
     content{
+        content{
       certificate{
         title
-        description
         timeStamp
         training{
+          title
           location{
             name
             Location{
@@ -23,6 +24,8 @@ query($studentId:Long,$input:PaginationInput){
           }
         }
       }
+      
+    }
       
     }
     }
