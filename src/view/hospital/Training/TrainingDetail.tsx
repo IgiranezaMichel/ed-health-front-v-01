@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@apollo/client";
-import { BorderColor,CancelPresentation, CheckBox, CheckCircleOutlineOutlined, CloseRounded, Email, LocalHospital, Person, PhoneInTalkOutlined, PlaylistAdd, RemoveRedEye, Save, School, TitleSharp } from "@mui/icons-material";
-import { Button, Card, CircularProgress, Divider, Skeleton, TextField } from "@mui/material";
+import { BorderColor, CheckCircleOutlineOutlined, CloseRounded, KeyboardArrowDown, KeyboardArrowUp, PhoneInTalkOutlined, PlaylistAdd, RemoveRedEye, Save, TitleSharp } from "@mui/icons-material";
+import { Button, Card, CircularProgress,Skeleton, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { HospitalMenu } from "../../../MenuBarItems/HospitalMenu";
 import { Navigation } from "../../../components/default/Navigation";
 import { Toast } from "../../../components/default/Toast";
@@ -13,17 +13,13 @@ import { SAVE_TRAINING_REQUIREMENT } from "../../../graphQl/mutation/TrainingReq
 import { ToastProps } from "../../../typeDefs/ToastProps";
 import { TrainerInput } from "../../../typeDefs/TrainerInput";
 import { TrainingRequirementInput } from "../../../typeDefs/TrainingRequirementInput";
-import { CalendarIcon, ClockIcon } from "@mui/x-date-pickers";
+import { CalendarIcon } from "@mui/x-date-pickers";
 import { Modal } from "../../../components/default/Modal";
-import { useGetTrainingApplicantPage } from "../../../controller/viewHooks/TrainingApplication/trainingApplication";
-import { STATUS } from "../../../enums/Status";
-import { PaginationInput } from "../../../typeDefs/PaginationInput";
 export const HospitalTrainingDetail = () => {
     const { id } = useParams();
     const [add, setAdd] = useState(false);
     const [addShowData, setShowData] = useState('requirement');
     const [isSaving, setIsSaving] = useState(false);
-    const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const [trainingRequirement, setTrainingRequirement] = useState<TrainingRequirementInput>({
         description: '',
         id: 0,
@@ -39,6 +35,7 @@ export const HospitalTrainingDetail = () => {
         signature: ''
     });
     const [message, setMessage] = useState('');
+    const [show, setShow] = useState('');
     const [toastProps, setToastProps] = useState<ToastProps>({ message: message, open: false, severity: 'success' });
     const [saveTraining] = useMutation(SAVE_TRAINING_REQUIREMENT);
     const [saveTrainer] = useMutation(REGISTER_TRAINER);
@@ -76,8 +73,7 @@ export const HospitalTrainingDetail = () => {
         }
     }
     const { isFindingTraining, applicantList, trainerList, trainingDetail, trainingRequirementList, refreshTrainingDetail } = useFindTrainingById(Number(id));
-    const trainingApplicantObj = useGetTrainingApplicantPage(STATUS.APPENDING, Number(id), page);
-    console.log(trainingApplicantObj)
+    const navigate=useNavigate()
     const addTrainerModal = <Modal
         actionBtn={
             <div>
@@ -114,34 +110,28 @@ export const HospitalTrainingDetail = () => {
             </section>}
             {!isFindingTraining &&
                 <Card className="container-lg p-3 row mt-5 m-auto" elevation={3}>
-                    <Card elevation={4} className="col-sm-5 border-4 border-top border-primary">
-                        <div className="text-center">
-                            <span className="bg-primary p-2 text-light fw-bold"><LocalHospital /><span>{trainingDetail.hospital.name}</span></span>
-                        </div>
-                        <img src={trainingDetail.hospital.logo} />
-                        <span className="d-block mb-3"><TitleSharp /> {trainingDetail.hospital.description}</span>
-                        <span className="d-block mb-3"><ClockIcon /> {String(trainingDetail.hospital.timeStamp).split('T')[0]}</span>
-                        <Button disableElevation={false} variant="contained" className="bg-primary rounded-4 text-white fw-bold">
-                            Total Applicant <span className="badge bg-info text-dark">{applicantList.length}</span>
-                            <RemoveRedEye onClick={() => setShowData('applicant')} className="mx-2" />
-                        </Button>
-                        <Button disableElevation={false} variant="contained" className="bg-primary mt-2 rounded-4 text-white fw-bold">
-                            Total requirement <span className="badge bg-info text-dark">{trainingRequirementList.length}</span>
-                            <RemoveRedEye onClick={() => setShowData('requirement')} className="mx-2" />
-                        </Button>
-                    </Card>
-                    <section className="col-sm-7 m-auto bg-primary p-2 text-light">
+                    <section className="col-sm-12 m-auto bg-primary p-2 text-light">
                         <span className="d-block mb-2"><TitleSharp /> Title: <b>{trainingDetail.title}</b></span>
                         <span className="d-block mb-1"><BorderColor /> <b>{trainingDetail.description}</b></span>
                         <span className="d-block mb-1"><CalendarIcon /> Deadline: <b>{String(trainingDetail.deadline).split('T')[0]}</b></span>
                         <span className="d-block">Post Date: <b>{trainingDetail.timeStamp}</b></span>
+                       <div className="my-3">
+                       <span className="bg-primary my-1 text-white fw-bold p-2 rounded-0 border">
+                            Total Applicant <span className="badge bg-info text-dark">{applicantList.length}</span>
+                            <RemoveRedEye onClick={() => navigate('/hospital/training-applicant-detail/'+id)} className="mx-2" />
+                        </span>
+                        <span className="bg-primary mx-1 text-white fw-bold p-2 rounded-0 border">
+                            Total requirement <span className="badge bg-info text-dark">{trainingRequirementList.length}</span>
+                            <RemoveRedEye onClick={() => setShowData('requirement')} className="mx-2" />
+                        </span>
+                       </div>
                         <div className=" border-top border-4">
                             <span className="fw-bold fs-5 d-block">Trainer</span>
                             <div className="modal-footer">
                                 <PlaylistAdd data-bs-toggle="modal" data-bs-target="#add-school-admin" className="bg-primary p-1 fs-1 text-light rounded-circle" />
                             </div>
                             <div className="col-12 row m-auto g-1">
-                                {trainerList.map((data: any) => {
+                                {show=='trainerList'&&trainerList.map((data: any) => {
                                     return <section className="col-sm-4 p-0">
                                         <Card className="p-0" elevation={4}>
                                             <img src={data.profilePicture} style={{ height: '150px', width: '100%', objectFit: 'contain' }} alt="" />
@@ -157,13 +147,18 @@ export const HospitalTrainingDetail = () => {
                                     </section>
                                 })}
                             </div>
+                            <div className="text-center">
+                                <Button className="text-white" onClick={()=>{show==''?setShow('trainerList'):setShow('')}}>
+                                {show=='trainerList'?<KeyboardArrowDown/>:<KeyboardArrowUp/>}
+                                </Button>
+                            </div>
                         </div>
                     </section>
 
                     {addTrainerModal}
 
                     {/* requirements */}
-                    {addShowData == 'requirement' ? <div className="accordion accordion-flush py-2 border bg-primary col-sm-12 m-auto" id="accordionFlushExample">
+                    {addShowData == 'requirement'&&<div className="accordion accordion-flush py-2 border bg-primary col-sm-12 m-auto" id="accordionFlushExample">
                         <div className="accordion-item">
                             <h2 className="accordion-header" id="flush-headingOne">
                                 <button className="accordion-button fw-bolder bg-primary text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
@@ -189,55 +184,6 @@ export const HospitalTrainingDetail = () => {
                                 </div>
                             </div>
                         </div>
-                    </div> : <div className="bg-primary">
-                        <span className="fs-4 text-white fw-bold">Applicant list</span>
-                        
-                        <div className="col-sm-12 m-auto py-4">
-                            <Button className="">
-                                New Applicant
-                            </Button>
-                            {
-                                !trainingApplicantObj.isLoadingApplicant && trainingApplicantObj.trainingApplicants.content.map((data: any) => {
-                                    return <div className="12">
-                                        <Card className="rounded-0 row col-sm-12 m-auto">
-                                            <Card className="col-sm-4">
-                                                <img src={data.student.user.profilePicture} className="card-img" alt={data.profilePicture} />
-                                            </Card>
-                                            <div className="col-sm-8">
-                                                <div className="mb-2">
-                                                    <Person />{data.student.user.name}
-                                                </div>
-                                                <div className="mb-2">
-                                                    <PhoneInTalkOutlined />{data.student.user.phoneNumber}
-                                                </div>
-                                                <div className="mb-2">
-                                                    <Email />{data.student.user.email}
-                                                </div>
-                                                <Divider className="border border-2 border-primary-subtle"/>
-                                                <div className="mb-2">
-                                                    <School />{data.student.school.name}
-                                                </div>
-                                                <div className="mb-2">
-                                                <b style={{fontFamily:'fantasy'}}>Location </b>{data.student.school.location.Location.Location.name} || {data.student.school.location.Location.name} || {data.student.school.location.name}
-                                                </div>
-                                                <div className="mb-2">
-                                                <b style={{fontFamily:'fantasy'}}>Department </b>{data.student.department.name}
-                                                </div>
-                                                <div className="mb-2">
-                                                    <b style={{fontFamily:'fantasy'}}>Status </b>{data.student.status}
-                                                </div>
-                                                <div className="">
-                                                <span className="float-md-end"><CheckBox/> <CancelPresentation/></span>
-                                            </div>
-                                            </div>
-                                        </Card>
-                                    </div>
-                                })
-                            }
-                        </div>
-                        {applicantList.length == 0 && <div className="p-2 bg-primary text-white text-center fw-bold">
-                            -- No Applicant data found --
-                        </div>}
                     </div>}
 
                 </Card>}
