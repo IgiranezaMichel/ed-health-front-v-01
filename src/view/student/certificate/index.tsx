@@ -1,12 +1,12 @@
-import { Description, Download, QrCode2, WorkspacePremium } from "@mui/icons-material"
+import {QrCode2, WorkspacePremium } from "@mui/icons-material"
 import { StudentMenu } from "../../../MenuBarItems/StudentMenu"
 import { Navigation } from "../../../components/default/Navigation"
 import { Modal } from "../../../components/default/Modal"
 import QrCode from "../../../components/default/QrCode"
-import { Button, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material"
 import { useGetAllStudentCertificatePage } from "../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao"
 import { useState } from "react"
 import { PaginationInput } from "../../../typeDefs/PaginationInput"
+import { Button, Card } from "@mui/material"
 export const StudentCertificate = () => {
     const student=JSON.parse(String(localStorage.getItem("Student")));
     const [page,setPage]=useState<PaginationInput>({pageNumber:0,pageSize:10,sort:"id"});
@@ -20,34 +20,15 @@ export const StudentCertificate = () => {
     return (
         <Navigation items={StudentMenu}>
             <div className="fs-5 fw-bolder">
-                <WorkspacePremium /> Certificates
+                <WorkspacePremium /> My Certificates
             </div>
-            <Table className="mt-2">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>#</TableCell>
-                        <TableCell>Title</TableCell>
-                        <TableCell>#</TableCell>
-                        <TableCell>Issued date</TableCell>
-                        <TableCell>Action</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    <TableRow>
-                        <TableCell>#</TableCell>
-                        <TableCell>Title</TableCell>
-                        <TableCell>#</TableCell>
-                        <TableCell>Issued date</TableCell>
-                        <TableCell>
-                            <Button data-bs-toggle="modal"
-                                data-bs-target="#certificate"><QrCode2 /></Button>
-                            <Button><Download /></Button>
-                            <Button><Description /></Button>
-                        </TableCell>
-                    </TableRow>
-                </TableBody>
-            </Table>
-            
+            <Button data-bs-toggle="modal" data-bs-target="#certificate"><QrCode2 /></Button>
+            <Card>
+                <h4>Certificate title: </h4>
+                
+                <div>Certificate title: </div>
+                <div>Certificate title: </div>
+            </Card>
             {certificateModal}
         </Navigation>
     )
