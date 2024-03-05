@@ -7,6 +7,7 @@ query($status:String,$trainingId:Long,$input:PaginationInput){
     totalPages
     size
     content{
+      id
       hospitalApprovalStatus
       hospitalApprovalTimeStamp
       student{
@@ -16,10 +17,12 @@ query($status:String,$trainingId:Long,$input:PaginationInput){
           email
           phoneNumber
           profilePicture
-          password
         }
         department{
           name
+          faculty{
+            name
+          }
         }
         status
         school{
