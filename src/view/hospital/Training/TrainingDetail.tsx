@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@apollo/client";
-import { BorderColor, CheckCircleOutlineOutlined, CloseRounded, LocalHospital, PhoneInTalkOutlined, PlaylistAdd, RemoveRedEye, Save, School, TitleSharp } from "@mui/icons-material";
-import { Button, Card, CircularProgress, Skeleton, TextField } from "@mui/material";
+import { BorderColor,CancelPresentation, CheckBox, CheckCircleOutlineOutlined, CloseRounded, Email, LocalHospital, Person, PhoneInTalkOutlined, PlaylistAdd, RemoveRedEye, Save, School, TitleSharp } from "@mui/icons-material";
+import { Button, Card, CircularProgress, Divider, Skeleton, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { useParams } from "react-router-dom";
 import { HospitalMenu } from "../../../MenuBarItems/HospitalMenu";
@@ -15,11 +15,15 @@ import { TrainerInput } from "../../../typeDefs/TrainerInput";
 import { TrainingRequirementInput } from "../../../typeDefs/TrainingRequirementInput";
 import { CalendarIcon, ClockIcon } from "@mui/x-date-pickers";
 import { Modal } from "../../../components/default/Modal";
+import { useGetTrainingApplicantPage } from "../../../controller/viewHooks/TrainingApplication/trainingApplication";
+import { STATUS } from "../../../enums/Status";
+import { PaginationInput } from "../../../typeDefs/PaginationInput";
 export const HospitalTrainingDetail = () => {
     const { id } = useParams();
     const [add, setAdd] = useState(false);
     const [addShowData, setShowData] = useState('requirement');
     const [isSaving, setIsSaving] = useState(false);
+    const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const [trainingRequirement, setTrainingRequirement] = useState<TrainingRequirementInput>({
         description: '',
         id: 0,
@@ -72,6 +76,8 @@ export const HospitalTrainingDetail = () => {
         }
     }
     const { isFindingTraining, applicantList, trainerList, trainingDetail, trainingRequirementList, refreshTrainingDetail } = useFindTrainingById(Number(id));
+    const trainingApplicantObj = useGetTrainingApplicantPage(STATUS.APPENDING, Number(id), page);
+    console.log(trainingApplicantObj)
     const addTrainerModal = <Modal
         actionBtn={
             <div>
@@ -185,15 +191,50 @@ export const HospitalTrainingDetail = () => {
                         </div>
                     </div> : <div className="bg-primary">
                         <span className="fs-4 text-white fw-bold">Applicant list</span>
-                        {
-                            applicantList.map((data: any) => {
-                                return <Card>
-                                    <img src={data.profilePicture} alt="" />
-                                    <PhoneInTalkOutlined />
-                                    <School />
-                                </Card>
-                            })
-                        }
+                        
+                        <div className="col-sm-12 m-auto py-4">
+                            <Button className="">
+                                New Applicant
+                            </Button>
+                            {
+                                !trainingApplicantObj.isLoadingApplicant && trainingApplicantObj.trainingApplicants.content.map((data: any) => {
+                                    return <div className="12">
+                                        <Card className="rounded-0 row col-sm-12 m-auto">
+                                            <Card className="col-sm-4">
+                                                <img src={data.student.user.profilePicture} className="card-img" alt={data.profilePicture} />
+                                            </Card>
+                                            <div className="col-sm-8">
+                                                <div className="mb-2">
+                                                    <Person />{data.student.user.name}
+                                                </div>
+                                                <div className="mb-2">
+                                                    <PhoneInTalkOutlined />{data.student.user.phoneNumber}
+                                                </div>
+                                                <div className="mb-2">
+                                                    <Email />{data.student.user.email}
+                                                </div>
+                                                <Divider className="border border-2 border-primary-subtle"/>
+                                                <div className="mb-2">
+                                                    <School />{data.student.school.name}
+                                                </div>
+                                                <div className="mb-2">
+                                                <b style={{fontFamily:'fantasy'}}>Location </b>{data.student.school.location.Location.Location.name} || {data.student.school.location.Location.name} || {data.student.school.location.name}
+                                                </div>
+                                                <div className="mb-2">
+                                                <b style={{fontFamily:'fantasy'}}>Department </b>{data.student.department.name}
+                                                </div>
+                                                <div className="mb-2">
+                                                    <b style={{fontFamily:'fantasy'}}>Status </b>{data.student.status}
+                                                </div>
+                                                <div className="">
+                                                <span className="float-md-end"><CheckBox/> <CancelPresentation/></span>
+                                            </div>
+                                            </div>
+                                        </Card>
+                                    </div>
+                                })
+                            }
+                        </div>
                         {applicantList.length == 0 && <div className="p-2 bg-primary text-white text-center fw-bold">
                             -- No Applicant data found --
                         </div>}
