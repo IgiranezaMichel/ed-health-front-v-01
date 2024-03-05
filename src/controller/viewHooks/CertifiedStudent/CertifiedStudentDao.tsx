@@ -11,10 +11,12 @@ const {data,refetch}=useQuery(GET_STUDENT_CERTIFICATE_PAGE,{variables:{studentId
 useEffect(
     ()=>{
         const fetchData=async()=>{
+            console.log(data)
             return await data;
         }
         fetchData().then(data=>{
             setStudentCertificateObj(data.getStudentCertificatePage)
+            console.log(studentCertificateObj)
             setIsLoading(false);
         })
     }
