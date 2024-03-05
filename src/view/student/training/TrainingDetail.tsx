@@ -28,14 +28,14 @@ export const TrainingDetail = (props: { trainingId: number }) => {
     return (
         <div>
             {!isFindingTraining && <>
-                <Card className="col-sm-4 border-4 border-top border-primary">
+                <Card className="col-sm-3 border-4 border-top border-primary">
                     <div className="text-center">
                         <span className="bg-primary text-white p-3">Host</span>
                     </div>
-                    <img src={trainingDetail.hospital.logo} alt="" />
+                    <img src={trainingDetail.hospital.logo} className="card-img" />
                     <section>
                         <div className="m-1"><LocalHospital />{trainingDetail.hospital.name}</div>
-                        <div className="m-1"><LocalHospital />{trainingDetail.location.name}</div>
+                        <div className="m-1"><LocationOn />{trainingDetail.location.Location.Location.name} || {trainingDetail.location.Location.name} || {trainingDetail.location.name}</div>
                     </section>
                 </Card>
                 <Card className="mt-3 p-2">
