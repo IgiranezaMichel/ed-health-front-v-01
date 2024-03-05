@@ -1,9 +1,9 @@
 import { gql } from "@apollo/client";
 
-export const GET_STUDENT_CERTIFICATE_PAGE=gql`
-mutation($studentId:Long,$input:PaginationInput){
+export const GET_STUDENT_CERTIFICATE_PAGE = gql`
+query($studentId:Long,$input:PaginationInput){
     getStudentCertificatePage(studentId:$studentId,input:$input){
-        pageNumber
+    pageNumber
     totalPages
     size
     content{
@@ -11,7 +11,19 @@ mutation($studentId:Long,$input:PaginationInput){
         title
         description
         timeStamp
+        training{
+          location{
+            name
+            Location{
+              name
+              Location{
+                name
+              }
+            }
+          }
+        }
       }
+      
     }
     }
 }
