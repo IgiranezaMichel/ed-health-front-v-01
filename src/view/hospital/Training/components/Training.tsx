@@ -53,7 +53,7 @@ export const Training: FC<item> = (item) => {
                                                     <Button onClick={() => navigate('/hospital/training-detail/' + data.id)}><Description /></Button>
                                                 </Tooltip>
                                                 {(data.ncnmApprovalStatus == 'approved')&&<Tooltip TransitionComponent={Zoom} placement="top" title="View Certificate">
-                                                    <Button><DocumentScannerRounded /></Button>
+                                                    <Button onClick={()=>navigate('/hospital/certificate/'+data.id)}><DocumentScannerRounded /></Button>
                                                 </Tooltip>}
                                                {(data.ncnmApprovalStatus == 'approved')&&<Tooltip TransitionComponent={Zoom} placement="top" title="Applicant">
                                                     <Button><ContactPage onClick={()=>navigate("/hospital/training-applicant-detail/"+data.id)}/></Button>
