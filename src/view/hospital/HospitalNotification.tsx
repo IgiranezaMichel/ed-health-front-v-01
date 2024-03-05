@@ -7,9 +7,7 @@ export const HospitalNotification=()=>{
     return(
        <Navigation items={HospitalMenu}>
         <h1>Notification <span className="float-end">
-        <button
-            className="btn btn-primary position-relative"
-        >
+        <button className="btn btn-primary position-relative">
             <Notifications/>
             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger border border-3 border-white">
                 9<span className="visually-hidden">unread messages</span>
