@@ -31,6 +31,7 @@ import { Student } from './view/student'
 import { StudentTraining } from './view/student/training'
 import { JobPublished } from './view/student/job'
 import { StudentCertificate } from './view/student/certificate'
+import { TrainingCertificate } from './view/hospital/Certificate/index'
 // import { TrainingApplicantDetail } from './view/hospital/Training/components/TrainingApplicantDetail'
 function App() {
   return (
@@ -48,16 +49,7 @@ function App() {
       <Route path='/admin/school' element={<SchoolManagement/>}/>
       <Route path='/:user/school-detail/:id' element={<SchoolDetail/>}/>
       <Route path='/admin/hospital' element={<HospitalManagement/>}/> 
-      {/*  */}
-      {/* <Route path='/ncnm' element={<NcnmHome/>}/>
-      <Route path='/ncnm/users' element={<CertifiedUser/>}/>
-      <Route path='/ncnm/school' element={<NcnmSchools/>}/>
-      <Route path='/ncnm/hospital' element={<NcnmHospital/>}/>
-      <Route path='/ncnm/training' element={<NcnmTraining/>}/>
-      <Route path='/ncnm/certificate' element={<NcnmCertificate/>}/>
-      <Route path='/ncnm/notification' element={<NcnmNotification/>}/>
-      <Route path='/ncnm/setting' element={<NcnmSetting/>}/> */}
-      {/*  */}
+ 
       <Route path='/ncnm' element={<NcnmDashboard/>}/>
 
       <Route path='/ncnm/school' element={<NcnmSchool/>}/>
@@ -82,7 +74,9 @@ function App() {
       <Route path='/hospital/job-detail/:id' element={<JobDetail/>}/>
       <Route path='/hospital/notification' element={<HospitalNotification/>}/>
       <Route path='/hospital/certificate' element={<Certificate/>}/>
+      <Route path='/hospital/certificate/:trainingId' element={<TrainingCertificate/>}/>
       <Route path='/:name/logout' element={<Logout/>}/>
+      
       {/* <Route path='/hospital/notification' element={<HospitalNotification/>}/>
       <Route path='/hospital/setting' element={<HospitalUserSetting/>}/>
       <Route path='/hospital/training' element={<ViewTraining/>}/>
