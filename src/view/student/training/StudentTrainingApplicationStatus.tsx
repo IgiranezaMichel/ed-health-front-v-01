@@ -15,7 +15,11 @@ export const StudentTrainingApplicationStatus = () => {
     });
     const [status, setStatus] = useState<any>(STATUS.APPENDING);
     const trainResult = useGetStudentTrainingApplicationPage(Number(student.id), status, page);
-    console.log(trainResult.trainingApplicationDetail)
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        event;
+        setPage({ ...page, pageNumber: value - 1 });
+      };
+      
     return (
         <>
             <div className="row g-3 mt-4">
@@ -38,7 +42,7 @@ export const StudentTrainingApplicationStatus = () => {
                         <Pagination
                             count={trainResult.trainingApplicationDetail.totalPages}
                             page={trainResult.trainingApplicationDetail.pageNumber + 1}
-                        // onChange={handleChange}
+                        onChange={handleChange}
                         />
                     </div>
                 </Stack>
