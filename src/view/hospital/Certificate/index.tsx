@@ -6,6 +6,8 @@ import { LocationOn } from "@mui/icons-material";
 import { Navigation } from "../../../components/default/Navigation";
 import { HospitalMenu } from "../../../MenuBarItems/HospitalMenu";
 import { useState } from "react";
+import { RegisteredCertificateList } from "./components/RegisteredCertificateList";
+import { CreateCertificate } from "./components/CreateCertificate";
 
 export const TrainingCertificate = () => {
     const { trainingId } = useParams();
@@ -36,7 +38,13 @@ export const TrainingCertificate = () => {
                     :''
                     }
                 </div>
-                
+                <div className="p-2">
+                {show==''?
+                <RegisteredCertificateList trainingId={Number(trainingId)}/>
+                :show=='createCertificate'?<CreateCertificate trainingId={Number(trainingId)}/>
+                :''
+                    }
+                    </div>
             </Card>
             }
         </Navigation>
