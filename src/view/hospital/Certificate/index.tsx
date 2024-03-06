@@ -1,16 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useParams } from "react-router-dom"
 import { useFindTrainingById } from "../../../controller/viewHooks/training/useFindTrainingById";
-import { Card, Divider } from "@mui/material";
+import { Button, Card, Divider } from "@mui/material";
 import { LocationOn } from "@mui/icons-material";
 import { Navigation } from "../../../components/default/Navigation";
 import { HospitalMenu } from "../../../MenuBarItems/HospitalMenu";
+import { useState } from "react";
 
 export const TrainingCertificate = () => {
     const { trainingId } = useParams();
     const { trainingDetail, isFindingTraining } = useFindTrainingById(Number(trainingId));
-    const user = JSON.parse(String(localStorage.getItem('userData')))
-    let day = new Date();
-    console.log(trainingDetail)
+    const [show,setShow]=useState('');
     return (
         <Navigation items={HospitalMenu}>
             {!isFindingTraining && <Card elevation={3} className="border">
@@ -30,39 +30,13 @@ export const TrainingCertificate = () => {
                             className="badge bg-primary">10</span>
                     </div>
                 </div>
-                <Card className="m-2 border border-5 p-3">
-                    <div className="p-2">
-                        <div className="float-end mt-3">
-                            <img src={trainingDetail.hospital.logo} height={80} /><br />
-                            <span>{trainingDetail.hospital.name} </span>
-                        </div>
-                        <div>
-                            <div style={{ fontFamily: 'fantasy' }} className="display-2 d-block">Certificate
-                            </div>
-                            <b style={{ fontFamily: 'fantasy' }} className="display-6 d-block">of Award</b>
-
-                        </div>
-                        <section className="mt-5">
-                            <div>Proudly to represented to </div>
-                            <b style={{ fontFamily: 'cursive' }} className="display-6 d-block">Name Surname</b>
-                        </section>
-                        <section className="mt-3">
-                            This certificate is proudly presented to Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ornare posuere neque, eget venenatis turpis imperdiet condimentum. Nunc ornare nunc sit amet ullamcorper tempus. Maecenas pellentesque nisl pretium
-                        </section>
-                        <div className="d-flex justify-content-center">
-                            <div className="mx-5">
-                                <div>{day.getUTCDate() + "-" + day.getMonth() + "-" + day.getFullYear()}</div>
-                                <Divider className="border-2 border-black " />
-                                <div className="text-center">Date</div>
-                            </div>
-                            <div className="mx-5">
-                                <div>{user.name}</div>
-                                <Divider className="border-2 border-black " />
-                                <div className="text-center">Date</div>
-                            </div>
-                        </div>
-                    </div>
-                </Card>
+                <div className="modal-footer m-2">
+                    {show==''?<Button onClick={()=>setShow('createCertificate')} className="fw-bold" variant="contained">New Certificate</Button>
+                    :show=='createCertificate'?<Button onClick={()=>setShow('')} className="fw-bold bg-danger" variant="contained">Cancel</Button>
+                    :''
+                    }
+                </div>
+                
             </Card>
             }
         </Navigation>
