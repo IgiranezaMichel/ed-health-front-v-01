@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useFindCertificateById_ } from "../../../../controller/viewHooks/Certificate/CertificateQueries";
-import { Card, CircularProgress, Divider } from "@mui/material";
-import { Password, RemoveRedEyeRounded } from "@mui/icons-material";
+import { Button, Card, CircularProgress, Divider } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 
 export const CertificateDetail = (props: { certificateId: number }) => {
     const [show, setShow] = useState('');
@@ -13,7 +13,9 @@ export const CertificateDetail = (props: { certificateId: number }) => {
             </div> :
                 <>
                     <Card className="m-2 border border-5 p-3">
-                        {show==''?<RemoveRedEyeRounded/>:<Password/>}
+                        <Button onClick={()=>show==''?setShow('showCertificate'):setShow('')}>
+                        {show=='showCertificate'?<Visibility/>:<VisibilityOff/>}
+                        </Button>
                         <div className="p-2">
                             <div className="float-end mt-3">
                                 <img src={certificate.certificate.training.hospital.logo} height={80} /><br />
@@ -28,7 +30,7 @@ export const CertificateDetail = (props: { certificateId: number }) => {
                                 </div>
                             </div>
 
-                           {show == '' && <section>
+                           {show == 'showCertificate'&& <section>
                             <section className="mt-5">
                                 <div>Proudly to represented to </div>
                                 <b style={{ fontFamily: 'cursive' }} className="display-6 d-block">Name Surname</b>
