@@ -25,7 +25,6 @@ return(
             {
                 certificateObj.studentCertifiedObj.content.length!=0?
                 <div className="p-3 text-center border fw-bold">
-                 
                 </div>:
                 <div className="p-3 text-center border fw-bold">
                 -- No certified student found --
