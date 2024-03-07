@@ -1,8 +1,9 @@
-import { Email, Person2Outlined } from "@mui/icons-material"
+import { Email, Person2Outlined, Wc } from "@mui/icons-material"
 import { Card } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao";
 import { useState } from "react";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
+import { CalendarIcon } from "@mui/x-date-pickers";
 
 export const CertifiedStudent=(props:{certificateId:number})=>{
     const [page,setPage]=useState<PaginationInput>({
@@ -24,9 +25,10 @@ export const CertifiedStudent=(props:{certificateId:number})=>{
                             </div>
                             <div className="col-sm-8">
                            <div className="mb-2"><Person2Outlined/> {data.student.user.name}</div>
+                           <div className="mb-2"><Wc/> {data.student.user.gender}</div>
                            <div className="mb-2"><Email/> {data.student.user.email}</div>
-                           <div className="mb-2"><Person2Outlined/> {data.student.user.email}</div>
-                           <div className="mb-2"><Person2Outlined/> {data.student.user.dob}</div>
+                           <div className="mb-2"><Wc/> {data.student.user.phoneNumber}</div>
+                           <div className="mb-2"><CalendarIcon/> {String(data.student.user.dob).split('T')[0]}</div>
                             </div>
                         </Card>
                     })}
