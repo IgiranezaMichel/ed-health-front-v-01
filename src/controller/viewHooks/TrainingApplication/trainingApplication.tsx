@@ -42,22 +42,22 @@ export const useGetStudentTrainingApplicationPage = (studentId: number, status: 
     return { trainingApplicationDetail, refetch, hasFinishLoading }
 }
 
-export const useGetCertifiedStudentByAdminApprovalStatus=(status:string,trainingId:number,input:PaginationInput)=>{
-    const {data,refetch}=useQuery(GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS,
-        {variables:{status:status,trainingId:trainingId,input:input}});
-        const [isLoading, setIsLoading] = useState(true);
-        const [certifiedStudentDetailObj, setCertifiedStudentDetailObj] = useState<any>({});
-useEffect(
-    ()=>{
-        const fetchData=async()=>{
-            return await data;
+export const useGetCertifiedStudentByAdminApprovalStatus = (status: string, trainingId: number, input: PaginationInput) => {
+    const { data, refetch } = useQuery(GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS,
+        { variables: { status: status, trainingId: trainingId, input: input } });
+    const [isLoading, setIsLoading] = useState(true);
+    const [certifiedStudentDetailObj, setCertifiedStudentDetailObj] = useState<any>({});
+    useEffect(
+        () => {
+            const fetchData = async () => {
+                return await data;
+            }
+            fetchData()
+                .then(data => {
+                    setCertifiedStudentDetailObj(data.getStudentTrainingApplicationPage);
+                    setIsLoading(false);
+                })
         }
-        fetchData()
-        .then(data=>{
-            setCertifiedStudentDetailObj(data.getStudentTrainingApplicationPage);
-            setIsLoading(false);
-        })
-    }
-)
-       return {refetch,isLoading,certifiedStudentDetailObj} 
+    )
+    return { refetch, isLoading, certifiedStudentDetailObj }
 }
