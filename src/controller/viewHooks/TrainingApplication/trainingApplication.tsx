@@ -41,9 +41,10 @@ export const useGetStudentTrainingApplicationPage = (studentId: number, status: 
     )
     return { trainingApplicationDetail, refetch, hasFinishLoading }
 }
+
 export const useGetCertifiedStudentByAdminApprovalStatus=(status:string,trainingId:number,input:PaginationInput)=>{
     const {data,refetch}=useQuery(GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS,
         {variables:{status:status,trainingId:trainingId,input:input}});
-        
+
         
 }
