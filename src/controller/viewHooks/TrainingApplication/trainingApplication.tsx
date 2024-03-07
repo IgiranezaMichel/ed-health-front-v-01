@@ -54,7 +54,7 @@ export const useGetCertifiedStudentByAdminApprovalStatus = (status: string, trai
             }
             fetchData()
                 .then(data => {
-                    setCertifiedStudentDetailObj(data.getStudentTrainingApplicationPage);
+                    setCertifiedStudentDetailObj(data.getTrainingApplicantPageByHospitalApprovalStatus);
                     setIsLoading(false);
                 })
         }
