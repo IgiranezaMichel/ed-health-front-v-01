@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Cancel, Email, Person2Outlined, Wc } from "@mui/icons-material"
+import { Cancel, Description, Email, Person2Outlined, Wc } from "@mui/icons-material"
 import { Button, Card, Tooltip } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao";
 import { useState } from "react";
@@ -41,13 +41,18 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                                                 <div style={{width:'50px',height:'50px'}}>
                                                     <QrCode url="/student-certificate/" style={{width:'100%',height:'100%'}} pathVariable={btoa(data.id+'')}/>
                                                 </div>
-                                            </div>
-                                        </section>
-                                        <div className="modal-footer p-2">
+                                                <div className="mt-1">
                                             <Tooltip placement="top" title="Reject certificate">
-                                            <Button><Cancel/></Button>
+                                            <Button variant="contained"><Cancel/></Button>
+                                            </Tooltip>
+                                            <Tooltip placement="top" title="Description">
+                                            <Button variant="outlined" className="mx-1 rounded-0"><Description/></Button>
                                             </Tooltip>
                                         </div>
+                                            </div>
+                                            
+                                        </section>
+                                        
                                     </Card>
                                 })}
                             </> :
