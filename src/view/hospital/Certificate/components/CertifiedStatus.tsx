@@ -19,9 +19,11 @@ export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
                         --No data found --
                 </Card>:<div>
                     {
-                        certifiedStudents.certifiedStudentDetailObj.content.map((data)=>{
-                            return <Card>
-
+                        certifiedStudents.certifiedStudentDetailObj.content.map((data:any)=>{
+                            return <Card >
+                                <div className="col-sm-2">
+                                    <img src={data.student.user.profilePicture} alt="" />
+                                </div>
                             </Card>
                         })
                     }
