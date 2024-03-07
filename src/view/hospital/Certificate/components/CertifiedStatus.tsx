@@ -34,7 +34,9 @@ export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
                                     <div className="mb-2"><Phone/> {data.student.user.phoneNumber}</div>
                                     <div className="mb-2"><CalendarIcon/> {String(data.student.user.dob).split('T')[0]}</div>
                                     </div>
-
+                                </div>
+                                <div className="col-md-5">
+                                    
                                 </div>
                             </Card>
                         })
