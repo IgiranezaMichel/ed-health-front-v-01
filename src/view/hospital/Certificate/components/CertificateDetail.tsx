@@ -4,7 +4,7 @@ import { Button, Card, CircularProgress, Divider } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { CertifiedStudentList } from "./CertifiedStudentList";
 
-export const CertificateDetail = (props: { certificateId: number,trainingId:number }) => {
+export const CertificateDetail = (props: { certificateId: number, trainingId: number }) => {
     const [show, setShow] = useState('');
     const certificate = useFindCertificateById_(props.certificateId);
     return (
@@ -14,8 +14,8 @@ export const CertificateDetail = (props: { certificateId: number,trainingId:numb
             </div> :
                 <>
                     <Card className="m-2 border border-5 p-3">
-                        <Button onClick={()=>show==''?setShow('showCertificate'):setShow('')}>
-                        {show=='showCertificate'?<Visibility/>:<VisibilityOff/>}
+                        <Button onClick={() => show == '' ? setShow('showCertificate') : setShow('')}>
+                            {show == 'showCertificate' ? <Visibility /> : <VisibilityOff />}
                         </Button> || <span className="mx-2">Student having this certificate <span className="badge bg-primary">{certificate.certificate.certifiedStudentList.length}</span></span>
                         <div className="p-2">
                             <div className="float-end mt-3">
@@ -31,42 +31,42 @@ export const CertificateDetail = (props: { certificateId: number,trainingId:numb
                                 </div>
                             </div>
 
-                           {show == 'showCertificate'&& <section>
-                            <section className="mt-5">
-                                <div>Proudly to represented to </div>
-                                <b style={{ fontFamily: 'cursive' }} className="display-6 d-block">Name Surname</b>
-                            </section>
-                            <div className="mt-3">
-                                {certificate.certificate.description}
-                            </div>
-                            <div className="d-flex justify-content-center my-4">
-                                <div className="mx-5">
-                                    <div className="text-center fw-bold">Approve date</div>
-                                    <Divider className="border border-dark " />
-                                    {String(certificate.certificate.timeStamp).split('T')[0]} {String(certificate.certificate.timeStamp).split('T')[1].split('.')[0]}
+                            {show == 'showCertificate' && <section>
+                                <section className="mt-5">
+                                    <div>Proudly to represented to </div>
+                                    <b style={{ fontFamily: 'cursive' }} className="display-6 d-block">Name Surname</b>
+                                </section>
+                                <div className="mt-3">
+                                    {certificate.certificate.description}
                                 </div>
-
-                                <div className="mx-5">
-                                    <div className="text-center fw-bold">
-                                        <img src={certificate.certificate.hospitalStamp} alt="" />
+                                <div className="d-flex justify-content-center my-4">
+                                    <div className="mx-5">
+                                        <div className="text-center fw-bold">Approve date</div>
+                                        <Divider className="border border-dark " />
+                                        {String(certificate.certificate.timeStamp).split('T')[0]} {String(certificate.certificate.timeStamp).split('T')[1].split('.')[0]}
                                     </div>
-                                    <Divider className="border border-dark " />
-                                    {String(certificate.certificate.training.hospital.name)}
-                                </div>
 
-                                <div className="mx-5">
-                                    <div className="text-center fw-bold">
-                                        <img src={certificate.certificate.userSignature} />
+                                    <div className="mx-5">
+                                        <div className="text-center fw-bold">
+                                            <img src={certificate.certificate.hospitalStamp} alt="" />
+                                        </div>
+                                        <Divider className="border border-dark " />
+                                        {String(certificate.certificate.training.hospital.name)}
                                     </div>
-                                    <Divider className="border border-dark " />
-                                    {String(certificate.certificate.accountHolder.name)}
+
+                                    <div className="mx-5">
+                                        <div className="text-center fw-bold">
+                                            <img src={certificate.certificate.userSignature} />
+                                        </div>
+                                        <Divider className="border border-dark " />
+                                        {String(certificate.certificate.accountHolder.name)}
+                                    </div>
                                 </div>
-                            </div>
                             </section>
                             }
                         </div>
                     </Card>
-                <CertifiedStudentList certificateId={props.certificateId} trainingId={props.trainingId}/>
+                    <CertifiedStudentList certificateId={props.certificateId} trainingId={props.trainingId} />
                 </>
             }
         </>
