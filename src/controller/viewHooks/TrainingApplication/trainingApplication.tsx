@@ -59,5 +59,5 @@ useEffect(
         })
     }
 )
-       return {refetch,isLoading} 
+       return {refetch,isLoading,certifiedStudentDetailObj} 
 }
