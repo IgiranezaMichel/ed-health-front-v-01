@@ -26,8 +26,10 @@ return(
                 certificateObj.studentCertifiedObj.content.length!=0?
                 <>
                     {certificateObj.studentCertifiedObj.content.map((data:any,index:number)=>{
-                        return <Card elevation={3} className="mb-3">
+                        return <Card elevation={3} className="mb-3 col-sm-12 row m-auto">
+                            <div className="col-sm-4">
                             <img src={data.student.user.profilePicture} height={100} />
+                            </div>
                         </Card>
                     })}
                 </>:
