@@ -32,7 +32,7 @@ export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
                                     <div className="mb-2"><Email/> {data.student.user.email}</div>
                                     <div className="mb-2"><Wc/> {data.student.user.gender}</div>
                                     <div className="mb-2"><Phone/> {data.student.user.phoneNumber}</div>
-                                    <div className="mb-2"><CalendarIcon/> {data.student.user.dob}</div>
+                                    <div className="mb-2"><CalendarIcon/> {String(data.student.user.dob).split('T')[0]}</div>
                                     </div>
 
                                 </div>
