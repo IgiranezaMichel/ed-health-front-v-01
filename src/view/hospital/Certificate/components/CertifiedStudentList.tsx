@@ -1,4 +1,4 @@
-import { Button } from "@mui/material"
+import { Button, Card } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao"
 import { useState } from "react";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
@@ -24,8 +24,9 @@ return(
         !certificateObj.isLoading&&<div className="p-2">
             {
                 certificateObj.studentCertifiedObj.content.length!=0?
-                <div className="p-3 text-center border fw-bold">
-                </div>:
+                <Card elevation={3} className="mb-3">
+                    
+                </Card>:
                 <div className="p-3 text-center border fw-bold">
                 -- No certified student found --
                 </div>
