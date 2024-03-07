@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Cancel, Description, Email, Person2Outlined, Wc } from "@mui/icons-material"
-import { Button, Card, Tooltip } from "@mui/material"
+import { Cancel, Description, Email, Person2Outlined, Sort, Wc } from "@mui/icons-material"
+import { Button, Card, Pagination, Stack, Tooltip } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao";
 import { useState } from "react";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
@@ -12,7 +12,10 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
         pageNumber: 0, pageSize: 10, sort: "id"
     })
     const certificateObj = useFindCertifiedStudentByCertificateIdPage(props.certificateId, page);
-    console.log(certificateObj)
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        event;
+        setPage({ ...page, pageNumber: value - 1 });
+      };
     return (
         <>
             {
@@ -20,6 +23,30 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                     {
                         certificateObj.studentCertifiedObj.content.length != 0 ?
                             <>
+                            <Stack spacing={2} className="mb-4">
+                    <div>  Page {certificateObj.studentCertifiedObj.pageNumber + 1} out of {certificateObj.studentCertifiedObj.totalPages}  <span>
+                        <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
+                        >
+                            <option value="8">8</option>
+                            <option value="16">16</option>
+                            <option value="24">24</option>
+                            <option value="32">32</option>
+                        </select>
+                    </span>
+                        <span className="float-end">
+                            Sort by <select  className="custom-select p-1">
+                                <option value="">Select item below</option>
+                                <option value="">Select item below</option>
+                                <option value="">Select item below</option>
+                            </select>
+                            <Sort/></span>
+                        <Pagination
+                            count={certificateObj.studentCertifiedObj.totalPages}
+                            page={certificateObj.studentCertifiedObj.pageNumber + 1}
+                        onChange={handleChange}
+                        />
+                    </div>
+                </Stack>
                                 {certificateObj.studentCertifiedObj.content.map((data: any, index: number) => {
                                     return <Card elevation={3} key={index} className="mb-3 col-sm-12 row m-auto">
                                         <section className="col-md-2 d-flex align-items-center">
