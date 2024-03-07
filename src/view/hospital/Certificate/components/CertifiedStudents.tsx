@@ -25,12 +25,10 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                             <>
                             <Stack spacing={2} className="mb-4">
                     <div>  Page {certificateObj.studentCertifiedObj.pageNumber + 1} out of {certificateObj.studentCertifiedObj.totalPages}  <span>
-                        <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
-                        >
-                            <option value="8">8</option>
-                            <option value="16">16</option>
-                            <option value="24">24</option>
-                            <option value="32">32</option>
+                        <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="30">30</option>
                         </select>
                     </span>
                         <span className="float-end">
