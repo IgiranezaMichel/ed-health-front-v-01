@@ -34,7 +34,7 @@ query($certificateId:Long,$input:PaginationInput){
     id
       student{
         id
-        user{
+        user{ 
           name
           gender
           email
