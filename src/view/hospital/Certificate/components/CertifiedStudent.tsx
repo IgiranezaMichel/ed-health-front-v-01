@@ -5,6 +5,7 @@ import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controll
 import { useState } from "react";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 import { CalendarIcon } from "@mui/x-date-pickers";
+import QrCode from "../../../../components/default/QrCode";
 
 export const CertifiedStudent = (props: { certificateId: number }) => {
     const [page, setPage] = useState<PaginationInput>({
@@ -37,6 +38,9 @@ export const CertifiedStudent = (props: { certificateId: number }) => {
                                             <div>
                                                 <div className="mb-2"><span style={{ fontFamily: 'fantasy' }}>Study at </span> {data.student.school.name}</div>
                                                 <div className="mb-2"><span style={{ fontFamily: 'fantasy' }}>Department</span> {data.student.department.name}</div>
+                                                <div style={{width:'50px',height:'50px'}}>
+                                                    <QrCode url="/student-certificate/" style={{width:'100%',height:'100%'}} certificateId={Number(data.id)}/>
+                                                </div>
                                             </div>
                                         </section>
                                         <div className="modal-footer p-2">
