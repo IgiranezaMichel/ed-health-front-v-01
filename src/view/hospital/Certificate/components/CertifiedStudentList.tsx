@@ -31,6 +31,11 @@ return(
                             <div className="col-sm-4">
                             <img src={data.student.user.profilePicture} height={100} />
                             </div>
+                            <div className="col-sm-8">
+                           <div>
+                           {data.student.user.name}
+                           </div>
+                            </div>
                         </Card>
                     })}
                 </>:
