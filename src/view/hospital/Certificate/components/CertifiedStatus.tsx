@@ -6,6 +6,7 @@ import { Card, CircularProgress } from "@mui/material";
 export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
     const [page,setPage]=useState<PaginationInput>({pageNumber:0,pageSize:10,sort:"id"});
    const certifiedStudents=useGetCertifiedStudentByAdminApprovalStatus(props.status,props.trainingId,page);
+   console.log(certifiedStudents);
     return(
         <>
         {
