@@ -1,8 +1,13 @@
 import { Email, Person2Outlined } from "@mui/icons-material"
 import { Card } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao";
+import { useState } from "react";
+import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 
 export const CertifiedStudent=(props:{certificateId:number})=>{
+    const [page,setPage]=useState<PaginationInput>({
+        pageNumber:0,pageSize:10,sort:"id"
+    })
     const certificateObj= useFindCertifiedStudentByCertificateIdPage(props.certificateId,page); 
    console.log(certificateObj)
     return(
