@@ -5,9 +5,7 @@ import { useState } from "react";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 
 export const CertifiedStudentList=(props:{certificateId:number})=>{
-    const [page,setPage]=useState<PaginationInput>({
-        pageNumber:0,pageSize:10,sort:"id"
-    })
+    
 return(
     <>
     <Button variant="contained" className="rounded-0 mx-2">
