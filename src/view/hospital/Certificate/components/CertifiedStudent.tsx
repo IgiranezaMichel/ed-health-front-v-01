@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Email, Person2Outlined, Wc } from "@mui/icons-material"
+import { Cancel, Email, Person2Outlined, Wc } from "@mui/icons-material"
 import { Card } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao";
 import { useState } from "react";
@@ -39,6 +39,9 @@ export const CertifiedStudent = (props: { certificateId: number }) => {
                                                 <div className="mb-2"><span style={{ fontFamily: 'fantasy' }}>Department</span> {data.student.department.name}</div>
                                             </div>
                                         </section>
+                                        <div className="modal-footer">
+                                            <Cancel/>
+                                        </div>
                                     </Card>
                                 })}
                             </> :
