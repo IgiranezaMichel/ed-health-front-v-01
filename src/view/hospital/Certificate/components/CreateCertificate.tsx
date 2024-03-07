@@ -120,7 +120,7 @@ export const CreateCertificate = (props: { trainingId: number }) => {
 
                     </div>
                     <div style={{ width: '40px', height: '40px', float: 'right', }}>
-                        <QrCode url="/certificate" certificateId={1} style={{ width: '100%', height: '100%' }} />
+                        <QrCode url="/certificate" pathVariable={''} style={{ width: '100%', height: '100%' }} />
                     </div>
                     <div className="text-center" style={{ clear: 'both' }}>
                         <CheckBox onClick={() => saveCertificateHandler()} className="fs-2" /> <CancelPresentation className="fs-2" />
