@@ -24,9 +24,11 @@ return(
         !certificateObj.isLoading&&<div className="p-2">
             {
                 certificateObj.studentCertifiedObj.content.length!=0?
-                <Card elevation={3} className="mb-3">
-                    
-                </Card>:
+                <>
+                    <Card elevation={3} className="mb-3">
+
+                    </Card>
+                </>:
                 <div className="p-3 text-center border fw-bold">
                 -- No certified student found --
                 </div>
