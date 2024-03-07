@@ -14,10 +14,18 @@ export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
                 <CircularProgress/>
             </div>
             :
-            <div>
-                <Card>
+            <div className="p-2">
+                {certifiedStudents.certifiedStudentDetailObj.content.length==0?<Card elevation={3} className="p-4 text-center fw-bold">
+                        --No data found --
+                </Card>:<div>
+                    {
+                        certifiedStudents.certifiedStudentDetailObj.content.map((data)=>{
+                            return <Card>
 
-                </Card>
+                            </Card>
+                        })
+                    }
+                    </div>}
             </div>
         }
         </>
