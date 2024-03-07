@@ -31,6 +31,7 @@ export const FIND_STUDENT_CERTIFIED_PAGE_BY_CERTIFICATE_ID=gql`
 query($certificateId:Long,$input:PaginationInput){
   getCertifiedStudentPage(certificateId:$certificateId,input:$input){
     content{
+    id
       student{
         id
         user{
