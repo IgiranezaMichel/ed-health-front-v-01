@@ -1,7 +1,10 @@
 import { Email, Person2Outlined } from "@mui/icons-material"
 import { Card } from "@mui/material"
+import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao";
 
-export const CertifiedStudent=()=>{
+export const CertifiedStudent=(props:{certificateId:number})=>{
+    const certificateObj= useFindCertifiedStudentByCertificateIdPage(props.certificateId,page); 
+   console.log(certificateObj)
     return(
         <>
          {
