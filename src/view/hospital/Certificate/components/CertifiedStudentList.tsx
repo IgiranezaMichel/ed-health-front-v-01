@@ -25,9 +25,11 @@ return(
             {
                 certificateObj.studentCertifiedObj.content.length!=0?
                 <>
-                    <Card elevation={3} className="mb-3">
-
-                    </Card>
+                    {certificateObj.studentCertifiedObj.content.map((data:any,index:number)=>{
+                        return <Card elevation={3} className="mb-3">
+                            <img src={data.student.user.profilePicture} height={100} />
+                        </Card>
+                    })}
                 </>:
                 <div className="p-3 text-center border fw-bold">
                 -- No certified student found --
