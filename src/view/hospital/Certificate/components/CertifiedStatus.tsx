@@ -4,10 +4,14 @@ import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 
 export const CertifiedStatus=(props:{status:string,trainingId:number})=>{
     const [page,setPage]=useState<PaginationInput>({pageNumber:0,pageSize:10,sort:"id"});
-   const certifiedStudent=useGetCertifiedStudentByAdminApprovalStatus(props.status,props.trainingId,page);
+   const certifiedStudents=useGetCertifiedStudentByAdminApprovalStatus(props.status,props.trainingId,page);
     return(
         <>
-        
+        {
+            certifiedStudents.isLoading&&<div>
+                
+            </div>
+        }
         </>
     )
 }
