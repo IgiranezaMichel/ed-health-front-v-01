@@ -8,8 +8,6 @@ export const CertifiedStudentList=(props:{certificateId:number})=>{
     const [page,setPage]=useState<PaginationInput>({
         pageNumber:0,pageSize:10,sort:"id"
     })
-   const certificateObj= useFindCertifiedStudentByCertificateIdPage(props.certificateId,page); 
-   console.log(certificateObj)
 return(
     <>
     <Button variant="contained" className="rounded-0 mx-2">
