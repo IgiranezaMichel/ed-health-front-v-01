@@ -1,10 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button} from "@mui/material"
-import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao"
-import { useState } from "react";
-import { PaginationInput } from "../../../../typeDefs/PaginationInput";
-import { CertifiedStudent } from "./CertifiedStudent";
-
+import { CertifiedStudents } from "./CertifiedStudents";
 export const CertifiedStudentList=(props:{certificateId:number})=>{
     
 return(
@@ -18,7 +14,7 @@ return(
     <Button variant="outlined" className=" mx-1 rounded-0">
         Rejection
     </Button>
-   <CertifiedStudent certificateId={props.certificateId}/>
+   <CertifiedStudents certificateId={props.certificateId}/>
     </>
 )
 }
