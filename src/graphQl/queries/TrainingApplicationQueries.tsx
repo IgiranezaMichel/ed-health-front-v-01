@@ -82,6 +82,7 @@ query($status:String,$trainingId:Long,$input:PaginationInput){
     content{
       student{
         user{
+          profilePicture
           name
           gender
           email
