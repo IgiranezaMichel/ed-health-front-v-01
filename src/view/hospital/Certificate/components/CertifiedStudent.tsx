@@ -20,7 +20,7 @@ export const CertifiedStudent=(props:{certificateId:number})=>{
                 <>
                     {certificateObj.studentCertifiedObj.content.map((data:any,index:number)=>{
                         return <Card elevation={3} key={index} className="mb-3 col-sm-12 row m-auto">
-                            <div className="col-sm-4">
+                            <div className="col-sm-2">
                             <img src={data.student.user.profilePicture} height={100} />
                             </div>
                             <div className="col-sm-8">
