@@ -7,7 +7,7 @@ export const CertifiedStudentList=(props:{certificateId:number,trainingId:number
     const [status,setStatus]=useState('approved');
 return(
     <>
-    <Button variant="contained" className="rounded-0 mx-2">
+    <Button onClick={()=>setStatus('')} variant="contained" className="rounded-0 mx-2">
         Certified
     </Button>
     <Button variant="outlined" className="rounded-0">
@@ -17,7 +17,7 @@ return(
         Rejection
     </Button>
    <CertifiedStudents certificateId={props.certificateId}/>
-   <CertifiedStatus status={status} trainingId={props.trainingId}/>
+   {status==''&&<CertifiedStatus status={status} trainingId={props.trainingId}/>}
     </>
 )
 }
