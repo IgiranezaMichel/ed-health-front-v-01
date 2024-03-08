@@ -2,8 +2,8 @@
 import { useState } from "react"
 import { useGetCertifiedStudentByAdminApprovalStatus } from "../../../../controller/viewHooks/TrainingApplication/trainingApplication"
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
-import { Button, Card, CircularProgress } from "@mui/material";
-import { CancelPresentationOutlined, CheckBox, Email, Person, Phone, Wc } from "@mui/icons-material";
+import { Button, Card, CircularProgress, Pagination, Stack } from "@mui/material";
+import { CancelPresentationOutlined, CheckBox, Email, Person, Phone, Sort, Wc } from "@mui/icons-material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifyStudent/CertifyStudentDao";
 import { CertifiedStudentInput } from "../../../../typeDefs/CertifiedStudentInput";
@@ -23,7 +23,6 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
             certificateId: props.certificateId,
             CertificateStatus:CertificateStatus.APPROVED
         });
-        console.log('certificate status '+CertificateStatus.APPROVED)
     const saveCertifyStudent = useSaveCertifyStudent(trainingApplicationId, studentApplicationStatus, certifyStudent);
 //    Register certify Student handler
     const registerCertifyStudent = () => {
@@ -44,6 +43,29 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
                         {certifiedStudents.certifiedStudentDetailObj.content.length == 0 ? <Card elevation={3} className="p-4 text-center fw-bold">
                             --No data found --
                         </Card> : <div className="mt-2 mb-2">
+                        <Stack spacing={2} className="mb-4">
+                                    <div>  Page {certifiedStudents.certifiedStudentDetailObj.pageNumber + 1} out of {certifiedStudents.certifiedStudentDetailObj.totalPages}  <span>
+                                        <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="30">30</option>
+                                        </select>
+                                    </span>
+                                        <span className="float-end">
+                                            Sort by <select onChange={(e)=>setPage({...page,sort:e.target.value})} className="custom-select p-1">
+                                                <option value="id">Select item below</option>
+                                                <option value="student.user.name">Name</option>
+                                                <option value="student.user.email">Email</option>
+                                                <option value="student.school.name">School</option>
+                                            </select>
+                                            <Sort /></span>
+                                        <Pagination
+                                            count={certificateObj.studentCertifiedObj.totalPages}
+                                            page={certificateObj.studentCertifiedObj.pageNumber + 1}
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                </Stack>
                             {
                                 certifiedStudents.certifiedStudentDetailObj.content.map((data: any, index: number) => {
                                     return <Card elevation={4} key={index} className="row col-12 m-auto mb-3">
