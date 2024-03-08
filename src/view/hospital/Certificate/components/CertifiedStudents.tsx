@@ -8,6 +8,7 @@ import { CalendarIcon } from "@mui/x-date-pickers";
 import QrCode from "../../../../components/default/QrCode";
 import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifyStudent/CertifyStudentDao";
 import { CertifiedStudentInput } from "../../../../typeDefs/CertifiedStudentInput";
+import { CertificateStatus } from "../../../../enums/CertificateStatus";
 
 export const CertifiedStudents = (props: { certificateId: number }) => {
     const [page, setPage] = useState<PaginationInput>({
