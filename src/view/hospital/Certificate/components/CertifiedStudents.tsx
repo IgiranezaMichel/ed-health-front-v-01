@@ -7,6 +7,7 @@ import { PaginationInput } from "../../../../typeDefs/PaginationInput";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import QrCode from "../../../../components/default/QrCode";
 import { useSaveCertifyStudent } from "../../../../controller/dmlHooks/CertifyStudent/CertifyStudentDao";
+import { CertifiedStudentInput } from "../../../../typeDefs/CertifiedStudentInput";
 
 export const CertifiedStudents = (props: { certificateId: number }) => {
     const [page, setPage] = useState<PaginationInput>({
@@ -17,6 +18,14 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
         event;
         setPage({ ...page, pageNumber: value - 1 });
     };
+    const [trainingApplicationId,setTrainingApplicationId]=useState(0)
+    const [certifyStudent, setCertifyStudent] = useState<CertifiedStudentInput>(
+        {
+            id: 0,
+            studentId: 0,
+            certificateId: props.certificateId,
+            CertificateStatus:CertificateStatus.APPROVED
+        });
     const saveCertifyStudent = useSaveCertifyStudent(trainingApplicationId, studentApplicationStatus, certifyStudent);
     //    Register certify Student handler
         const registerCertifyStudent = () => {
