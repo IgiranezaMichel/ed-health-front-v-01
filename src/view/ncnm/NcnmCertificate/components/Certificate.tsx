@@ -21,7 +21,7 @@ export const Certificate = () => {
       }
       {(!isLoadingCertificates && certificateId == 0)
         ? <div className="col-12 bg">
-          <div className="mt-4">  Page {certificatesDetail.pageNumber + 1} out of {certificatesDetail.totalPages}  <span>
+          <div className="mt-4 mb-4">  Page {certificatesDetail.pageNumber + 1} out of {certificatesDetail.totalPages}  <span>
             <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
             >
               <option value="8">8</option>
@@ -36,6 +36,7 @@ export const Certificate = () => {
             </select><Sort /></span>
             <Pagination count={certificatesDetail.totalPages} onChange={handleChange} page={certificatesDetail.pageNumber + 1} />
           </div>
+
           {certificatesDetail.content.map((data: any, index: any) => {
             return <Card key={index} elevation={5} className="mb-3 p-2 col-sm-12 m-auto row">
               <section className="col-md-4">
