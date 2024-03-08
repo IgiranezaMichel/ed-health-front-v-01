@@ -27,6 +27,7 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
             certificateId: props.certificateId,
             CertificateStatus:CertificateStatus.APPROVED
         });
+    const [studentApplicationStatus, setStudentApplicationStatus] = useState('certified');
     const saveCertifyStudent = useSaveCertifyStudent(trainingApplicationId, studentApplicationStatus, certifyStudent);
     //    Register certify Student handler
         const registerCertifyStudent = () => {
@@ -85,7 +86,16 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                                                 </div>
                                                 <div className="mt-1 modal-footer">
                                                     <Tooltip placement="top" title="Reject certificate">
-                                                        <Cancel /> 
+                                                        <Cancel onClick={() => {
+                                                                setCertifyStudent({
+                                                                    CertificateStatus:CertificateStatus.APPROVED,
+                                                                    certificateId: props.certificateId,
+                                                                    id: 0, studentId: Number(data.student.id)
+                                                                }
+                                                                );setTrainingApplicationId(Number(data.id)); 
+                                                                setStudentApplicationStatus('rejected'); 
+                                                                registerCertifyStudent()
+                                                            }}/> 
                                                     </Tooltip>
                                                 </div>
                                             </div>
