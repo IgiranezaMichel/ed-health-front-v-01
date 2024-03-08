@@ -60,8 +60,8 @@ export const CertifiedStatus = (props: { status: string, trainingId: number, cer
                                             </select>
                                             <Sort /></span>
                                         <Pagination
-                                            count={certificateObj.studentCertifiedObj.totalPages}
-                                            page={certificateObj.studentCertifiedObj.pageNumber + 1}
+                                            count={certifiedStudents.certifiedStudentDetailObj.totalPages}
+                                            page={certifiedStudents.certifiedStudentDetailObj.pageNumber + 1}
                                             onChange={handleChange}
                                         />
                                     </div>
