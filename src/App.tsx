@@ -58,7 +58,6 @@ function App() {
           <Route path='/ncnm/certificate' element={<NcnmCertificate />} />
           <Route path='/ncnm/payment' element={<NcnmPayment />} />
           <Route path='/ncnm/hospital-detail/:id' element={<HospitalDetail />} />
-
           {/* school */}
           <Route path='/school' element={<SchoolDashBoard />} />
           <Route path='/school/student' element={<SchoolStudents />} />
