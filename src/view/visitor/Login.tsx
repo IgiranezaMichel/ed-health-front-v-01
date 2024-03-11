@@ -10,9 +10,9 @@ export const Login = () => {
   if (!schoolDataIsLoading && schoolDetailList != null) localStorage.setItem("school", JSON.stringify(schoolDetailList));
   if (userHasFound && user != null) localStorage.setItem("userData", JSON.stringify(user));
   if (!isProcessingHospitalData) localStorage.setItem("hospital", JSON.stringify({
-    id:hospitalDetail.id,
-    logo:hospitalDetail.logo,
-    location:hospitalDetail.location
+    id: hospitalDetail.id,
+    logo: hospitalDetail.logo,
+    location: hospitalDetail.location
   }));
   return (
     <main style={{ backgroundImage: 'url(/visitor/bg-img.png)', backgroundPosition: 'fixed', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundAttachment: 'fixed', width: '100vw', height: '100vw' }} className="fixed-top overflow-auto">
