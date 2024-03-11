@@ -20,7 +20,7 @@ export const StudentCertificate = () => {
     const certificateModal = <Modal id="certificate" title="My certificate qrcode" actionBtn={<button data-bs-toggle="modal"
         data-bs-dismiss="#certificate" className="bg-danger text-white fw-bold border-0 p-1">close</button>}>
         <div className="text-center p-2">
-            <QrCode certificateId={1} />
+            <QrCode url="" style={{}} pathVariable=""/>
         </div>
     </Modal>
     return (
