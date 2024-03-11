@@ -36,10 +36,10 @@ export const Student = () => {
                                 <KeyboardArrowDown onClick={() => setShowUserDetail(!showUserDetail)} />
                             </div>
                         </Card>
-                        {showUserDetail && <div className="row m-auto container-xxl">
+                        {showUserDetail && <Card elevation={3} className="row m-auto col-md-9">
                             <div className="col-sm-4">
-                                <Card className="col-12">
-                                    <img className="card-img" src={user.profilePicture} alt="" />
+                                <Card className="col-12 p-0">
+                                    <img className="card-img p-0" src={user.profilePicture} alt="" />
                                 </Card>
                             </div>
                             <section className="mb-2 col-sm-8 d-flex justify-content-center align-items-center">
@@ -51,7 +51,7 @@ export const Student = () => {
                                 <div className="mb-2"> <TimeIcon /> {String(user.dob).split('T')[0]}</div>
                                 </div>
                             </section>
-                        </div>}
+                        </Card>}
                     </div>
                 }
             </div>
