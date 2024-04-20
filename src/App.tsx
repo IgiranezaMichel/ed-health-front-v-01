@@ -32,12 +32,14 @@ import { StudentTraining } from './view/student/training'
 import { JobPublished } from './view/student/job'
 import { StudentCertificate } from './view/student/certificate'
 import { TrainingCertificate } from './view/hospital/Certificate/index'
+import { AccessContext } from './context/AccessContext'
 function App() {
   return (
     <>
       <Router>
         <Routes>
           <Route path='/' element={<Login />} />
+          <Route path='/demo' element={<AccessContext />} />
           <Route path='/student' element={<Student />} />
           <Route path='/student/training' element={<StudentTraining />} />
           <Route path='/student/job' element={<JobPublished />} />
