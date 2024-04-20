@@ -7,7 +7,7 @@ import { STATUS } from "../../../../enums/Status"
 import { LocationOn } from "@mui/icons-material"
 
 export const StudentJobApplicationDetail = () => {
-  const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" })
+  const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
   const student = JSON.parse(String(localStorage.getItem("Student")));
   const studentJobApplication = useGetStudentJobApplicationList(student.id, STATUS.APPENDING, page);
   console.log(studentJobApplication)
