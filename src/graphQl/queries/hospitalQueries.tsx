@@ -141,3 +141,8 @@ query($hospitalId:Long,$ncnmApprovalStatus:String,$input:PaginationInput){
   }
 }
 `
+export const TOTAL_HOSPITAL=gql`
+query{
+  totalHospital
+}
+`
