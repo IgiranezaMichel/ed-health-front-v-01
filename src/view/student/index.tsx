@@ -36,9 +36,9 @@ export const Student = () => {
                                 <KeyboardArrowDown onClick={() => setShowUserDetail(!showUserDetail)} />
                             </div>
                         </Card>
-                        {showUserDetail && <Card elevation={3} className="row m-auto col-md-9">
+                        {showUserDetail && <Card elevation={7} className="row m-auto col-md-9 border-0 rounded-0">
                             <div className="col-sm-4">
-                                <Card className="col-12 p-0">
+                                <Card className="col-12 p-0 border-0">
                                     <img className="card-img p-0" src={user.profilePicture} alt="" />
                                 </Card>
                             </div>
