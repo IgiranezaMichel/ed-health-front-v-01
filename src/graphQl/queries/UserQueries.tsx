@@ -29,3 +29,8 @@ query($role:Role,$input:PaginationInput){
   }
 }
 `
+export const TOTAL_ACCOUNT_HOLDER_BY_ROLE=gql`
+query($role:Role){
+  getTotalAccountHolderByRole(role:$role)
+}
+`
