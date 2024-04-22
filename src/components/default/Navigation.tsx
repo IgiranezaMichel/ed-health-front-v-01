@@ -18,6 +18,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { SideBarItem } from '../../typeDefs/SideBarItem';
 import { Email, Person2 } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
 type sideBar = {
   items: SideBarItem[]
   children: React.ReactNode,
@@ -151,9 +152,11 @@ export const Navigation: React.FC<sideBar> = (items) => {
               <ListItem key={index} disablePadding sx={{ display: 'block' }}>
                 <ListItemButton
                   sx={{ minHeight: 48,justifyContent: open ? 'initial' : 'center',px: 2.5,}}>
+                  <Tooltip title={data.name}  arrow placement='right'>
                   <ListItemIcon  sx={{  minWidth: 0,mr: open ? 3 : 'auto',justifyContent: 'center',}}>
                     {data.MenuItemProps}
                   </ListItemIcon>
+                  </Tooltip>
                   <ListItemText primary={data.name} sx={{ opacity: open ? 1 : 0 }} />
                 </ListItemButton>
               </ListItem>
