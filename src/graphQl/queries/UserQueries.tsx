@@ -17,6 +17,7 @@ export const FIND_USER_LIST_BY_ROLE=gql`
 query($role:Role,$input:PaginationInput){
   getAllUserByRole(role:$role,input:$input){
     content{
+      id
       name
       gender
       email
