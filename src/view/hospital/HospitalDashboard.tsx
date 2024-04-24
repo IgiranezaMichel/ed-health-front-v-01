@@ -2,6 +2,7 @@ import { Card } from "@mui/material"
 import { HospitalMenu } from "../../MenuBarItems/HospitalMenu"
 import { Navigation } from "../../components/default/Navigation"
 import {Person, PersonAddAlt, SchoolOutlined, Visibility} from "@mui/icons-material"
+import { MuiCharts } from "../../muiCharts"
 
 export const HospitalDashboard=()=>{
     return(
@@ -44,8 +45,10 @@ export const HospitalDashboard=()=>{
                   </a>
                 </div>
               </Card>
+             
             </section>
+            
           </main>
-
+          <MuiCharts/>
     </Navigation>)
 }
