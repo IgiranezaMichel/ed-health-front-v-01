@@ -6,6 +6,7 @@ import { DashboardCard } from "../../components/default/DashboardCard";
 import { useFindListOfUserByRole } from "../../controller/viewHooks/User/FindListOfUserByRole";
 import { Role } from "../../enums/Role";
 import { PaginationInput } from "../../typeDefs/PaginationInput";
+import { StudentDetail } from "../school/Student/Detail";
 
 export default function UserList(props:{role:Role}) {
     const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
@@ -77,7 +78,7 @@ export default function UserList(props:{role:Role}) {
           }
           </main>
         }
-        {/* {studentId!=0&&<StudentDetail id={studentId} />} */}
+        {studentId!=0&&<StudentDetail id={studentId} />}
       </>
     )
 }
