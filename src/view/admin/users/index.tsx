@@ -77,7 +77,7 @@ export default function UserList(props:{role:Role}) {
             </div>
           }
           </main>
-        <Dialog maxWidth="sm" PaperProps={{ className: 'col rounded-0' }} open={openStudentDetail}>
+        <Dialog maxWidth="md" PaperProps={{ className: 'col rounded-0' }} open={openStudentDetail}>
         <div className="p-3 sticky-top bg-white fw-bold">Student Detail <Close onClick={()=>setOpenStudentDetail(false)} className="float-end bg-danger text-white" /></div>
           <UserInformation userId={studentId}/>
         </Dialog>
