@@ -1,6 +1,6 @@
 import { AdminMenu } from "../../../MenuBarItems/AdminMenu"
-import { SchoolComponent } from "../../../components/SchoolComponent"
 import { Navigation } from "../../../components/default/Navigation"
+import { SchoolComponent } from "./component/SchoolComponent"
 
 export const SchoolManagement=()=>{
   return<Navigation items={AdminMenu}>
