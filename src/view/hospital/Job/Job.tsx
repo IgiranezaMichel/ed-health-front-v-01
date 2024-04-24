@@ -95,7 +95,7 @@ export const Job = () => {
               {
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 listOfPostedJob.map((data: any, index) => {
-                  return <Card key={index} className="col-sm-12 row m-auto border p-0">
+                  return <Card key={index} className="col-sm-12 row m-auto mt-3 border p-0">
                     <section className="col-md-3">
                       <img className="card-img" src={data.picture} alt="" />
                     </section>
