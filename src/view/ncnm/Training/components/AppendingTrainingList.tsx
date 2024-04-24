@@ -70,7 +70,7 @@ export const AppendingTrainingList: FC<trainingControl> = (props) => {
 
             </Table>
             {
-                !isLoadingAppendingTrainingData && appendingTrainingDetail.length != 0 &&
+                !isLoadingAppendingTrainingData && appendingTrainingDetail.length == 0 &&
                 <div className="text-center p-4 bg-primary text-white fw-bold">
                     -- No data found --
                 </div>
