@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
 import { FIND_USER_BY_ID } from "../../../graphQl/queries/UserQueries";
 export const useFindUserById=(userId:number)=>{
-    const [user,setUser,]=useState({});
+    const [user,setUser,]=useState<any>({});
     const [userHasFound,setUserHasFound]=useState(false);
 const {data}=useQuery(FIND_USER_BY_ID,{variables:{id:userId}});
 useEffect(
