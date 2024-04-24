@@ -1,6 +1,6 @@
 import { NcnmMenu } from "../../../MenuBarItems/NcnmMenu"
-import { SchoolComponent } from "../../../components/SchoolComponent"
 import { Navigation } from "../../../components/default/Navigation"
+import { SchoolComponent } from "../../admin/School/component/SchoolComponent"
 
 export const NcnmSchool=()=>{
 return(
