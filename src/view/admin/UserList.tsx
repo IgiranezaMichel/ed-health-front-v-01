@@ -78,7 +78,7 @@ export default function UserList(props:{role:Role}) {
           }
           </main>
         }
-        {studentId!=0&&<StudentDetail id={studentId} />}
+        <StudentDetail id={studentId} />
       </>
     )
 }
