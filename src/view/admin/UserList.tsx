@@ -1,16 +1,17 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Email, ListAlt, Person, Phone, School, Sort } from "@mui/icons-material";
-import { Pagination, Table, TableBody, TableCell, TableRow } from "@mui/material";
+import { Close, Email, ListAlt, Person, Phone, School, Sort } from "@mui/icons-material";
+import { Dialog, Pagination, Table, TableBody, TableCell, TableRow } from "@mui/material";
 import { useState } from "react";
 import { DashboardCard } from "../../components/default/DashboardCard";
 import { useFindListOfUserByRole } from "../../controller/viewHooks/User/FindListOfUserByRole";
 import { Role } from "../../enums/Role";
 import { PaginationInput } from "../../typeDefs/PaginationInput";
-import { StudentDetail } from "../school/Student/Detail";
+import { StudentDetail } from "../school/Student/detail";
 
 export default function UserList(props:{role:Role}) {
     const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
     const [studentId, setStudentId] = useState(0);
+    const [openStudentDetail, setOpenStudentDetail] = useState(false);
     const{userListIsAvailable,users}=useFindListOfUserByRole(props.role,page);
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
       event;
@@ -63,7 +64,7 @@ export default function UserList(props:{role:Role}) {
                     <div className='mb-2'><Email /> {data.email}</div>
                     <div><Phone />{data.phoneNumber}</div>
                   </TableCell>
-                  <TableCell><ListAlt onClick={()=>setStudentId(Number(data.id))}/></TableCell>
+                  <TableCell><ListAlt onClick={()=>{setStudentId(Number(data.id));setOpenStudentDetail(true)}}/></TableCell>
                 </TableRow>
               })
               }
@@ -78,7 +79,11 @@ export default function UserList(props:{role:Role}) {
           }
           </main>
         }
-        <StudentDetail id={studentId} />
+        <Dialog maxWidth="sm" PaperProps={{ className: 'col rounded-0' }} open={openStudentDetail}>
+        <div className="p-3 sticky-top bg-white fw-bold">Student Detail <Close onClick={()=>setOpenStudentDetail(false)} className="float-end bg-danger text-white" /></div>
+          <StudentDetail id={studentId} />
+        </Dialog>
+        
       </>
     )
 }
