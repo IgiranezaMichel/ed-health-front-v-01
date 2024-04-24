@@ -5,7 +5,7 @@ import { Pagination, Table, TableBody, TableCell, TableRow } from '@mui/material
 import { useState } from 'react';
 import useStudentFromSameSchoolListPage from '../../../controller/viewHooks/Student/StudentFromSameSchoolListPage';
 import { PaginationInput } from '../../../typeDefs/PaginationInput';
-import { StudentDetail } from './Detail';
+import { StudentDetail } from './detail';
 
 export const AllStudent = (props:{refresh:boolean}) => {
   const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 6, sort: "id" });
