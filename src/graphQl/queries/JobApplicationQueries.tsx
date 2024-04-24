@@ -84,3 +84,14 @@ export const FIND_JOB_APPLICATION_BY_JOB_ID_AND_STATUS=gql`
   }
 }
 `
+export const STUDENT_JOB_APPLICATION_HISTORY_LIST=gql`
+query($userId:Long){
+  getJobApplicationListByUserId(userId:$userId){
+  job{
+    title
+    status
+  }
+  status
+  timeStamp
+}}
+`
