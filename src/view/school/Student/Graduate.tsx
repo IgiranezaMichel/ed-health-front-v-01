@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useShowStudentFromSameSchoolHavingSameStatus } from "../../../controller/viewHooks/Student/FindStudentFromSameSchoolByStatus";
 import { StudentStatus } from "../../../enums/StudentStatus";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
-import { StudentDetail } from "./Detail";
+import { StudentDetail } from "./detail";
 
 export const Graduate = (props: { schoolId: number, status: StudentStatus }) => {
   const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 6, sort: "id" });
