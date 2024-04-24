@@ -6,7 +6,7 @@ import { DashboardCard } from "../../../components/default/DashboardCard";
 import { useFindListOfUserByRole } from "../../../controller/viewHooks/User/FindListOfUserByRole";
 import { Role } from "../../../enums/Role";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
-import UserInformation from "./userInformation";
+import UserInformation from "./userInformationIndex";
 
 export default function UserList(props:{role:Role}) {
     const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 10, sort: "id" });
