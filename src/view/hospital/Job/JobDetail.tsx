@@ -59,6 +59,7 @@ export const JobDetail = () => {
     if(saveStatus.hasFinishLoading){
     alert(saveStatus.result);
     jobApplication.refetch();}
+
   }
   const applicationModal=<Modal id="applicationModal" title={status+" Application"} actionBtn={
   <Button onClick={()=>saveApplicationStatus()} className="text-white bg-primary fw-bold">Yes</Button>}>
@@ -69,19 +70,9 @@ export const JobDetail = () => {
   return (
     <Navigation items={HospitalMenu}>
       <div className="d-flex justify-content-center align-content-center">
-        {jobDetailIsLoading && <span>
-          <Box sx={{ width: 300 }}>
-            <Skeleton />
-            <Skeleton animation="wave" />
-            <Skeleton animation={false} />
-          </Box>
-        </span>
-
-        }
       </div>
       {!jobDetailIsLoading &&
         <>
-
           <Card elevation={4} className="p-2 rounded-0">
             <div className="px-3">
               <h4 className="card-title mb-4">{jobDetail.title}</h4>
