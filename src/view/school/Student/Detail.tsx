@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
-import { Check, Email, Person2Sharp, Phone } from "@mui/icons-material";
-import { Button, Card, CircularProgress, TextField } from "@mui/material";
+import { Check, Close, Email, Person2Sharp, Phone } from "@mui/icons-material";
+import { Button, Card, CircularProgress, Dialog, TextField } from "@mui/material";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { useState } from "react";
 import { Modal } from "../../../components/default/Modal";
@@ -34,7 +34,7 @@ export const StudentDetail = (props: { id: number }) => {
     return (
         <>
 
-            {isLoadingStudentData && <main className="d-flex justify-content-center align-content-center py-5">
+            {/* {isLoadingStudentData && <main className="d-flex justify-content-center align-content-center py-5">
                 <CircularProgress />
             </main>}
             {!isLoadingStudentData && <main className="my-5 row m-12 m-auto">
@@ -59,7 +59,11 @@ export const StudentDetail = (props: { id: number }) => {
                         </Button>
                     </Card>}
             </main>}
-            {approveStudent}
+            {approveStudent} */}
+            <Dialog maxWidth="sm"PaperProps={{className:'col rounded-0'}} open>
+                <div className="p-3 sticky-top">Student Detail <Close className="float-end"/></div>
+                
+            </Dialog>
         </>
     )
 }
