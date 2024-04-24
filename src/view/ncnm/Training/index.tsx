@@ -4,7 +4,6 @@ import { NcnmMenu } from "../../../MenuBarItems/NcnmMenu"
 import { DashboardCard } from "../../../components/default/DashboardCard"
 import { Navigation } from "../../../components/default/Navigation"
 import { STATUS } from "../../../enums/Status"
-import { MuiCharts } from "../../../muiCharts"
 import { AppendingTrainingList } from "./components/AppendingTrainingList"
 import { ExpiredTrainingList } from "./components/ExpiredTrainingList"
 export const NcnmTraining = () => {
@@ -12,11 +11,10 @@ export const NcnmTraining = () => {
     const [ncnmStatus, setNcnmStatus] = useState(STATUS.APPENDING);
     return (
         <Navigation items={NcnmMenu}>
-            <div className="display-5" style={{ filter: ('drop-shadow(2px 2px 2px blue)') }}>Training</div>
+            <div className="display-5 mb-3" style={{ filter: ('drop-shadow(2px 2px 2px blue)') }}>Training</div>
             <div className="col-sm-4">
                 <DashboardCard subtitleDescription="Total" title="Available Active training " icon={<School className="float-end fs-1" />} size={2} />
             </div>
-            <MuiCharts/>
             <div className="col-sm-12 mt-4">
                 <button onClick={() => { setIsSelected(0); setNcnmStatus(STATUS.APPENDING) }} className={selected == 0 ? "bg-primary text-white fw-bold" : "bg-white"}><HdrStrongOutlined /> Appending</button>
                 <button onClick={() => { setIsSelected(1); setNcnmStatus(STATUS.CANCEL) }} className={selected == 1 ? "bg-primary text-white fw-bold" : "bg-white"}><SchoolSharp />Cancelled Append</button>
@@ -26,8 +24,6 @@ export const NcnmTraining = () => {
             </div>
             {(selected==0||selected==1||selected==2)&&<AppendingTrainingList status={ncnmStatus}/>}
             {(selected==3||selected==4)&&<ExpiredTrainingList status={ncnmStatus}/>}
-    
-
         </Navigation>
     )
 }
