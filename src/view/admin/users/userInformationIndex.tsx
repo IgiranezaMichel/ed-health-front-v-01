@@ -3,6 +3,7 @@ import { TabContext, TabList, TabPanel } from '@mui/lab'
 import { Box, Tab } from '@mui/material'
 import { useState } from 'react';
 import UserInformationDetail from './userInformationDetail';
+import { UserJobDetail } from './userJobDetail';
 
 export default function UserInformation(props:{userId:number}) {
     const [value, setValue] = useState('1');
@@ -22,7 +23,7 @@ export default function UserInformation(props:{userId:number}) {
                             </TabList>
                         </Box>
                         <TabPanel value="1"><UserInformationDetail userId={props.userId}/></TabPanel>
-                        <TabPanel value="2"><Work/></TabPanel>
+                        <TabPanel value="2"><UserJobDetail userId={props.userId}/></TabPanel>
                         <TabPanel value="3"><Work/></TabPanel>
                     </TabContext>
       </Box>
