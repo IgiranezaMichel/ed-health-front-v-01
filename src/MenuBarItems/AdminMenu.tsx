@@ -1,4 +1,4 @@
-import { DashboardCustomizeOutlined, HouseOutlined, LocalHospitalOutlined, Logout, PeopleAltOutlined, Settings} from "@mui/icons-material";
+import { DashboardCustomizeOutlined, LocalHospitalOutlined, Logout, PeopleAltOutlined, School, Settings} from "@mui/icons-material";
 import { SideBarItem } from "../typeDefs/SideBarItem";
 
 export const AdminMenu: SideBarItem[] = [
@@ -20,7 +20,7 @@ export const AdminMenu: SideBarItem[] = [
     {
         name: 'School',
         link: '/admin/school',
-        MenuItemProps: <HouseOutlined/>
+        MenuItemProps: <School/>
     },
     {
         name: 'Setting',
