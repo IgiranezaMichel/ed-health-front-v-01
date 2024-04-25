@@ -10,11 +10,11 @@ export const useSchoolPage=(input:PaginationInput)=>{
     const [totalPage,setTotalPage]=useState(0);
     const [schoolDataIsLoading,setSchoolDataIsLoading]=useState(true);
     const [schoolPageNumber,setSchoolPageNumber]=useState(0);
-    const data=useQuery(GET_ALL_SCHOOL,{variables:{input:input}});
+    const {data,refetch}=useQuery(GET_ALL_SCHOOL,{variables:{input:input}});
 useEffect(
     ()=>{
         const fetchData=async()=>{
-          return await data.data;
+          return await data;
         }
         fetchData().then(data=>{
             setSchoolList(data.schoolPageList.content);
@@ -25,7 +25,7 @@ useEffect(
         }).catch(err=>console.log(err))
     }
 )
-return {schoolList,schoolPageNumber,totalPage,schoolSize,schoolDataIsLoading}
+return {schoolList,schoolPageNumber,totalPage,schoolSize,schoolDataIsLoading,refetch}
 }
 export const useFaculty= (schoolId: number) => {
     const schoolData = useQuery(FIND_FACULTY_BY_SCHOOL_BY_ID, { variables: { id: schoolId },fetchPolicy:'no-cache'});
