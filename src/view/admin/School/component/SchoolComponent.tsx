@@ -1,28 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Close, DataSaverOn, DeleteOutlineRounded, Groups2, ListAlt, LockPersonRounded, PinDrop, School, SchoolSharp, Sort } from "@mui/icons-material";
-import { Button, Card,Dialog, Pagination, Skeleton, Tooltip } from "@mui/material";
+import { Close, DataSaverOn, DeleteOutlineRounded, Groups2, ListAlt, LockPersonRounded, PinDrop, School, SchoolSharp } from "@mui/icons-material";
+import { Button, Card,Dialog, Skeleton, Tooltip } from "@mui/material";
 import { DashboardCard } from "../../../../components/default/DashboardCard";
 import { SchoolFormModal } from "./schoolModal";
-import { useState } from "react";
-import { useSchoolPage } from "../../../../controller/viewHooks/SchoolHooks";
-import { PaginationInput } from "../../../../typeDefs/PaginationInput";
+import { ReactNode, useState } from "react";
 import { useNavigate } from "react-router-dom";
-export const SchoolComponent = (props: { accessedBy: string }) => {
+import { useHospitalContext } from "../../../../context/hospitalContext";
+export const SchoolComponent = (props: { accessedBy: string,children:ReactNode }) => {
     const navigation = useNavigate();
     const [addNewHospital,setAddNewHospital]=useState(false);
-    const [page, setPage] = useState<PaginationInput>({
-        pageNumber: 0,
-        pageSize: 8,
-        sort: "name"
-    })
-    const { schoolDataIsLoading, schoolList, schoolPageNumber, schoolSize, totalPage } = useSchoolPage(page);
-    const handlePageSizeChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        event;
-        setPage({ ...page, pageNumber: value - 1 });
-    };
+    const {data}=useHospitalContext();
       return (
         <>
-            {schoolDataIsLoading && <div className="col-sm-8 m-auto">
+            {data.schoolDataIsLoading && <div className="col-sm-8 m-auto">
                 <div className="col-12 mt-5">
                     <Skeleton className="w-50 bg-primary mt-2" />
                     <Skeleton className="w-50 bg-primary mt-2" />
@@ -31,39 +21,20 @@ export const SchoolComponent = (props: { accessedBy: string }) => {
                     <Skeleton className="bg-primary mt-2" />
                 </div>
             </div>}
-            {!schoolDataIsLoading && <div>
+            {!data.schoolDataIsLoading && <div>
                 <div className="row container-lg m-auto">
                     <span className="display-6 fw-bold mb-3" style={{ filter: 'drop-shadow(2px 3px grey)' }}>Manage School</span>
                     <section className="col-sm-4">
-                        <DashboardCard size={schoolSize} title="Total Schools" subtitleDescription="Total Schools" icon={<School />} />
+                        <DashboardCard size={data.schoolSize} title="Total Schools" subtitleDescription="Total Schools" icon={<School />} />
                     </section>
                     <div className="container-lg mt-3">
                         <Button className="rounded-0 bg-primary text-white" onClick={()=>setAddNewHospital(true)}><DataSaverOn />
                         </Button>
                     </div>
-                    <div>  Page {schoolPageNumber + 1} out of {totalPage}  <span>
-                        <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
-                        >
-                            <option value="8">8</option>
-                            <option value="16">16</option>
-                            <option value="24">24</option>
-                            <option value="32">32</option>
-                            <option value={schoolSize}>All</option>
-                        </select>
-                    </span>
-                        <span className="float-end"> Sort by<select onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
-                            <option selected={page.sort == 'name' ? true : false} value={"name"}>Name</option>
-                            <option selected={page.sort == 'location' ? true : false} value="location">Location</option>
-                        </select><Sort /></span>
-                        <Pagination
-                            count={totalPage}
-                            page={schoolPageNumber + 1}
-                            onChange={handlePageSizeChange}
-                        />
-                    </div>
+                    {props.children}
                     <div className="row col-12 g-2 m-auto">
                         {
-                            schoolList.map((data: any, index) => {
+                            data.schoolList.map((data: any, index:number) => {
                                 return <div className="col-sm-3 mb-3">
                                     <Card key={index} className=" p-0" elevation={6}>
                                         <div className="text-center">
