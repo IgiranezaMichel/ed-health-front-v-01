@@ -6,8 +6,8 @@ import { DataContextInput } from "../../../typeDefs/dateContextInput"
 import { PaginationInput } from "../../../typeDefs/PaginationInput"
 import { useSchoolPage } from "../../../controller/viewHooks/SchoolHooks"
 import { HospitalContext } from "../../../context/hospitalContext"
-import { Sort } from "@mui/icons-material"
-import { Pagination } from "@mui/material"
+import { SwapVert } from "@mui/icons-material"
+import { NativeSelect, Pagination } from "@mui/material"
 
 export const SchoolManagement = () => {
   const [page, setPage] = useState<PaginationInput>({
@@ -28,19 +28,19 @@ export const SchoolManagement = () => {
     <Navigation items={AdminMenu}>
       <SchoolComponent accessedBy="admin">
         {!school.schoolDataIsLoading&&<div>  Page {school.schoolPageNumber + 1} out of   <span>
-          <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
+          <NativeSelect onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
           >
             <option value="8">8</option>
             <option value="16">16</option>
             <option value="24">24</option>
             <option value="32">32</option>
             <option value={school.schoolSize}>All</option>
-          </select>
+          </NativeSelect>
         </span>
-          <span className="float-end"> Sort by<select onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
+          <span className="float-end"> Sort by<SwapVert/><NativeSelect onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
             <option selected={page.sort == 'name' ? true : false} value={"name"}>Name</option>
             <option selected={page.sort == 'location' ? true : false} value="location">Location</option>
-          </select><Sort /></span>
+          </NativeSelect></span>
           <Pagination
             count={school.totalPage}
             page={school.schoolPageNumber + 1}
