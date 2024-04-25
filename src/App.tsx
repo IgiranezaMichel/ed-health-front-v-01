@@ -1,6 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom'
 import { Setting } from './components/default/Setting'
-import { AccessContext } from './context/AccessContext'
 import { Logout } from './view/Logout'
 import { AdminHome } from './view/admin'
 import { HospitalManagement } from './view/admin/HospitalManagement'
@@ -39,7 +38,6 @@ function App() {
       <Router>
         <Routes>
           <Route path='/' element={<Login />} />
-          <Route path='/demo' element={<AccessContext />} />
           <Route path='/student' element={<Student />} />
           <Route path='/student/training' element={<StudentTraining />} />
           <Route path='/student/job' element={<JobPublished />} />
