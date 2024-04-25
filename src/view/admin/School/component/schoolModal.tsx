@@ -3,13 +3,16 @@ import { useEffect, useState } from "react";
 import { useFilterLocation } from "../../../../controller/viewHooks/Location/useFilterLocation";
 import { REGISTER_SCHOOL } from "../../../../graphQl/mutation/SchoolMutation";
 import { SchoolInput } from "../../../../typeDefs/SchoolInput";
-import { ToastProps } from "../../../../typeDefs/ToastProps";
+// import { ToastProps } from "../../../../typeDefs/ToastProps";
 import { useMutation } from "@apollo/client";
 import { Button, TextField } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import { useFindAccountHolderByEmail } from "../../../../controller/dmlHooks/user";
 export const SchoolFormModal = () => {
     const { listOfLocationData } = useFilterLocation("name", "PROVINCE");
-  
+    const [email,setEmail]= useState('');
+    const [user,setUser]=useState<any>({});
+    const {findByEmail}=useFindAccountHolderByEmail(email);
    
     const [school, setSchool] = useState<SchoolInput>({
         id: 0,
@@ -17,21 +20,24 @@ export const SchoolFormModal = () => {
         logo: '',
         name: ''
     });
-    const [toastProps, setToastProps] = useState<ToastProps>({
-        message: '',
-        open: false,
-        severity: 'success'
-    })
-    useEffect(
-        () => {
+    // const [toastProps, setToastProps] = useState<ToastProps>({
+    //     message: '',
+    //     open: false,
+    //     severity: 'success'
+    // })
+    // useEffect(
+    //     () => {
 
-        }, [toastProps, school]
-    )
+    //     }, [toastProps, school]
+    // )
     const [districtList, setDistrictList] = useState<any>([]);
-    const [selecteProvinceId, setSelectedProvinceId] = useState<any>();
-    const [selecteDistrictId, setSelectedDistrictId] = useState<any>();
+    const [selectedProvinceId, setSelectedProvinceId] = useState<any>();
+    const [selectedDistrictId, setSelectedDistrictId] = useState<any>();
     const [sectorList, setSectorList] = useState<any>([]);
     const [registerSchool] = useMutation(REGISTER_SCHOOL);
+    const findByEmailHandler=()=>{
+        findByEmail().then(data=>{setUser(data.data.findAccountHolderByEmail);console.log(user)});
+    }
     useEffect(
         () => {
 
@@ -62,11 +68,12 @@ export const SchoolFormModal = () => {
     return <>
         <div className="p-2">
             <section>
-                {school.logo!=''&&<div className="col-sm-6  m-auto mb-4">
-                    <img src={school.logo} className="card-img" />
+                {school.logo!=''&&<div className="col-sm-6  m-auto mb-4 row">
+                    <div className="card p-0 rounded-0 border-0 col-6"><img src={school.logo} className="card-img rounded-0" /></div>
+                    {user!=undefined&&user.profilePicture!=undefined&&<div className="card p-0 rounded-0 border-0 col-6"><img src={user.profilePicture} className="card-img rounded-0" /></div>}
                     </div>}
             </section>
-            <TextField className="m-auto form-control mb-3 " value={school.name} onChange={e => { setSchool({ ...school, name: e.target.value }) }} label="School Name" />
+            <TextField className="m-auto form-control mb-3 " variant="standard" value={school.name} onChange={e => { setSchool({ ...school, name: e.target.value }) }} label="School Name" />
             <label htmlFor="label">School Logo</label>
             <input type="file" onChange={imgHandler} className="form-control mb-3  border border-dark rounded-0" />
             <div className="mb-3">
@@ -80,7 +87,7 @@ export const SchoolFormModal = () => {
                         }
                     </select>
                 </div>
-                {selecteProvinceId != undefined &&
+                {selectedProvinceId != undefined &&
                     <div className="mb-3">
                         <select onChange={(e) => { setSelectedDistrictId(Number(e.target.value)); findListOfSectorWithInDistrict(Number(e.target.value)) }} className="form-select mb-3  border border-dark rounded-0" >
                             <option value={undefined}>Select District</option>
@@ -92,7 +99,7 @@ export const SchoolFormModal = () => {
                         </select>
                     </div>
                 }
-                {selecteDistrictId != undefined &&
+                {selectedDistrictId != undefined &&
                     <div className="mb-3">
                         <select onChange={(e) => setSchool({ ...school, locationId: Number(e.target.value) })} className="form-select  border border-dark rounded-0" >
                             <option value={undefined}>Select Sector</option>
@@ -104,13 +111,13 @@ export const SchoolFormModal = () => {
                     </div>
                 }
                 {school.locationId!=0&&<div>
-                    <TextField label='Enter email of user you want to make admin' fullWidth variant="standard"/>
+                    <TextField label='Enter email of user you want to make admin' onChange={(e)=>setEmail(e.target.value)} fullWidth variant="standard"/>
                     <div className="modal-footer">
-                    <Search className="fs-1 p-1 bg-primary mt-2 text-white"/>
+                    <Search onClick={()=>findByEmailHandler()} className="fs-1 p-1 bg-primary mt-2 text-white"/>
                     </div>
-                    <div className="modal-footer">
+                    {user!=undefined&&user.profilePicture!=undefined&&<div className="modal-footer">
                         <Button variant="contained" className="mt-2">Save</Button>
-                    </div>
+                    </div>}
                     </div>}
             </div>
         </div>
