@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useMutation } from "@apollo/client";
-import { AccountBoxRounded, Cancel, Check, CheckCircle, Close, Description, FolderSpecial, KeyboardArrowDown, KeyboardArrowUp, LibraryAdd, ListAlt, Phone, School, Sort, Wc } from "@mui/icons-material";
+import { AccountBoxRounded, Cancel, CheckCircle,Description, FolderSpecial, KeyboardArrowDown, KeyboardArrowUp,ListAlt, Phone, School, Sort, Wc } from "@mui/icons-material";
 import {  Button, Card, Divider, Pagination, Tooltip, Zoom } from "@mui/material";
 import { TimeIcon } from "@mui/x-date-pickers";
 import { useState } from "react";
@@ -9,8 +8,6 @@ import { HospitalMenu } from "../../../MenuBarItems/HospitalMenu";
 import { Navigation } from "../../../components/default/Navigation";
 import { Toast } from "../../../components/default/Toast";
 import { useFindJobById } from "../../../controller/viewHooks/jobHooks";
-import { SAVE_JOB_REQUIREMENT } from "../../../graphQl/mutation/JobRequirementMutation";
-import { JobRequirementInput } from "../../../typeDefs/JobRequirementInput";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
 import { ToastProps } from "../../../typeDefs/ToastProps";
 import { useFindJobApplicationByJobIdAndStatus} from "../../../controller/viewHooks/JobApplication/JobApplicationDao";
@@ -30,30 +27,18 @@ export const JobDetail = () => {
     setPage({ ...page, pageNumber: value - 1 });
   };
   const { jobDetail, jobDetailIsLoading } = useFindJobById(Number(id));
-  const [add, setAdd] = useState(false);
-  const [requirement, setRequirement] = useState<JobRequirementInput>({
-    id: 0,
-    description: '',
-    jobId: Number(id)
-  });
-  const [saveJobRequirement] = useMutation(SAVE_JOB_REQUIREMENT);
-  const [toastProps, setToastProps] = useState<ToastProps>({
+  const [toastProps] = useState<ToastProps>({
     message: '',
     open: false,
     severity: 'info'
   })
-  const SaveJobRequirement = () => {
-    saveJobRequirement({ variables: { input: requirement } }).then(data => {
-      setToastProps({ message: data.data.saveJobRequirement, open: true, severity: 'success' })
-    })
-  }
   const [showRequirement, setShowRequirement] = useState(false);
   const [showApplicant, setShowApplicant] = useState(false);
   const [status, setStatus] = useState<any>(STATUS.APPENDING);
   const [applicationStatus, setApplicationStatus] = useState<any>('');
   const jobApplication = useFindJobApplicationByJobIdAndStatus(Number(id), page,status);
   const saveStatus=useChangeJobApplicantStatusByHospitalAdmin(Number(id),applicationStatus);
-
+  console.log(jobDetail)
   const saveApplicationStatus=()=>{
     saveStatus.saveJobApplicationStatusHandler();
     if(saveStatus.hasFinishLoading){
@@ -89,15 +74,10 @@ export const JobDetail = () => {
             <div className="card-body p-3">
               <h4 className="card-title fw-bold py-2">Job Requirement</h4>
               {
-                showRequirement && jobDetail.jobRequirement.map((data: any, index: number) => {
-                  return <li key={index}>{data.description}</li>
-                })
+                showRequirement &&<div>
+                  <div dangerouslySetInnerHTML={{__html:jobDetail.jobRequirement}}></div>
+                </div>
               }
-              {add && <div>
-                <input type="text" value={requirement.description} onChange={(e) => setRequirement({ ...requirement, description: e.target.value })} className="w-75" />
-                <Check onClick={() => SaveJobRequirement()} className="p-1 text-white rounded-circle mx-3 bg-success" />
-                <Close className="p-1 text-white rounded-circle bg-danger" onClick={() => setAdd(false)} /></div>}
-              <LibraryAdd onClick={() => setAdd(true)} className="float-end" style={{ clear: 'both' }} />
             </div>
 
             <div className="text-center">
@@ -114,7 +94,7 @@ export const JobDetail = () => {
               <Button onClick={()=>setStatus(STATUS.CANCEL)} className={status==STATUS.CANCEL?"btn text-black border fw-bold rounded-0 bg-info mx-2":"btn text-black border fw-bold rounded-0 bg-white mx-2"}>Rejected</Button>
 
             </div>
-            <div className="mx-4">  Page {jobApplication.jobApplication.pageNumber+ 1} out of {jobApplication.jobApplication.totalPages}  <span>
+            <div className="mx-4">  Page {jobApplication.jobApplication.totalPages>0?<>{jobApplication.jobApplication.pageNumber+ 1}</>:0} out of {jobApplication.jobApplication.totalPages}  <span>
               <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
                 <option value="10">10</option>
                 <option value="20">20</option>
@@ -171,7 +151,7 @@ export const JobDetail = () => {
               </Card>
             })
             }
-            {!jobApplication.isLoading&&jobApplication.jobApplication.content.length==0&&
+            {!jobApplication.isLoading&&jobApplication.jobApplication!=undefined&&jobApplication.jobApplication.content!=undefined&&jobApplication.jobApplication.content.length==0&&
             <div className="text-center fw-bold text-white bg-primary p-4 mt-2">
               -- No data found --
               </div>}
