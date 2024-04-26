@@ -31,7 +31,6 @@ export const useGetListOfPostedJobs=(hospitalId:number,input:PaginationInput,sta
 }
 
 export const useFindJobById=(id:number)=>{
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const [jobDetail,setJobDetail]=useState<any>({});
 const [jobDetailIsLoading,setJobDetailIsLoading]=useState(true);
 const jobData =useQuery(FIND_JOB_BY_ID,{variables:{id:id}});
