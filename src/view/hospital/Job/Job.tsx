@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { BusinessCenterOutlined, DataSaverOn, DoNotDisturb, Edit, HdrStrongOutlined, ListAltOutlined, Sort, Visibility } from "@mui/icons-material"
 import { Button, Card, Divider, Pagination, Skeleton, Stack, Tooltip } from "@mui/material"
 import { TimeIcon } from "@mui/x-date-pickers"
@@ -9,7 +10,7 @@ import { Navigation } from "../../../components/default/Navigation"
 import { useFindJobById, useGetListOfPostedJobs } from "../../../controller/viewHooks/jobHooks"
 import { JobStatus } from "../../../enums/JobStatus"
 import { PaginationInput } from "../../../typeDefs/PaginationInput"
-import { JobModal } from "../Training/components/JobModal"
+import { JobModal } from "./component/JobModal"
 
 export const Job = () => {
   const [selected, setIsSelected] = useState(0);
@@ -93,7 +94,6 @@ export const Job = () => {
             </Stack>
             <div className="row col-12 m-auto justify-content-center">
               {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 listOfPostedJob.map((data: any, index) => {
                   return <Card key={index} className="col-sm-12 row m-auto mt-3 border p-0">
                     <section className="col-md-3">
