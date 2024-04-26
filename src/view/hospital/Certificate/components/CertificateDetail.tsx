@@ -46,7 +46,7 @@ export const CertificateDetail = (props: { certificateId: number, trainingId: nu
                                         {String(certificate.certificate.timeStamp).split('T')[0]} {String(certificate.certificate.timeStamp).split('T')[1].split('.')[0]}
                                     </div>
 
-                                    <div className="mx-5">
+                                    <div className="mx-3">
                                         <div className="text-center fw-bold">
                                             <img src={certificate.certificate.hospitalStamp} alt="" />
                                         </div>
@@ -54,12 +54,19 @@ export const CertificateDetail = (props: { certificateId: number, trainingId: nu
                                         {String(certificate.certificate.training.hospital.name)}
                                     </div>
 
-                                    <div className="mx-5">
+                                    <div className="mx-3">
                                         <div className="text-center fw-bold">
                                             <img src={certificate.certificate.userSignature} />
                                         </div>
                                         <Divider className="border border-dark " />
                                         {String(certificate.certificate.accountHolder.name)}
+                                    </div>
+                                    <div className="mx-2">
+                                        <div className="text-center fw-bold">
+                                            <img src={certificate.certificate.userSignature} />
+                                        </div>
+                                        <Divider className="border border-dark " />
+                                        Ncnm
                                     </div>
                                 </div>
                             </section>
