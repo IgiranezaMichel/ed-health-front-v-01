@@ -9,6 +9,7 @@ import { JobStatus } from "../../../../enums/JobStatus";
 import { REGISTER_JOB } from "../../../../graphQl/mutation/JobMutation";
 import { JobInput } from "../../../../typeDefs/JobInput";
 import { ToastProps } from "../../../../typeDefs/ToastProps";
+import JoditEditor from 'jodit-react';
 export const JobModal = () => {
   const [saveJobDataMutation]=useMutation(REGISTER_JOB)
   const [toastProps,setToastProps]=useState<ToastProps>({
@@ -24,7 +25,8 @@ export const JobModal = () => {
     picture: '',
     title: '',
     status:JobStatus.ACTIVE,
-    numberOfEmployee:0
+    numberOfEmployee:0,
+    jobRequirement:''
   });
   const [jobDataHasSaved,setJobDataHasSaved]=useState(false);
   useEffect(
@@ -73,7 +75,7 @@ export const JobModal = () => {
     <>
       <Modal id="createJob"
         title="Create new Job"
-        modalClass="modal-z"
+        modalClass="col-md-8"
         titleBarClass="bg-success rounded-0 text-light"
         titleIcon={<WorkHistoryOutlined className="mx-2" />}
         actionBtn={
@@ -92,6 +94,9 @@ export const JobModal = () => {
           <span>Deadline</span>
           <TextField id="outlined-basic" value={job.deadline} onChange={(e) => { setJob({ ...job, deadline: e.target.value })}} type="datetime-local" className="form-control mb-3" variant="outlined" />
           <input type="file" onChange={imgHandler}/>
+          <JoditEditor value="" onChange={text=>setJob({...job,jobRequirement:text})}>
+            
+          </JoditEditor>
         </div>
       </Modal>
       {/*  */}
