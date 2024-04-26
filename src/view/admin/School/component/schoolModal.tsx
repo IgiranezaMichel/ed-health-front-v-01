@@ -113,7 +113,7 @@ export const SchoolFormModal = () => {
                 {school.locationId!=0&&<div>
                     <TextField label='Enter email of user you want to make admin' onChange={(e)=>setEmail(e.target.value)} fullWidth variant="standard"/>
                     <div className="modal-footer">
-                    <Search onClick={()=>findByEmailHandler()} className="fs-1 p-1 bg-primary mt-2 text-white"/>
+                    <Search onClick={()=>findByEmailHandler()} className="fs-2 p-1 bg-primary mt-2 text-white rounded-circle"/>
                     </div>
                     {user!=undefined&&user.profilePicture!=undefined&&<div className="modal-footer">
                         <Button variant="contained" className="mt-2">Save</Button>
