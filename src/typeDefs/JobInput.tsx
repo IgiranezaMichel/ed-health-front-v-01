@@ -8,5 +8,6 @@ export type JobInput={
     picture:string,
     numberOfEmployee:number,
     hospitalId: number,
-    status:JobStatus
+    status:JobStatus,
+    jobRequirement:string
 }
