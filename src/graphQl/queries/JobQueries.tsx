@@ -29,6 +29,7 @@ query($id:Long){
     status
     numberOfEmployee
     timeStamp
+    jobRequirement
     hospital{
       name
       location{
@@ -40,9 +41,6 @@ query($id:Long){
           }
         }
       }
-    }
-    jobRequirement{
-      description
     }
   }
 }
