@@ -81,10 +81,7 @@ query($id:Long){
       studentApprovalTimeStamp
       hospitalApprovalTimeStamp
     }
-    trainingRequirementList{
-    id
-    description
-}
+    trainingRequirement
   }
 }
 `
