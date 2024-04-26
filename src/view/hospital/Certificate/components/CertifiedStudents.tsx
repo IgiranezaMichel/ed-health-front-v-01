@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Cancel,Email, Person2Outlined, Sort, Wc } from "@mui/icons-material"
-import { Card, Pagination, Stack, Tooltip } from "@mui/material"
+import { Card, NativeSelect, Pagination, Stack, Tooltip } from "@mui/material"
 import { useFindCertifiedStudentByCertificateIdPage } from "../../../../controller/viewHooks/CertifiedStudent/CertifiedStudentDao";
 import { useEffect, useState } from "react";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
@@ -56,19 +56,19 @@ export const CertifiedStudents = (props: { certificateId: number }) => {
                             <>
                                 <Stack spacing={2} className="mb-4">
                                     <div>  Page {certificateObj.studentCertifiedObj.pageNumber + 1} out of {certificateObj.studentCertifiedObj.totalPages}  <span>
-                                        <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
+                                        <NativeSelect onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
                                             <option value="10">10</option>
                                             <option value="20">20</option>
                                             <option value="30">30</option>
-                                        </select>
+                                        </NativeSelect>
                                     </span>
                                         <span className="float-end">
-                                            Sort by <select onChange={(e)=>setPage({...page,sort:e.target.value})} className="custom-select p-1">
+                                            Sort by <NativeSelect onChange={(e)=>setPage({...page,sort:e.target.value})} className="custom-select p-1">
                                                 <option value="id">Select item below</option>
                                                 <option value="student.user.name">Name</option>
                                                 <option value="student.user.email">Email</option>
                                                 <option value="student.school.name">School</option>
-                                            </select>
+                                            </NativeSelect>
                                             <Sort /></span>
                                         <Pagination
                                             count={certificateObj.studentCertifiedObj.totalPages}
