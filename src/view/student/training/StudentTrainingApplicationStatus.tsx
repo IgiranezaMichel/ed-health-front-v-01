@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useGetStudentTrainingApplicationPage } from "../../../controller/viewHooks/TrainingApplication/trainingApplication";
 import { STATUS } from "../../../enums/Status";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
-import { Card, Divider, Pagination, Stack } from "@mui/material";
+import { Card, Divider, NativeSelect, Pagination, Stack } from "@mui/material";
 import { LocationOn, Sort } from "@mui/icons-material";
 
 export const StudentTrainingApplicationStatus = () => {
@@ -24,26 +24,30 @@ export const StudentTrainingApplicationStatus = () => {
         <>
             <div className="row g-3 mt-4">
                 <Stack spacing={2} className="mb-4">
-                    <div>  Page {trainResult.trainingApplicationDetail.pageNumber + 1} out of {trainResult.trainingApplicationDetail.totalPages}  <span>
-                        <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
+                    <div>  
+                   {trainResult.trainingApplicationDetail.totalPages!=0&& <span>
+                    Page {trainResult.trainingApplicationDetail.pageNumber + 1} out of {trainResult.trainingApplicationDetail.totalPages}  <span>
+                        <NativeSelect onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
                         >
                             <option value="8">8</option>
                             <option value="16">16</option>
                             <option value="24">24</option>
                             <option value="32">32</option>
-                        </select>
+                        </NativeSelect>
                     </span>
+                    </span>}
                         <span className="float-end">
-                            Find My <select onChange={e => setStatus(e.target.value)} className="custom-select p-1" name="" id="">
+                            Find My <NativeSelect onChange={e => setStatus(e.target.value)} className="custom-select p-1" name="" id="">
                                 <option selected={status == STATUS.APPENDING ? true : false} value={STATUS.APPENDING}>On going application</option>
                                 <option selected={status == STATUS.APPENDING ? true : false} value={STATUS.APPROVE}>Approved application</option>
                                 <option selected={status == STATUS.APPENDING ? true : false} value={STATUS.CANCEL}>Cancelled application</option>
-                            </select><Sort /></span>
-                        <Pagination
+                            </NativeSelect><Sort /></span>
+                       {trainResult.trainingApplicationDetail.totalPages!=0&& 
+                       <Pagination
                             count={trainResult.trainingApplicationDetail.totalPages}
                             page={trainResult.trainingApplicationDetail.pageNumber + 1}
                         onChange={handleChange}
-                        />
+                        />}
                     </div>
                 </Stack>
             </div>
