@@ -18,7 +18,7 @@ export const AppendingTrainingList: FC<trainingControl> = (props) => {
     };
     return (
         <>
-            <div className="mt-4">  Page {appendingTrainingDetail.pageNumber + 1} out of {appendingTrainingDetail.totalPages}  <span>
+           {appendingTrainingDetail.totalPages!=0&&<div className="mt-4">  Page {appendingTrainingDetail.pageNumber + 1} out of {appendingTrainingDetail.totalPages}  <span>
                 <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2">
                     <option value={8}>8</option>
                     <option value={16}>16</option>
@@ -31,16 +31,16 @@ export const AppendingTrainingList: FC<trainingControl> = (props) => {
                     <option selected={page.sort == 'location' ? true : false} value="location">Location</option>
                 </select><Sort /></span>
                 <Pagination count={appendingTrainingDetail.totalPages} onChange={handleChange} page={appendingTrainingDetail.pageNumber + 1} />
-            </div>
-            <Table className="overflow-auto">
+            </div>}
+            <Table className="overflow-auto mt-5">
                 <TableHead>
-                    <TableRow>
-                        <TableCell>#</TableCell>
-                        <TableCell>Hospital</TableCell>
-                        <TableCell>Title</TableCell>
-                        <TableCell>Published_On</TableCell>
-                        <TableCell>Deadline</TableCell>
-                        <TableCell>Action</TableCell>
+                    <TableRow className="bg-body-secondary">
+                        <TableCell className="fw-bold">#</TableCell>
+                        <TableCell className="fw-bold">Hospital</TableCell>
+                        <TableCell className="fw-bold">Title</TableCell>
+                        <TableCell className="fw-bold">Published_On</TableCell>
+                        <TableCell className="fw-bold">Deadline</TableCell>
+                        <TableCell className="fw-bold">Action</TableCell>
                     </TableRow>
                 </TableHead>
                 {!isLoadingAppendingTrainingData && <TableBody>
@@ -66,6 +66,11 @@ export const AppendingTrainingList: FC<trainingControl> = (props) => {
                             )
                         })
                     }
+                     {appendingTrainingDetail != undefined && appendingTrainingDetail.content != undefined && appendingTrainingDetail.content.length == 0 && <TableRow>
+                        <TableCell colSpan={6} className="text-center">
+                            -- no data found --
+                        </TableCell>
+                    </TableRow>}
                 </TableBody>}
 
             </Table>
