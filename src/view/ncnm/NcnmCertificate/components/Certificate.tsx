@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { List, LocalHospital, LocationOn, Sort } from "@mui/icons-material"
-import { Card, CircularProgress, Divider, Pagination} from "@mui/material"
+import { BookmarkSharp, List, LocationOn, ModelTrainingSharp, Sort } from "@mui/icons-material"
+import { Avatar, Card, CircularProgress, Divider, Pagination, Tooltip } from "@mui/material"
 import { useState } from "react"
 import { useCertificatePage } from "../../../../controller/viewHooks/useCertificatePage"
 import { PaginationInput } from "../../../../typeDefs/PaginationInput"
@@ -9,6 +9,7 @@ import { CertificateDetail } from "./CertificateDetail"
 export const Certificate = () => {
   const [page, setPage] = useState<PaginationInput>({ pageNumber: 0, pageSize: 8, sort: "title" });
   const { certificatesDetail, isLoadingCertificates } = useCertificatePage(page);
+  console.log(certificatesDetail)
   const [certificateId, setCertificateId] = useState(0);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     event;
@@ -39,26 +40,50 @@ export const Certificate = () => {
 
           {certificatesDetail.content.map((data: any, index: any) => {
             return <Card key={index} elevation={5} className="mb-3 p-2 col-sm-12 m-auto row">
-              <section className="col-md-4">
-                <img src={data.training.hospital.logo} className="card-img" />
-                <div className="text-center"><LocalHospital /> {data.training.hospital.name} </div>
+              <section className="col-md-3 card p-0 border-0">
+                <div className="text-center d-flex"><Tooltip arrow className="card" title={<div>
+                  <img src={data.training.hospital.logo} className="card-img" />
+                </div>}>
+                  <Avatar src={data.training.hospital.logo} />
+                </Tooltip>
+                  <div className="card justify-content-center border-0">
+                    {data.training.hospital.name}
+                  </div> </div>
                 <div className="text-center"><LocationOn />{data.training.hospital.location.Location.Location.name} || {data.training.hospital.location.Location.name} || {data.training.hospital.location.name} </div>
               </section>
               <section className="col-md-8 d-flex align-items-center">
                 <div>
-                  <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Training title</span> {data.training.title}</span>
-                  <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Certificate Name </span>Certificate {data.title}</span>
-                  <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Issued Date </span>{String(data.timeStamp).split('T')[0]} {String(data.timeStamp).split('T')[1].split('.')[0]}</span>
-                  <div><span style={{ fontFamily: 'fantasy' }}>Total Trainer </span><span className="badge bg-success fw-bold">{data.training.trainers.length}</span></div>
-                  <div><span style={{ fontFamily: 'fantasy' }}>Total Applicant </span><span className="badge bg-success fw-bold">{data.training.applicantList.length}</span></div>
-                <div><LocationOn />{data.training.location.Location.Location.name} || {data.training.location.Location.name} || {data.training.location.name} </div>
-                  <div>
-                    <span style={{ fontFamily: 'fantasy' }}>Signed by </span>{data.accountHolder.name}
+                  <div className="d-flex">
+                    <section className="d-flex">
+                      <div className="card border-0 p-1 fs-1 justify-content-center">
+                        <ModelTrainingSharp />
+                      </div>
+                      <div className="card border-0">
+                        <div> <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Training title</span> {data.training.title}</span></div>
+                        <div> <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Training Location</span> {data.training.location.name}</span></div>
+                        <div>
+                          <span style={{ fontFamily: 'fantasy' }}>Total Trainer </span><span className="badge bg-success fw-bold">{data.training.trainers.length}</span>
+                        </div>
+                      </div>
+                    </section>
+                    <section className="d-sm-flex mx-md-4">
+                      <div className="card border-0 p-1 fs-1 justify-content-center">
+                        <BookmarkSharp />
+                      </div>
+                      <div className="card border-0">
+                        <div> <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Certificate Name</span> {data.title}</span></div>
+                        <div> <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Issued Date</span> {String(data.timeStamp).split('T')[0]} {String(data.timeStamp).split('T')[1].split('.')[0]}</span></div>
+                        <div><span style={{ fontFamily: 'fantasy' }}>Total Applicant </span><span className="badge bg-success fw-bold">{data.training.applicantList.length}</span></div>
+                      </div>
+                    </section>
                   </div>
                 </div>
               </section>
-              <Divider className="border-2 my-2 border-dark"/>
-              <div  className="modal-footer"><List onClick={() => setCertificateId(Number(data.id))} /></div>
+              <div className="modal-footer">
+                    <small style={{ fontFamily: 'fantasy' }}>Signed by </small>{data.accountHolder.name}
+              </div>
+              <Divider className="border-2 my-2 border-dark" />
+              <div className="modal-footer"><List onClick={() => setCertificateId(Number(data.id))} /></div>
             </Card>
           })}
         </div> : certificateId != 0 ? <CertificateDetail certificateId={certificateId} /> : <></>
