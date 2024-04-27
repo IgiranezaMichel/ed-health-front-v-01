@@ -4,11 +4,9 @@ import { STATUS } from "../../../enums/Status";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
 import { Navigation } from "../../../components/default/Navigation";
 import { StudentMenu } from "../../../MenuBarItems/StudentMenu";
-import { BusinessCenter, CreateNewFolder, Description, NewReleases } from "@mui/icons-material";
-import { Button, Card, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material";
+import { CreateNewFolder, Description, NewReleases } from "@mui/icons-material";
+import { Button, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material";
 import { TimeIcon } from "@mui/x-date-pickers";
-import { DashboardCard } from "../../../components/default/DashboardCard";
-import { PIE_CHART_DEFAULT } from "../../../components/default/PIECHART";
 import { TrainingDetail } from "./TrainingDetail";
 import { useNcnmTrainingApprovalStatusPage } from "../../../controller/viewHooks/training/useNcnmTrainingApprovalStatus";
 import { StudentTrainingApplicationStatus } from "./StudentTrainingApplicationStatus";
@@ -23,24 +21,6 @@ export const StudentTraining = () => {
     return (
         <Navigation items={StudentMenu}>
             {trainingId == 0 && <div>
-                <div className="row m-auto container-xxl g-1">
-                    <div className="col-sm-6">
-                        <Card elevation={4} >
-                            <DashboardCard icon={<BusinessCenter className="float-md-end fs-1" />} subtitleDescription="Job successful analysis" />
-                            <div className="col-12 py-1">
-                                <PIE_CHART_DEFAULT centerLabel="Job" items={[{ value: 1, label: 'Success' }]} />
-                            </div>
-                        </Card>
-                    </div>
-                    <div className="col-sm-6">
-                        <Card elevation={4} >
-                            <DashboardCard icon={<BusinessCenter className="float-md-end fs-1" />} subtitleDescription="Job successful analysis" />
-                            <div className="col-12 py-1">
-                                <PIE_CHART_DEFAULT centerLabel="Job" items={[{ value: 1, label: 'Success' }]} />
-                            </div>
-                        </Card>
-                    </div>
-                </div>
                 {
                     <>
                         <div className="modal-footer py-3">
