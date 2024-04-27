@@ -75,6 +75,7 @@ export const AppendingTrainingList: FC<trainingControl> = (props) => {
                     -- No data found --
                 </div>
             }
+            
         </>
     )
 }
