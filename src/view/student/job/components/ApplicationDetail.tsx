@@ -38,17 +38,7 @@ export const ApplicationDetail = (props: { id: number }) => {
                     <div>
                         {job.jobDetail.description}
                     </div>
-                    {
-                        job.jobDetail.jobRequirement.length == 0 ? <div>-- no data found</div> :
-                            <div>
-                                <div className="fs-5 fw-bold py-2">Requirement</div>
-                                {
-                                    job.jobDetail.jobRequirement.map((data: any, index: any) => {
-                                        return <li key={index}>{data.description}</li>
-
-                                    })
-                                }</div>
-                    }
+                    {job.jobDetail.jobRequirement}
                     <div className="modal-footer">
                         <Button variant="contained" data-bs-toggle="modal"
                             data-bs-target="#saveApplication">Apply</Button>
