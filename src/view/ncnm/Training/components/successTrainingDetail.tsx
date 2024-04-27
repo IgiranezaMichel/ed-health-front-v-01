@@ -13,7 +13,6 @@ export const SuccessTrainingDetail = (props: { trainingId: number, children: Rea
     }
     const { studentList, isLoading } = useGetStudentAppliedForTraining(props.trainingId);
     const { isFindingTraining, trainingDetail, trainerList } = useFindTrainingById(props.trainingId);
-    console.log(studentList)
     return <>
         {props.children}
         <section>
