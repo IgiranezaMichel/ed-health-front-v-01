@@ -102,3 +102,28 @@ query($status:String,$trainingId:Long,$input:PaginationInput){
   }
 }
 `
+export const GET_LIST_OF_TRAINING_APPLICANT_BY_TRAINING_ID=gql`
+query($trainingId:Long){
+getListOfAllTrainingApplicant(trainingId:$trainingId){
+  hospitalApprovalStatus
+  student{
+    id
+    user{
+      name
+      gender
+      email
+      phoneNumber
+      profilePicture
+    }
+    department{
+      name
+      faculty{
+        name
+        school{
+          name
+        }
+      }
+    }
+  }
+}}
+`
