@@ -21,7 +21,6 @@ useEffect(
             setPageNumber(data.pageNumber);
             setTotalPage(data.totalPages);
             setPageSize(data.size);
-            console.log(appendingTrainingDetail)
             setIsLoadingAppendingTraingDatas(false)}).catch(err=>err)
     }
 )
