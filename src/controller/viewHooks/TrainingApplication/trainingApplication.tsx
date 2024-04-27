@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
 import { useQuery } from "@apollo/client";
-import { GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS, GET_STUDENT_TRAINING_APPLICATION_PAGE, GET_TRAINING_APPLICANT_PAGE_BY__HOSPITAL_APPROVAL_STATUS } from "../../../graphQl/queries/TrainingApplicationQueries";
-
+import { GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS, GET_LIST_OF_TRAINING_APPLICANT_BY_TRAINING_ID, GET_STUDENT_TRAINING_APPLICATION_PAGE, GET_TRAINING_APPLICANT_PAGE_BY__HOSPITAL_APPROVAL_STATUS } from "../../../graphQl/queries/TrainingApplicationQueries";
 export const useGetTrainingApplicantPage = (status: string, trainingId: number, input: PaginationInput) => {
     const { data, refetch } = useQuery(GET_TRAINING_APPLICANT_PAGE_BY__HOSPITAL_APPROVAL_STATUS, { variables: { status: status, trainingId: trainingId, input: input } });
     const [trainingApplicants, setTrainingApplicants] = useState<any>([]);
@@ -60,4 +59,25 @@ export const useGetCertifiedStudentByAdminApprovalStatus = (status: string, trai
         }
     )
     return { refetch, isLoading, certifiedStudentDetailObj }
+}
+export const useGetStudentAppliedForTraining= (trainingId: number) => {
+    const { data, refetch } = useQuery(GET_LIST_OF_TRAINING_APPLICANT_BY_TRAINING_ID    ,
+        { variables: {trainingId: trainingId }});
+    const [isLoading, setIsLoading] = useState(true);
+    const [studentList, setStudentList] = useState<any>([]);
+    useEffect(
+        () => {
+            const fetchData = async () => {
+                if(data){
+                    return await data.getListOfAllTrainingApplicant;
+                }
+            }
+            fetchData()
+                .then(data => {
+                    setStudentList(data);
+                    setIsLoading(false);
+                })
+        }
+    )
+    return { refetch, isLoading, studentList }
 }
