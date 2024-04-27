@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { BookmarkSharp, List, LocationOn, ModelTrainingSharp, Sort } from "@mui/icons-material"
-import { Avatar, Card, CircularProgress, Divider, Pagination, Tooltip } from "@mui/material"
+import { Avatar, Card, CircularProgress, Divider, NativeSelect, Pagination, Tooltip } from "@mui/material"
 import { useState } from "react"
 import { useCertificatePage } from "../../../../controller/viewHooks/useCertificatePage"
 import { PaginationInput } from "../../../../typeDefs/PaginationInput"
@@ -23,23 +23,24 @@ export const Certificate = () => {
       {(!isLoadingCertificates && certificateId == 0)
         ? <div className="col-12 bg">
           <div className="mt-4 mb-4">  Page {certificatesDetail.pageNumber + 1} out of {certificatesDetail.totalPages}  <span>
-            <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
+            <NativeSelect onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
             >
               <option value="8">8</option>
               <option value="16">18</option>
               <option value="24">24</option>
-            </select>
+            </NativeSelect>
           </span>
-            <span className="float-end"> Sort by<select onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
+            <span className="float-end"> Sort by <Sort/>
+            <NativeSelect onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
               <option selected={page.sort == 'description' ? true : false} value="description">Description</option>
               <option selected={page.sort == 'deadline' ? true : false} value="deadline">Deadline</option>
               <option selected={page.sort == 'location' ? true : false} value="location">Location</option>
-            </select><Sort /></span>
+            </NativeSelect></span>
             <Pagination count={certificatesDetail.totalPages} onChange={handleChange} page={certificatesDetail.pageNumber + 1} />
           </div>
 
           {certificatesDetail.content.map((data: any, index: any) => {
-            return <Card key={index} elevation={5} className="mb-3 p-2 col-sm-12 m-auto row">
+            return <Card key={index} elevation={3} className="mb-2 p-1 col-sm-12 m-auto row rounded-0">
               <section className="col-md-3 card p-0 border-0">
                 <div className="text-center d-flex"><Tooltip arrow className="card" title={<div>
                   <img src={data.training.hospital.logo} className="card-img" />
@@ -56,24 +57,24 @@ export const Certificate = () => {
                   <div className="d-flex">
                     <section className="d-flex">
                       <div className="card border-0 p-1 fs-1 justify-content-center">
-                        <ModelTrainingSharp />
+                        <ModelTrainingSharp className="bg-success p-1 fs-1 rounded-circle text-white"/>
                       </div>
                       <div className="card border-0">
-                        <div> <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Training title</span> {data.training.title}</span></div>
-                        <div> <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Training Location</span> {data.training.location.name}</span></div>
+                        <div> <span className="d-block"><small style={{ fontFamily: 'fantasy' }}>Training title</small> {data.training.title}</span></div>
+                        <div> <span className="d-block"><small style={{ fontFamily: 'fantasy' }}>Training Location</small> {data.training.location.name}</span></div>
                         <div>
-                          <span style={{ fontFamily: 'fantasy' }}>Total Trainer </span><span className="badge bg-success fw-bold">{data.training.trainers.length}</span>
+                          <small style={{ fontFamily: 'fantasy' }}>Total Trainer </small><small className="badge bg-success fw-bold">{data.training.trainers.length}</small>
                         </div>
                       </div>
                     </section>
                     <section className="d-sm-flex mx-md-4">
                       <div className="card border-0 p-1 fs-1 justify-content-center">
-                        <BookmarkSharp />
+                        <BookmarkSharp className="bg-primary p-1 fs-1 rounded-circle text-white"/>
                       </div>
                       <div className="card border-0">
-                        <div> <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Certificate Name</span> {data.title}</span></div>
-                        <div> <span className="d-block"><span style={{ fontFamily: 'fantasy' }}>Issued Date</span> {String(data.timeStamp).split('T')[0]} {String(data.timeStamp).split('T')[1].split('.')[0]}</span></div>
-                        <div><span style={{ fontFamily: 'fantasy' }}>Total Applicant </span><span className="badge bg-success fw-bold">{data.training.applicantList.length}</span></div>
+                        <div> <small className="d-block"><span style={{ fontFamily: 'fantasy' }}>Certificate Name</span> {data.title}</small></div>
+                        <div> <small className="d-block"><span style={{ fontFamily: 'fantasy' }}>Issued Date</span> {String(data.timeStamp).split('T')[0]} {String(data.timeStamp).split('T')[1].split('.')[0]}</small></div>
+                        <div><small style={{ fontFamily: 'fantasy' }}>Total Applicant </small><small className="badge bg-success fw-bold">{data.training.applicantList.length}</small></div>
                       </div>
                     </section>
                   </div>
@@ -82,7 +83,7 @@ export const Certificate = () => {
               <div className="modal-footer">
                     <small style={{ fontFamily: 'fantasy' }}>Signed by </small>{data.accountHolder.name}
               </div>
-              <Divider className="border-2 my-2 border-dark" />
+              <Divider className="border-1 my-2 border-dark" />
               <div className="modal-footer"><List onClick={() => setCertificateId(Number(data.id))} /></div>
             </Card>
           })}
