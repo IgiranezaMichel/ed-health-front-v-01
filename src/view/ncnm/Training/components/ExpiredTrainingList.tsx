@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { CalendarToday, LocalHospital, LocationOn, School, Sort } from "@mui/icons-material";
-import { Pagination, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { CalendarToday, Close, LocalHospital, LocationOn, School, Sort } from "@mui/icons-material";
+import { Dialog, Pagination, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { FC, useState } from "react";
 import { useExpiredTraining } from "../../../../controller/viewHooks/training/useExpiredTraining";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
+import { SuccessTrainingDetail } from "./successTrainingDetail";
 type trainingControl = {
     status: string,
 }
@@ -15,6 +16,8 @@ export const ExpiredTrainingList: FC<trainingControl> = (props) => {
         event;
         setPage({ ...page, pageNumber: value - 1 });
     };
+    const [trainingId,setTrainingId]=useState(0);
+    const [openTrainingDetail,setOpenTrainingDetail]=useState(false);
     return (
         <>
             <div className="mt-4">  Page {expiredTrainingDetail.pageNumber + 1} out of {expiredTrainingDetail.totalPages}  <span>
@@ -61,7 +64,7 @@ export const ExpiredTrainingList: FC<trainingControl> = (props) => {
                                         <div><LocationOn />{data.location.Location.Location.name}/{data.location.Location.name}/{data.location.name}</div>
                                     </TableCell>
                                     <TableCell>
-                                        {props.status != 'cancelled' && <School />}
+                                        {props.status != 'cancelled' && <School onClick={()=>{setTrainingId(data.id);setOpenTrainingDetail(true)}}/>}
                                     </TableCell>
                                 </TableRow>
                             )
@@ -69,6 +72,11 @@ export const ExpiredTrainingList: FC<trainingControl> = (props) => {
                     }
                 </TableBody>}
             </Table>
+            <Dialog maxWidth='lg' PaperProps={{className:'col-12 rounded-0'}} open={openTrainingDetail}>
+            <SuccessTrainingDetail trainingId={trainingId}>
+                <div className="p-4 bg-white sticky-top fw-bold">Training Details <Close onClick={()=>setOpenTrainingDetail(false)} className="float-end"/></div>
+            </SuccessTrainingDetail>
+            </Dialog>
         </>
     )
 }
