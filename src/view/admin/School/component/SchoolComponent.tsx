@@ -65,7 +65,7 @@ export const SchoolComponent = (props: { accessedBy: string,children:ReactNode }
                         }
                     </div>
                 </div>
-                <Dialog maxWidth='sm' PaperProps={{className:'rounded-0'}} open={addNewHospital}>
+                <Dialog maxWidth='xs' PaperProps={{className:'rounded-0 col-12'}} open={addNewHospital}>
                     <div className="p-3 sticky-top bg-white">Add new school <Close onClick={()=>setAddNewHospital(false)} className="float-end"/></div>
                     <SchoolFormModal/>
                 </Dialog>
