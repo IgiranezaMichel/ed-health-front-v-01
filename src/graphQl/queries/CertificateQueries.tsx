@@ -89,10 +89,10 @@ query($trainingId:Long){
   findCertificateByTrainingId(trainingId:$trainingId){
     id
     title
+    timeStamp
     accountHolder{
       name
     }
-    timeStamp
     certifiedStudentList{
       id
     }
