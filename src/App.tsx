@@ -32,6 +32,7 @@ import { StudentCertificate } from './view/student/certificate'
 import { JobPublished } from './view/student/job'
 import { StudentTraining } from './view/student/training'
 import { Login } from './view/visitor/Login'
+import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
