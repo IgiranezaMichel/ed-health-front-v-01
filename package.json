@@ -30,7 +30,8 @@
     "react-dom": "^18.2.0",
     "react-pro-sidebar": "^1.1.0",
     "react-qr-code": "^2.0.12",
-    "react-router-dom": "^6.22.0"
+    "react-router-dom": "^6.22.0",
+    "react-toastify": "^10.0.5"
   },
   "devDependencies": {
     "@types/google.maps": "^3.55.3",
