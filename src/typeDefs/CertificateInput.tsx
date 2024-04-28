@@ -6,4 +6,6 @@ export type CertificateInput = {
     hospitalStamp: string
     accountHolderId: number
     trainingId: number
+    offeredHasToPay:boolean
+    price:number
 }
