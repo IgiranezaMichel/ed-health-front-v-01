@@ -12,7 +12,7 @@ import { CreateCertificate } from "./components/CreateCertificate";
 export const TrainingCertificate = () => {
     const { trainingId } = useParams();
     const { trainingDetail, isFindingTraining } = useFindTrainingById(Number(trainingId));
-    const [show,setShow]=useState('');
+    const [show, setShow] = useState('');
     return (
         <Navigation items={HospitalMenu}>
             {!isFindingTraining && <Card elevation={3} className="border">
@@ -33,18 +33,18 @@ export const TrainingCertificate = () => {
                     </div>
                 </div>
                 <div className="modal-footer m-2">
-                    {show==''?<Button onClick={()=>setShow('createCertificate')} className="fw-bold" variant="contained">New Certificate</Button>
-                    :show=='createCertificate'?<Button onClick={()=>setShow('')} className="fw-bold bg-danger" variant="contained">Cancel</Button>
-                    :''
+                    {show == '' ? <Button onClick={() => setShow('createCertificate')} className="fw-bold" variant="contained">New Certificate</Button>
+                        : show == 'createCertificate' ? <Button onClick={() => setShow('')} className="fw-bold bg-danger" variant="contained">Cancel</Button>
+                            : ''
                     }
                 </div>
                 <div className="p-2">
-                {show==''?
-                <RegisteredCertificateList trainingId={Number(trainingId)}/>
-                :show=='createCertificate'?<CreateCertificate trainingId={Number(trainingId)}/>
-                :''
+                    {show == '' ?
+                        <RegisteredCertificateList trainingId={Number(trainingId)} />
+                        : show == 'createCertificate' ? <CreateCertificate trainingId={Number(trainingId)} />
+                            : ''
                     }
-                    </div>
+                </div>
             </Card>
             }
         </Navigation>
