@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@apollo/client"
 import { AddBox, AddBusiness, CalendarToday, Delete, LocalHospitalOutlined, LocalHospitalSharp, LocationOnRounded, Sort } from "@mui/icons-material"
-import { Button, Card, Pagination, TextField, TextareaAutosize } from "@mui/material"
+import { Button, Card, NativeSelect, Pagination, TextField, TextareaAutosize } from "@mui/material"
 import { useState } from "react"
 import { AdminMenu } from "../../MenuBarItems/AdminMenu"
 import { DashboardCard } from "../../components/default/DashboardCard"
@@ -22,17 +22,13 @@ export const HospitalManagement = () => {
     id: 0,
     logo: ''
   })
-  const [showAddHospital,setShowAddHospital]=useState(false);
+  const [showAddHospital, setShowAddHospital] = useState(false);
   const [saveHospitalData] = useMutation(REGISTER_HOSPITAL);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [districtList, setDistrictList] = useState<any>([]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [selecteProvinceId, setSelectedProvinceId] = useState<any>();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedProvinceId, setSelectedProvinceId] = useState<any>();
   const [selecteDistrictId, setSelectedDistrictId] = useState<any>();
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [sectorList, setSectorList] = useState<any>([]);
-  const { listOfLocationData } = useFilterLocation("name", "PROVINCE");
+  const { listOfLocationData, refetch } = useFilterLocation("name", "PROVINCE");
   const handlePageSizeChange = (event: React.ChangeEvent<unknown>, value: number) => {
     event;
     setPage({ ...page, pageNumber: value - 1 });
@@ -60,7 +56,8 @@ export const HospitalManagement = () => {
     }
   }
   const saveHospitalDataHandler = () => {
-    saveHospitalData({ variables: { input: hospital } }).then(data => console.log(data)).catch(err => err)
+    saveHospitalData({ variables: { input: hospital } }).then(data => console.log(data)).catch(err => err);
+    refetch();
   }
   const addNewHospitalModal = <Card className="col-sm-5 p-2 bg-body-tertiary" elevation={4}>
     <div className="text-center">Add New Hospital</div>
@@ -69,21 +66,19 @@ export const HospitalManagement = () => {
     <input type="file" onChange={imgHandler} className="form-control mb-2" />
     <div className="mb-3">
       <div className="mb-3">
-        <select onChange={(e) => { setSelectedProvinceId(Number(e.target.value)); findDistrict(Number(e.target.value)) } } className="form-select border border-dark rounded-0">
+        <select onChange={(e) => { setSelectedProvinceId(Number(e.target.value)); findDistrict(Number(e.target.value)) }} className="form-select border border-dark rounded-0">
           <option value={undefined}>Select Province</option>
           {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             listOfLocationData.map((data: any, index: any) => {
               return <option key={index} value={index}>{data.name}</option>
             })}
         </select>
       </div>
-      {selecteProvinceId != undefined &&
+      {selectedProvinceId != undefined &&
         <div className="mb-3">
-          <select onChange={(e) => { setSelectedDistrictId(Number(e.target.value)); findListOfSectorWithInDistrict(Number(e.target.value)) } } className="form-select mb-3  border border-dark rounded-0">
+          <select onChange={(e) => { setSelectedDistrictId(Number(e.target.value)); findListOfSectorWithInDistrict(Number(e.target.value)) }} className="form-select mb-3  border border-dark rounded-0">
             <option value={undefined}>Select District</option>
             {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               districtList.map((data: any, index: any) => {
                 return <option key={index} value={index}>{data.name}</option>
               })}
@@ -93,7 +88,7 @@ export const HospitalManagement = () => {
         <div className="mb-3">
           <select onChange={(e) => setHospital({ ...hospital, locationId: Number(e.target.value) })} className="form-select  border border-dark rounded-0">
             <option value={undefined}>Select Sector</option>
-            {// eslint-disable-next-line @typescript-eslint/no-explicit-any
+            {
               sectorList.map((data: any, index: any) => {
                 return <option key={index} value={data.id}>{data.name}</option>
               })}
@@ -111,54 +106,61 @@ export const HospitalManagement = () => {
           <div className="col-sm-4 mb-4">
             <DashboardCard title="Available Hospital" icon={<LocalHospitalOutlined className="fs-1 float-end" />} size={hospitalSize} subtitleDescription="Total available hospital" />
           </div>
-          <AddBox className="fs-1 mb-3" onClick={()=>setShowAddHospital(!showAddHospital)}/>
+          <AddBox className="fs-1 mb-3" onClick={() => setShowAddHospital(!showAddHospital)} />
           {/* add new hospital */}
-          {showAddHospital?addNewHospitalModal:''}
-          {/*  */}
-          <div>  Page {hospitalPageNumber + 1} out of {hospitalPageSize}  <span>
-            <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
-            >
-              <option value="6">6</option>
-              <option value="12">12</option>
-              <option value="18">18</option>
-              <option value="24">24</option>
-              <option value="30">30</option>
-            </select>
-          </span>
-            <span className="float-end"> Sort by<select onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
-              <option selected={page.sort == 'name' ? true : false} value={"name"}>Name</option>
-              <option selected={page.sort == 'location' ? true : false} value="location">Location</option>
-              <option selected={page.sort == 'timeStamp' ? true : false} value="timeStamp">Date of registration</option>
-            </select><Sort /></span>
-            <Pagination
-              count={hospitalPageSize}
-              page={hospitalPageNumber + 1}
-              onChange={handlePageSizeChange}
-            />
-          </div>
+          {showAddHospital ? addNewHospitalModal : ''}
+          {hospitalPageSize != 0 &&
+            <div>  Page {hospitalPageNumber + 1} out of {hospitalPageSize}  <span>
+              <NativeSelect onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
+              >
+                <option value="6">6</option>
+                <option value="12">12</option>
+                <option value="18">18</option>
+                <option value="24">24</option>
+                <option value="30">30</option>
+              </NativeSelect>
+            </span>
+              <span className="float-end"> Sort by <Sort />
+                <NativeSelect onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
+                  <option selected={page.sort == 'name' ? true : false} value={"name"}>Name</option>
+                  <option selected={page.sort == 'location' ? true : false} value="location">Location</option>
+                  <option selected={page.sort == 'timeStamp' ? true : false} value="timeStamp">Date of registration</option>
+                </NativeSelect>
+              </span>
+              <Pagination
+                count={hospitalPageSize}
+                page={hospitalPageNumber + 1}
+                onChange={handlePageSizeChange}
+              />
+            </div>}
         </div>
-        {!isFindingHospital && <div className="row m-auto g-3 col-12">
+        {!isFindingHospital && <><div className="row m-auto g-3 col-12">
           {allAvailableHospital.map((data: any, index: any) => {
             return <div key={index} className="col-sm-3">
               <Card elevation={4}>
                 <div className="text-center">
-                <img width={'50%'} height={100} src={data.logo} alt="" />
+                  <img  height={'100vh'} src={data.logo} alt="" />
                 </div>
                 <div className="card-body bg-light px-2">
-                  <div><LocalHospitalSharp/> <b>{data.name}</b></div>
-                  <div ><LocationOnRounded/>{data.location.Location.Location.name}/{data.location.Location.name}/{data.location.name}</div>
-                  <div ><CalendarToday/> {String(data.timeStamp).split('T')[0]}</div>
+                  <div><LocalHospitalSharp /> <b>{data.name}</b></div>
+                  <div><LocationOnRounded />{data.location.Location.Location.name}/{data.location.Location.name}/{data.location.name}</div>
+                  <div><CalendarToday /> {String(data.timeStamp).split('T')[0]}</div>
                   <div className="modal-footer">
-                  <Button>
-                    <Delete/> <AddBusiness/>
-                  </Button>
+                    <Button>
+                      <Delete /> <AddBusiness />
+                    </Button>
+                  </div>
                 </div>
-                </div>
-               
+
               </Card>
             </div>
           })}
-        </div>}
+        </div><div>
+            {allAvailableHospital.length == 0 && <section className="text-center fw-bold p-4">
+              -- No hospital found
+            </section>}
+          </div></>
+        }
       </div>
     </Navigation>
   )
