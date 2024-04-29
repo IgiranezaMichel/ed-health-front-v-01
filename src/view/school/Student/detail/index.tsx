@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
-import {  Check, Email, Person2Sharp, Phone } from "@mui/icons-material";
-import { Button, Card, CircularProgress,TextField } from "@mui/material";
+import {  Check, Email, Phone,WcSharp } from "@mui/icons-material";
+import { Avatar, Button, Card, CircularProgress,TextField, Tooltip } from "@mui/material";
 
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { useState } from "react";
@@ -38,26 +38,28 @@ export const StudentDetail = (props: { id: number }) => {
             {isLoadingStudentData && <main className="d-flex justify-content-center align-content-center py-5">
                 <CircularProgress />
             </main>}
-            {!isLoadingStudentData && <main className="my-5 row m-12 m-auto">
-                <Card className="col-sm-6 rounded-0" elevation={9}>
-                    <img src={studentDetail.user.profilePicture} className="card-img" />
-                </Card>
-                <Card className="col-sm-6 rounded-0 d-flex justify-content-center align-items-center align-content-center" elevation={9}>
-                    <div className="p-md-3">
-                        <div className="my-2"><Person2Sharp /> {studentDetail.user.name}</div>
-                        <div className="my-2"><Person2Sharp /> {studentDetail.user.gender}</div>
-                        <div className="my-2"><Email /> {studentDetail.user.email}</div>
-                        <div className="my-2"><Phone /> {studentDetail.user.phoneNumber}</div>
-                        <div className="my-2"><CalendarIcon /> {String(studentDetail.user.dob).split('T')[0]}</div>
-                        <div className="my-2">Status <b>{studentDetail.status}</b></div>
+            {!isLoadingStudentData && <main className="m-12 m-auto">
+                <Card className="col-sm-12 p-3 rounded-0" elevation={9}>
+                    <Tooltip title={<div><img height={'100vh'} src={studentDetail.user.profilePicture}/></div>}>
+                    <section className="d-flex">
+                    <Avatar className="bg-dark" src={studentDetail.user.profilePicture}/>
+                    <div className="card d-flex justify-content-center border-0 mx-3">{studentDetail.user.name}</div>
+                    </section>
+                    </Tooltip>
+                    <div className="p-md-3 d-md-flex">
+                        <div className="mx-2"><WcSharp className="border rounded-circle border-dark border-2"/> {studentDetail.user.gender}</div>
+                        <div className="mx-2"><Email className="border rounded-circle border-dark border-2" /> {studentDetail.user.email}</div>
+                        <div className="mx-2"><Phone className="border rounded-circle border-dark border-2" /> {studentDetail.user.phoneNumber}</div>
+                        <div className="mx-2"><CalendarIcon className="border rounded-circle border-dark border-2" /> {String(studentDetail.user.dob).split('T')[0]}</div>
+                        <div className="mx-2">Status <b>{studentDetail.status}</b></div>
                     </div>
-                </Card>
+                    </Card>
                 {(studentDetail.status != StudentStatus.DROPOUT && studentDetail.status != StudentStatus.INACTIVE && studentDetail.status != StudentStatus.UNKNOWN) &&
                     <Card elevation={4} className="border border-2 p-2">
                         <b>Mark As he/she has complete   courses</b>
-                        <Button data-bs-toggle="modal" data-bs-target="#saveStudentBtn" className="bg-success float-end">
-                            <Check className="text-white fs-3 fw-bolder" />
-                        </Button>
+                        <button data-bs-toggle="modal" data-bs-target="#saveStudentBtn" className="bg-success float-end py-1 rounded-circle">
+                            <Check className="text-white fs-5 fw-bolder" />
+                        </button>
                     </Card>}
             </main>}
             
