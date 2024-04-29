@@ -5,6 +5,9 @@ query($schoolId:Long,$input:PaginationInput){
     studentFromSameSchoolListPage(schoolId:$schoolId,input:$input){
   content{
       id
+      department{
+      name
+    }
       user{
         id
         name
