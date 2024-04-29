@@ -90,15 +90,15 @@ export const HospitalDetail = () => {
 
     return (
         <Navigation items={NcnmMenu} >
-            {!isProcessingHospitalData && <div className="row">
-                <Card className="col-sm-4">
+            {!isProcessingHospitalData && <div className="row col-12 m-auto">
+                <Card className="col-sm-4 rounded-0">
                     <img src={hospitalDetail.logo} className="card-img" />
                     <div><LocalHospital />{hospitalDetail.name}</div>
                     <div>
-                        <LocationCity />{hospitalDetail.location.Location.Location.name}/{hospitalDetail.location.Location.name}/{hospitalDetail.location.name}
+                        <LocationCity />{hospitalDetail.location.Location.Location.name} || {hospitalDetail.location.Location.name} || {hospitalDetail.location.name}
                     </div>
                 </Card>
-                <Card className="col-sm-6 d-flex justify-content-center align-content-center align-items-center">
+                <Card className="col-sm-8 rounded-0 d-flex justify-content-center align-content-center align-items-center">
                     <div>
                         <h5>{hospitalDetail.name} Admins</h5>
                         {hospitalDetail.hospitalTrainingList.length == 0 &&
