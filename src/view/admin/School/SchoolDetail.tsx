@@ -5,22 +5,23 @@ import { useParams } from "react-router-dom";
 import { AdminMenu } from "../../../MenuBarItems/AdminMenu";
 import { DashboardCard } from "../../../components/default/DashboardCard";
 import { Navigation } from "../../../components/default/Navigation";
-import { useSchool } from "../../../controller/viewHooks/SchoolHooks";
+import { useSchoolDetailById } from "../../../controller/viewHooks/SchoolHooks";
 
 export const SchoolDetail=()=>{
     const {id}=useParams();
-    const {schoolDataIsLoading,schoolDetailList}=useSchool(Number(id));
+    const {responseReady,schoolDetailObj}=useSchoolDetailById(Number(id));
+    console.log(schoolDetailObj)
     return(
         <Navigation items={AdminMenu} >
-               {!schoolDataIsLoading&& <main>
+               {responseReady&& <main>
                     <section className="row col-12 m-auto">
                     <Card className="col-sm-4"  elevation={3}>
-                        <img className="card-img" src={schoolDetailList.logo} alt="" />
-                        <div><School/> {schoolDetailList.name}</div>
+                        <img className="card-img" src={schoolDetailObj.logo} alt="" />
+                        <div><School/> {schoolDetailObj.name}</div>
                         <div><LocationCitySharp/> 
-                        {schoolDetailList.location.Location.Location.name}/
-                        {schoolDetailList.location.Location.name}/
-                        {schoolDetailList.location.name}
+                        {schoolDetailObj.location.Location.Location.name}/
+                        {schoolDetailObj.location.Location.name}/
+                        {schoolDetailObj.location.name}
                          </div>
                     </Card >
                     <Card elevation={3} className="col-sm-8">
@@ -28,7 +29,7 @@ export const SchoolDetail=()=>{
                     </Card>
                     </section>
                     <main className="mb-3 col-12 m-auto row g-2">
-                    {schoolDetailList.facultyList.map((data:any)=>{
+                    {schoolDetailObj.facultyList.map((data:any)=>{
                         return(
                             
                                 <div className="col-sm-4">
