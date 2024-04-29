@@ -1,30 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useMutation } from "@apollo/client";
-import { BorderColor, CheckCircleOutlineOutlined, CloseRounded, KeyboardArrowDown, KeyboardArrowUp, PhoneInTalkOutlined, PlaylistAdd, RemoveRedEye, Save, TitleSharp } from "@mui/icons-material";
-import { Button, Card, CircularProgress,Skeleton, TextField } from "@mui/material";
+import { BorderColor, KeyboardArrowDown, KeyboardArrowUp, People, PersonPin, PhoneInTalkOutlined, PlaylistAdd, RemoveRedEye, Save, TitleSharp } from "@mui/icons-material";
+import { Box, Button, Card, CircularProgress, Skeleton, Tab, TextField } from "@mui/material";
 import { ChangeEvent, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { HospitalMenu } from "../../../MenuBarItems/HospitalMenu";
 import { Navigation } from "../../../components/default/Navigation";
-import { Toast } from "../../../components/default/Toast";
 import { useFindTrainingById } from "../../../controller/viewHooks/training/useFindTrainingById";
 import { REGISTER_TRAINER } from "../../../graphQl/mutation/TrainerMutations";
-import { SAVE_TRAINING_REQUIREMENT } from "../../../graphQl/mutation/TrainingRequirementMutation";
-import { ToastProps } from "../../../typeDefs/ToastProps";
 import { TrainerInput } from "../../../typeDefs/TrainerInput";
-import { TrainingRequirementInput } from "../../../typeDefs/TrainingRequirementInput";
 import { CalendarIcon } from "@mui/x-date-pickers";
 import { Modal } from "../../../components/default/Modal";
+import { TabContext, TabList, TabPanel } from "@mui/lab";
 export const HospitalTrainingDetail = () => {
     const { id } = useParams();
-    const [add, setAdd] = useState(false);
-    const [addShowData, setShowData] = useState('requirement');
     const [isSaving, setIsSaving] = useState(false);
-    const [trainingRequirement, setTrainingRequirement] = useState<TrainingRequirementInput>({
-        description: '',
-        id: 0,
-        trainingId: Number(id)
-    });
+    const [value, setValue] = useState('1');
+    const handleChange = (event: React.SyntheticEvent, newValue: string) => {
+        event;
+        setValue(newValue);
+    }
     const [trainer, setTrainer] = useState<TrainerInput>({
         name: '',
         phoneNumber: '',
@@ -34,20 +29,8 @@ export const HospitalTrainingDetail = () => {
         trainerTitle: '',
         signature: ''
     });
-    const [message, setMessage] = useState('');
     const [show, setShow] = useState('');
-    const [toastProps, setToastProps] = useState<ToastProps>({ message: message, open: false, severity: 'success' });
-    const [saveTraining] = useMutation(SAVE_TRAINING_REQUIREMENT);
     const [saveTrainer] = useMutation(REGISTER_TRAINER);
-    const saveTrainingRequirementHandler = () => {
-        saveTraining({ variables: { input: trainingRequirement } })
-            .then(data => {
-                setMessage(data.data.saveTrainingRequirement);
-                alert(message);
-                refreshTrainingDetail();
-                setToastProps({ open: true, message: message, severity: 'success' })
-            }).catch(err => err);
-    }
     const saveTrainerHandler = () => {
         setIsSaving(true);
         saveTrainer({ variables: { input: trainer } }).then(data => { alert(data); setIsSaving(false); refreshTrainingDetail() }).catch(err => console.log(err))
@@ -72,8 +55,8 @@ export const HospitalTrainingDetail = () => {
             reader.readAsDataURL(file);
         }
     }
-    const { isFindingTraining, applicantList, trainerList, trainingDetail, trainingRequirementList, refreshTrainingDetail } = useFindTrainingById(Number(id));
-    const navigate=useNavigate()
+    const { isFindingTraining, applicantList, trainerList, trainingDetail, refreshTrainingDetail } = useFindTrainingById(Number(id));
+    const navigate = useNavigate()
     const addTrainerModal = <Modal
         actionBtn={
             <div>
@@ -109,86 +92,76 @@ export const HospitalTrainingDetail = () => {
                 <Skeleton className="w-100 d-block bg-primary" />
             </section>}
             {!isFindingTraining &&
-                <Card className="container-lg p-3 row mt-5 m-auto" elevation={3}>
-                    <section className="col-sm-12 m-auto bg-primary p-2 text-light">
-                        <span className="d-block mb-2"><TitleSharp /> Title: <b>{trainingDetail.title}</b></span>
-                        <span className="d-block mb-1"><BorderColor /> <b>{trainingDetail.description}</b></span>
-                        <span className="d-block mb-1"><CalendarIcon /> Deadline: <b>{String(trainingDetail.deadline).split('T')[0]}</b></span>
-                        <span className="d-block">Post Date: <b>{trainingDetail.timeStamp}</b></span>
-                       <div className="my-3">
-                       <span className="bg-primary my-1 text-white fw-bold p-2 rounded-0 border">
-                            Total Applicant <span className="badge bg-info text-dark">{applicantList.length}</span>
-                            <RemoveRedEye onClick={() => navigate('/hospital/training-applicant-detail/'+id)} className="mx-2" />
-                        </span>
-                        <span className="bg-primary mx-1 text-white fw-bold p-2 rounded-0 border">
-                            Total requirement <span className="badge bg-info text-dark">{trainingRequirementList.length}</span>
-                            <RemoveRedEye onClick={() => setShowData('requirement')} className="mx-2" />
-                        </span>
-                       </div>
-                        <div className=" border-top border-4">
-                            <span className="fw-bold fs-5 d-block">Trainer</span>
-                            <div className="modal-footer">
-                                <PlaylistAdd data-bs-toggle="modal" data-bs-target="#add-school-admin" className="bg-primary p-1 fs-1 text-light rounded-circle" />
-                            </div>
-                            <div className="col-12 row m-auto g-1">
-                                {show=='trainerList'&&trainerList.map((data: any) => {
-                                    return <section className="col-sm-4 p-0">
-                                        <Card className="p-0" elevation={4}>
-                                            <img src={data.profilePicture} style={{ height: '150px', width: '100%', objectFit: 'contain' }} alt="" />
-                                            <div className="card-body">
-                                                <div className="card-title px-1">
-                                                    <b>{data.trainerTitle}</b> {data.name}
-                                                    <div className="mt-2 ">
-                                                        <PhoneInTalkOutlined />{data.phoneNumber}
+                <>
+                    <Card elevation={4} className="col-sm-12 row m-auto p-3 rounded-0">
+                        <div className="col-md-6">
+                            <span className="d-block mb-2"><TitleSharp /> Title: <b>{trainingDetail.title}</b></span>
+                            <span className="d-block mb-1"><BorderColor />Approval status: <b>{trainingDetail.ncnmApprovalStatus}</b></span>
+                        </div>
+                        <div className="col-md-6">
+                            <span className="d-block mb-1"><CalendarIcon /> Deadline: <b>{String(trainingDetail.deadline).split('T')[0]}</b></span>
+                            <span className="d-block">Post Date: <b>{trainingDetail.timeStamp}</b></span>
+                        </div>
+                    </Card>
+                    <Card className="mt-3 rounded-0" elevation={4}>
+                        <TabContext value={value}>
+                            <Box sx={{ border: 'none', borderColor: 'divider' }}>
+                                <TabList onChange={handleChange}>
+                                    <Tab label={<div><PersonPin /> Requirement</div>} value="1" />
+                                    <Tab label={<div><People /> Trainers</div>} value="2" />
+                                    <Tab label={<div><People /> Applicant List</div>} value="3" />
+                                </TabList>
+                            </Box>
+                            <TabPanel value="1" className="col-12">
+
+                                <div className="fw-bold italic">Description</div>
+                                <div>{trainingDetail.description}</div>
+                                <div className="fw-bold italic mb-3 mt-3">Requirement</div>
+                                <div dangerouslySetInnerHTML={{ __html: trainingDetail.trainingRequirement }}></div>
+                            </TabPanel>
+                            <TabPanel value="2">
+                                <div>
+                                    <span className="fw-bold fs-5 d-block">Trainer</span>
+                                    <div className="modal-footer">
+                                        <PlaylistAdd data-bs-toggle="modal" data-bs-target="#add-school-admin" className="bg-primary p-1 fs-1 text-light rounded-circle" />
+                                    </div>
+                                    <div className="col-12 row m-auto g-1">
+                                        {show == 'trainerList' && trainerList.map((data: any) => {
+                                            return <section className="col-sm-4 p-0">
+                                                <Card className="p-0" elevation={4}>
+                                                    <img src={data.profilePicture} style={{ height: '150px', width: '100%', objectFit: 'contain' }} alt="" />
+                                                    <div className="card-body">
+                                                        <div className="card-title px-1">
+                                                            <b>{data.trainerTitle}</b> {data.name}
+                                                            <div className="mt-2 ">
+                                                                <PhoneInTalkOutlined />{data.phoneNumber}
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                        </Card>
-                                    </section>
-                                })}
-                            </div>
-                            <div className="text-center">
-                                <Button className="text-white" onClick={()=>{show==''?setShow('trainerList'):setShow('')}}>
-                                {show=='trainerList'?<KeyboardArrowDown/>:<KeyboardArrowUp/>}
-                                </Button>
-                            </div>
-                        </div>
-                    </section>
-
-                    {addTrainerModal}
-
-                    {/* requirements */}
-                    {addShowData == 'requirement'&&<div className="accordion accordion-flush py-2 border bg-primary col-sm-12 m-auto" id="accordionFlushExample">
-                        <div className="accordion-item">
-                            <h2 className="accordion-header" id="flush-headingOne">
-                                <button className="accordion-button fw-bolder bg-primary text-white collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="true" aria-controls="flush-collapseOne">
-                                    Training Requirements
-                                </button>
-                            </h2>
-                            <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div className="accordion-body py-5">
-                                    <ol>
-                                        {
-                                            trainingRequirementList.map((data: any) => {
-                                                return <li key={data.id}>
-                                                    {data.description}
-                                                </li>
-                                            })
-                                        }
-                                    </ol>
-                                    {add && <div>
-                                        <input type="text" onChange={(e) => setTrainingRequirement({ ...trainingRequirement, description: e.target.value })} className="p-1 w-75" />
-                                        <CheckCircleOutlineOutlined onClick={() => saveTrainingRequirementHandler()} className="text-success mx-1" /> <CloseRounded className="mx-1" onClick={() => setAdd(false)} />
-                                    </div>}
-                                    <PlaylistAdd className="float-end fs-2" onClick={() => setAdd(true)} style={{ clear: 'both' }} />
+                                                </Card>
+                                            </section>
+                                        })}
+                                    </div>
+                                    <div className="text-center">
+                                        <Button className="text-white" onClick={() => { show == '' ? setShow('trainerList') : setShow('') }}>
+                                            {show == 'trainerList' ? <KeyboardArrowDown /> : <KeyboardArrowUp />}
+                                        </Button>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>}
 
-                </Card>}
-
-            <Toast message={toastProps.message} severity={toastProps.severity} open={toastProps.open} />
+                            </TabPanel>
+                            <TabPanel value="3">g</TabPanel>
+                        </TabContext>
+                    </Card>
+                    <div className="my-3">
+                        <span className="bg-primary my-1 text-white fw-bold p-2 rounded-0 border">
+                            Total Applicant <span className="badge bg-info text-dark">{applicantList.length}</span>
+                            <RemoveRedEye onClick={() => navigate('/hospital/training-applicant-detail/' + id)} className="mx-2" />
+                        </span>
+                    </div>
+                </>
+            }
+            {addTrainerModal}
         </Navigation>
     )
 }
