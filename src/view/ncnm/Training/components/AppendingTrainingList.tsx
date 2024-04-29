@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CalendarToday, ListAltSharp, LocalHospital, LocationOn, Sort } from "@mui/icons-material";
-import { Pagination, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
+import { Card, Pagination, Table, TableBody, TableCell, TableHead, TableRow } from "@mui/material";
 import { FC, useState } from "react";
 import { useAppendingTraining } from "../../../../controller/viewHooks/training/useAppendingTraining";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
@@ -32,7 +32,8 @@ export const AppendingTrainingList: FC<trainingControl> = (props) => {
                 </select><Sort /></span>
                 <Pagination count={appendingTrainingDetail.totalPages} onChange={handleChange} page={appendingTrainingDetail.pageNumber + 1} />
             </div>}
-            <Table className="overflow-auto mt-5">
+            <Card className="overflow-auto mt-5">
+            <Table >
                 <TableHead>
                     <TableRow className="bg-body-secondary">
                         <TableCell className="fw-bold">#</TableCell>
@@ -74,6 +75,7 @@ export const AppendingTrainingList: FC<trainingControl> = (props) => {
                 </TableBody>}
 
             </Table>
+            </Card>
             {
                 !isLoadingAppendingTrainingData && appendingTrainingDetail.length == 0 &&
                 <div className="text-center p-4 bg-primary text-white fw-bold">
