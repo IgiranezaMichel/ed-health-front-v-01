@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useQuery } from "@apollo/client"
 import { useEffect, useState } from "react"
-import { FIND_FACULTY_BY_SCHOOL_BY_ID, FIND_SCHOOL_BY_ID, GET_ALL_SCHOOL, } from "../../graphQl/queries/SchoolQuery"
+import { FIND_FACULTY_BY_SCHOOL_BY_ID, FIND_SCHOOL_BY_ID, GET_ALL_SCHOOL, GET_SCHOOL_DETAIL_BY_ID, } from "../../graphQl/queries/SchoolQuery"
 import { PaginationInput } from "../../typeDefs/PaginationInput"
 // pagination
 export const useSchoolPage=(input:PaginationInput)=>{
@@ -54,4 +54,17 @@ export const useFaculty= (schoolId: number) => {
       }
     }, [schoolData, id, schoolDetailList]);
     return { schoolDetailList, schoolDataIsLoading };
+  };
+  // 
+  export const useSchoolDetailById= (id: number) => {
+    const schoolData = useQuery(GET_SCHOOL_DETAIL_BY_ID, { variables: {id: id },fetchPolicy:'no-cache'});
+    const [schoolDetailObj, setSchoolDetailObj] = useState<any>({});
+    const [responseReady, setResponseReady] = useState(false);
+    useEffect(() => {
+      if (schoolData.data && schoolData.data.findSchoolById) {
+        setSchoolDetailObj(schoolData.data.findSchoolById);
+        setResponseReady(true);
+      }
+    }, [schoolData, id, schoolDetailObj]);
+    return { schoolDetailObj, responseReady };
   };
