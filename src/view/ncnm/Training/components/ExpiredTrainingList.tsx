@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { CalendarToday, Close, LocationOn, School, Sort } from "@mui/icons-material";
-import { Avatar, Dialog, NativeSelect, Pagination, Table, TableBody, TableCell, TableHead, TableRow, Tooltip } from "@mui/material";
+import { Avatar, Card, Dialog, NativeSelect, Pagination, Table, TableBody, TableCell, TableHead, TableRow, Tooltip } from "@mui/material";
 import { FC, useState } from "react";
 import { useExpiredTraining } from "../../../../controller/viewHooks/training/useExpiredTraining";
 import { PaginationInput } from "../../../../typeDefs/PaginationInput";
@@ -34,51 +34,53 @@ export const ExpiredTrainingList: FC<trainingControl> = (props) => {
                 </NativeSelect></span>
                 <Pagination count={expiredTrainingDetail.totalPages} onChange={handleChange} page={expiredTrainingDetail.pageNumber + 1} />
             </div>}
-            <Table className="overflow-auto mt-4">
-                <TableHead>
-                    <TableRow className={props.status == 'cancelled'?"bg-danger":"bg-success"}>
-                        <TableCell className="fw-bold text-white">#</TableCell>
-                        <TableCell className="fw-bold text-white">Hospital</TableCell>
-                        <TableCell className="fw-bold text-white">Title</TableCell>
-                        <TableCell className="fw-bold text-white">Published_On</TableCell>
-                        <TableCell className="fw-bold text-white">Deadline</TableCell>
-                        {props.status != 'cancelled' && <TableCell className="fw-bold text-white">Action</TableCell>}
-                    </TableRow>
-                </TableHead>
-                {!isLoadingExpiredTrainingDatas && <TableBody>
-                    {
-                        expiredTrainingDetail.content.map((data: any, index: any) => {
-                            return (
-                                <TableRow>
-                                    <TableCell>
-                                        {index + 1}
-                                    </TableCell>
-                                    <TableCell >
-                                        <section className="d-flex">
-                                        <Tooltip title={<div><img src={data.hospital.logo} alt="" /></div>}><Avatar src={data.hospital.logo}/></Tooltip>
-                                        <div className="card justify-content-center border-0">{data.hospital.name}</div>
-                                        </section>
-                                    </TableCell>
-                                    <TableCell>{data.title}</TableCell>
-                                    <TableCell><CalendarToday />{String(data.timeStamp).split('T')[0]}</TableCell>
-                                    <TableCell>
-                                        <div className="mb-3"> <CalendarToday />{String(data.deadline).split('T')[0]}</div>
-                                        <div><LocationOn />{data.location.Location.Location.name}/{data.location.Location.name}/{data.location.name}</div>
-                                    </TableCell>
-                                    <TableCell>
-                                        {props.status != 'cancelled' && <School onClick={() => { setTrainingId(data.id); setOpenTrainingDetail(true) }} />}
-                                    </TableCell>
-                                </TableRow>
-                            )
-                        })
-                    }
-                    {expiredTrainingDetail != undefined && expiredTrainingDetail.content != undefined && expiredTrainingDetail.content.length == 0 && <TableRow>
-                        <TableCell colSpan={5} className="text-center">
-                            -- no data found --
-                        </TableCell>
-                    </TableRow>}
-                </TableBody>}
-            </Table>
+            <Card className="overflow-auto mt-4">
+                <Table>
+                    <TableHead>
+                        <TableRow className={props.status == 'cancelled' ? "bg-danger" : "bg-success"}>
+                            <TableCell className="fw-bold text-white">#</TableCell>
+                            <TableCell className="fw-bold text-white">Hospital</TableCell>
+                            <TableCell className="fw-bold text-white">Title</TableCell>
+                            <TableCell className="fw-bold text-white">Published_On</TableCell>
+                            <TableCell className="fw-bold text-white">Deadline</TableCell>
+                            {props.status != 'cancelled' && <TableCell className="fw-bold text-white">Action</TableCell>}
+                        </TableRow>
+                    </TableHead>
+                    {!isLoadingExpiredTrainingDatas && <TableBody>
+                        {
+                            expiredTrainingDetail.content.map((data: any, index: any) => {
+                                return (
+                                    <TableRow>
+                                        <TableCell>
+                                            {index + 1}
+                                        </TableCell>
+                                        <TableCell >
+                                            <section className="d-flex">
+                                                <Tooltip title={<div><img src={data.hospital.logo} alt="" /></div>}><Avatar src={data.hospital.logo} /></Tooltip>
+                                                <div className="card justify-content-center border-0">{data.hospital.name}</div>
+                                            </section>
+                                        </TableCell>
+                                        <TableCell>{data.title}</TableCell>
+                                        <TableCell><CalendarToday />{String(data.timeStamp).split('T')[0]}</TableCell>
+                                        <TableCell>
+                                            <div className="mb-3"> <CalendarToday />{String(data.deadline).split('T')[0]}</div>
+                                            <div><LocationOn />{data.location.Location.Location.name}/{data.location.Location.name}/{data.location.name}</div>
+                                        </TableCell>
+                                        <TableCell>
+                                            {props.status != 'cancelled' && <School onClick={() => { setTrainingId(data.id); setOpenTrainingDetail(true) }} />}
+                                        </TableCell>
+                                    </TableRow>
+                                )
+                            })
+                        }
+                        {expiredTrainingDetail != undefined && expiredTrainingDetail.content != undefined && expiredTrainingDetail.content.length == 0 && <TableRow>
+                            <TableCell colSpan={5} className="text-center">
+                                -- no data found --
+                            </TableCell>
+                        </TableRow>}
+                    </TableBody>}
+                </Table>
+            </Card>
             <Dialog maxWidth='lg' PaperProps={{ className: 'col-12 rounded-0' }} open={openTrainingDetail}>
                 <SuccessTrainingDetail trainingId={trainingId}>
                     <div className="p-4 bg-white sticky-top fw-bold">Training Details <Close onClick={() => setOpenTrainingDetail(false)} className="float-end" /></div>
