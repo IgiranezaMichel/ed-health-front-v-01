@@ -10,7 +10,6 @@ export const SchoolComponent = (props: { accessedBy: string,children:ReactNode }
     const navigation = useNavigate();
     const [addNewSchool,setAddNewSchool]=useState(false);
     const {data}=useHospitalContext();
-    console.log(data)
       return (
         <>
             {data.schoolDataIsLoading && <div className="col-sm-8 m-auto">
