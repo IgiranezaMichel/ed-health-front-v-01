@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const GET_ALL_SCHOOL=gql`
+export const GET_ALL_SCHOOL = gql`
 query($input:PaginationInput){
     schoolPageList(input:$input){
     pageNumber
@@ -60,7 +60,55 @@ query($id:Long){
   }
 }
 `
-export const FIND_FACULTY_BY_SCHOOL_BY_ID=gql`
+export const GET_SCHOOL_DETAIL_BY_ID = gql`
+query($id:Long){findSchoolById(id:$id){
+  name
+  facultyList{
+    name
+    departmentList{
+      id
+    }
+  }
+  location{
+    name
+    Location{
+      name
+      Location{
+        name
+      }
+    }
+  }
+	  studentList{
+      user{
+        name
+        gender
+        email
+        phoneNumber
+        profilePicture
+        dob
+    	}
+      status
+      startingDate
+      department{
+        name
+      }
+    }
+  schoolAdminList{
+    user{
+     name
+     gender
+        email
+        phoneNumber
+        profilePicture
+        dob
+    }
+  	position
+    startingDate
+    status
+}
+}}
+`
+export const FIND_FACULTY_BY_SCHOOL_BY_ID = gql`
 query($id:Long){
     findSchoolById(id:$id){
     id
