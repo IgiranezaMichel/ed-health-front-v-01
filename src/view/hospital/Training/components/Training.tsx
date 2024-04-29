@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ContactPage, Description, DocumentScannerRounded, ReadMore} from "@mui/icons-material"
-import { Button, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material"
+import { Button, Card, CircularProgress, Table, TableBody, TableCell, TableHead, TableRow, Tooltip, Zoom } from "@mui/material"
 import { CalendarIcon } from "@mui/x-date-pickers"
 import { FC, ReactNode } from "react"
 import { useNavigate } from "react-router-dom"
@@ -23,22 +24,21 @@ export const Training: FC<item> = (item) => {
                     <div className="bg">
                         {item.children}
                     </div>
-
+                    <Card>
                     <Table className="overflow-auto">
-                        <TableHead className="bg-info">
+                        <TableHead className="bg-primary">
                             <TableRow >
                             </TableRow>
                             <TableRow >
-                                <TableCell className="fw-bolder">#</TableCell>
-                                <TableCell className="fw-bolder">Title</TableCell>
-                                <TableCell className="fw-bolder">Deadline</TableCell>
-                                <TableCell className="fw-bolder">Ncnm Approval</TableCell>
-                                <TableCell className="fw-bolder">Action</TableCell>
+                                <TableCell className="fw-bolder text-white">#</TableCell>
+                                <TableCell className="fw-bolder text-white">Title</TableCell>
+                                <TableCell className="fw-bolder text-white">Deadline</TableCell>
+                                <TableCell className="fw-bolder text-white">Ncnm Approval</TableCell>
+                                <TableCell className="fw-bolder text-white">Action</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {
-                                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                                 trainingList.map((data: any, index) => {
                                     return (
                                         <TableRow key={index}>
@@ -65,7 +65,8 @@ export const Training: FC<item> = (item) => {
                                 })
                             }
                         </TableBody>
-                    </Table>
+                    </Table> 
+                    </Card>
                     {trainingList.length==0&&<div className="text-center p-4 border">
                         No data found
                         </div>}
