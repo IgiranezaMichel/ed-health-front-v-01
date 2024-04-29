@@ -1,5 +1,5 @@
 import { DataSaverOn, DoNotDisturb, HdrStrongOutlined, PsychologyOutlined, SchoolOutlined, SchoolSharp, Sort } from "@mui/icons-material"
-import { Card, CircularProgress, Divider, Pagination, Stack } from "@mui/material"
+import { Card, CircularProgress, NativeSelect, Pagination, Stack } from "@mui/material"
 import { useEffect, useState } from "react"
 import { HospitalMenu } from "../../../MenuBarItems/HospitalMenu"
 import { CreateNewTraining } from "../../../components/Training/Modal/CreateNewTraining"
@@ -34,7 +34,7 @@ export const HospitalTraining = () => {
         </div>}
         {
           hasLoaded &&
-          <main className="row m-auto col-sm-10 mt-4 float-end" style={{ clear: 'left' }}>
+          <main className="row m-auto col-sm-10 mb-4 float-end" style={{ clear: 'left' }}>
             <section className="col-sm-6">
               <Card className="border" elevation={3}>
                 <div className="p-2">
@@ -62,44 +62,52 @@ export const HospitalTraining = () => {
         {/*  */}
         {
           hasLoaded && <div>
-            <div className="mb-3" style={{ clear: 'right' }}>
-              <button data-bs-toggle="modal"
-                data-bs-target="#modalId" className="rounded bg-primary text-white"><DataSaverOn />
-              </button>
-            </div>
-            <div className="col-sm-12" style={{ clear: 'right' }}>
-              <button onClick={() => { setIsSelected(0); setNcnmStatus(STATUS.APPENDING) }} className={selected == 0 ? "bg-primary text-white fw-bold" : "bg-white"}><HdrStrongOutlined /> Appending Training</button>
-              <button onClick={() => { setIsSelected(1); setNcnmStatus(STATUS.APPROVE) }} className={selected == 1 ? "bg-primary text-white fw-bold" : "bg-white"}><SchoolSharp />Approved Training</button>
-              <button onClick={() => { setIsSelected(2); setNcnmStatus(STATUS.CANCEL) }} className={selected == 2 ? "bg-danger text-white fw-bold" : "bg-white"}><DoNotDisturb />Cancelled Training</button>
-            </div>
-            <Divider className="mt-4" />
+            <Card elevation={4} className="mb-3 p-4" style={{ clear: 'right' }}>
+              <div className="mb-3">
+                <span className="fs-3  fw-bold m-auto">Hospital Trainings</span>
+              </div>
+              <div className="col-sm-12" style={{ clear: 'right' }}>
+                <button onClick={() => { setIsSelected(0); setNcnmStatus(STATUS.APPENDING) }} className={selected == 0 ? "bg-primary text-white fw-bold btn" : "bg-white btn"}>
+                  <HdrStrongOutlined /> Appending Training
+                </button>
+                <button onClick={() => { setIsSelected(1); setNcnmStatus(STATUS.APPROVE) }} className={selected == 1 ? "bg-primary text-white fw-bold btn" : "bg-white btn"}>
+                  <SchoolSharp />Approved Training
+                </button>
+                <button onClick={() => { setIsSelected(2); setNcnmStatus(STATUS.CANCEL) }} className={selected == 2 ? "bg-danger text-white fw-bold btn" : "bg-white btn"}>
+                  <DoNotDisturb />Cancelled Training
+                </button>
+              </div>
+            </Card>
+            <button data-bs-toggle="modal"
+              data-bs-target="#modalId" className="rounded bg-primary text-white btn"><DataSaverOn />
+            </button>
             <CreateNewTraining />
             <Training hospitalId={1} page={page} status={ncnmStatus}>
               <div className="form-group mb-4">
 
-                <Stack spacing={2}>
+                {totalPage != 0 && <Stack spacing={2}>
                   <div>  Page {currentPage + 1} out of {totalPage}  <span>
-                    <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
+                    <NativeSelect onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
                     >
                       <option value="5">5</option>
                       <option value="10">10</option>
                       <option value="15">15</option>
                       <option value="20">20</option>
-                    </select>
+                    </NativeSelect>
                   </span>
-                    <span className="float-end"> Sort by<select onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
+                    <span className="float-end"> Sort by<NativeSelect onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
                       <option selected={page.sort == 'title' ? true : false} value={"title"}>Title</option>
                       <option selected={page.sort == 'description' ? true : false} value="description">Description</option>
                       <option selected={page.sort == 'deadline' ? true : false} value="deadline">Deadline</option>
                       <option selected={page.sort == 'location' ? true : false} value="location">Location</option>
-                    </select><Sort /></span>
+                    </NativeSelect><Sort /></span>
                     <Pagination
                       count={totalPage}
                       page={currentPage + 1}
                       onChange={handleChange}
                     />
                   </div>
-                </Stack>
+                </Stack>}
               </div>
             </Training>
           </div>
