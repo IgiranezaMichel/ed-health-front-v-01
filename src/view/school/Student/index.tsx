@@ -2,7 +2,7 @@
 
 import { useMutation } from "@apollo/client"
 import { HdrStrongOutlined, ListAltOutlined, PersonAddAlt1Outlined, SchoolSharp } from "@mui/icons-material"
-import { Button, TextField } from "@mui/material"
+import { Button, Card, TextField } from "@mui/material"
 import { useEffect, useState } from "react"
 import { SchoolMenu } from "../../../MenuBarItems/SchoolMenu"
 import { Modal } from "../../../components/default/Modal"
@@ -89,16 +89,18 @@ export const SchoolStudents = () => {
     </Modal>
     return (
         <Navigation items={SchoolMenu}>
+            <Card elevation={4} className="p-3 rounded-0">
             <div className="mb-3">
-                <button data-bs-toggle="modal" data-bs-target="#saveStudentBtn" className="rounded bg-primary text-white"><PersonAddAlt1Outlined /></button>
+                <button  data-bs-toggle="modal" data-bs-target="#saveStudentBtn" className="rounded bg-primary text-white btn"><PersonAddAlt1Outlined /></button>
             </div>
-            <div>
-                <button onClick={() => { setIsSelected(0) }} className={selected == 0 ? "bg-primary text-light" : "bg-white"}><ListAltOutlined /> All Student</button>
-                <button onClick={() => setIsSelected(1)} className={selected == 1 ? "bg-primary text-light" : "bg-white"}><HdrStrongOutlined /> Appending Student</button>
-                <button onClick={() => { setIsSelected(2); }} className={selected == 2 ? "bg-primary text-light" : "bg-white"}><SchoolSharp />Grandaunts</button>
-                <button onClick={() => { setIsSelected(3); }} className={selected == 3 ? "bg-primary text-light" : "bg-white"}><SchoolSharp />Dropout</button>
+            <div className="-5">
+                <button onClick={() => { setIsSelected(0) }} className={selected == 0 ? "bg-primary text-light btn" : "bg-white btn"}><ListAltOutlined /> All Student</button>
+                <button onClick={() => setIsSelected(1)} className={selected == 1 ? "bg-primary text-light btn" : "bg-white btn"}><HdrStrongOutlined /> Appending Student</button>
+                <button onClick={() => { setIsSelected(2); }} className={selected == 2 ? "bg-primary text-light btn" : "bg-white btn"}><SchoolSharp />Grandaunts</button>
+                <button onClick={() => { setIsSelected(3); }} className={selected == 3 ? "bg-primary text-light btn" : "bg-white btn"}><SchoolSharp />Dropout</button>
             </div>
-            <div>
+            </Card>
+            <div className="mt-5">
                 {
                     selected == 0 && <AllStudent refresh={refreshListOfStudent} />
                 }
