@@ -7,4 +7,5 @@ export type TrainingInput={
     trainerId?:number,
     locationId?:number,
     hospitalId?:number
+    trainingRequirement:string
 }
