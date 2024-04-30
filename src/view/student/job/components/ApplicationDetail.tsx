@@ -8,9 +8,9 @@ import { STATUS } from "../../../../enums/Status";
 export const ApplicationDetail = (props: { id: number }) => {
     const job = useFindJobById(Number(props.id));
     const student = JSON.parse(String(localStorage.getItem('Student')));
-    const { result, saveJobApplicationHandler } = useRegisterStudentJobApplication(Number(student.id), job.jobDetail.id, STATUS.APPENDING);
+    const {saveJobApplicationHandler } = useRegisterStudentJobApplication(Number(1), job.jobDetail.id, STATUS.APPENDING);
     const saveJobApplication = () => {
-        saveJobApplicationHandler().then(() => alert(result));
+        saveJobApplicationHandler().then((data) => alert(data));
     }
     console.log(job.jobDetail)
     const saveApplicationModal = <Modal id="saveApplication"
@@ -35,10 +35,12 @@ export const ApplicationDetail = (props: { id: number }) => {
                     </div>
                     <div className="text-md-end"><span >Deadline {job.jobDetail.deadline}</span></div>
                     <Divider className="border border-2 m-3 border-primary-subtle" />
+                    <b>Description</b>
                     <div>
                         {job.jobDetail.description}
                     </div>
-                    {job.jobDetail.jobRequirement}
+                    <b>Requirement</b>
+                    <div className="mb-2" dangerouslySetInnerHTML={{__html:job.jobDetail.jobRequirement}}></div>
                     <div className="modal-footer">
                         <Button variant="contained" data-bs-toggle="modal"
                             data-bs-target="#saveApplication">Apply</Button>
