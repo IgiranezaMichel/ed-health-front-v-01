@@ -12,9 +12,7 @@ query($studentId:Long,$status:String,$input:PaginationInput){
         description
         status
         numberOfEmployee
-        jobRequirement{
-          description
-        }
+        jobRequirement
         hospital{
           name
           logo
@@ -50,9 +48,7 @@ query($id:Long){
         name
         logo
       }
-      jobRequirement{
-        description
-      }
+      jobRequirement
     }
   }
 }
@@ -74,6 +70,7 @@ export const FIND_JOB_APPLICATION_BY_JOB_ID_AND_STATUS=gql`
           email
           phoneNumber
           gender
+          dob
         }
         department{
           name
