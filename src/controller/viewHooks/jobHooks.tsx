@@ -54,7 +54,7 @@ useEffect(
        const fetchData=async()=>{
         return await  data;
         }
-        fetchData().then((data)=>{setJobObj(data.findJobsPostedPage);setFinishLoading(true)})
+        fetchData().then((data)=>{setJobObj(data.findActivePostedJobsPage);setFinishLoading(true)})
         .catch(err=>err)
     }
 )
