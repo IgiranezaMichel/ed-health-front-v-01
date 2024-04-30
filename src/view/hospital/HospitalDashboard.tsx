@@ -1,54 +1,69 @@
-import { Card } from "@mui/material"
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { HospitalMenu } from "../../MenuBarItems/HospitalMenu"
 import { Navigation } from "../../components/default/Navigation"
-import {Person, PersonAddAlt, SchoolOutlined, Visibility} from "@mui/icons-material"
-import { MuiCharts } from "../../muiCharts"
-
+import { BarChart } from "@mui/x-charts"
+import { axisClasses } from '@mui/x-charts';
+import { useHospitalTrainingApprovalStatusStatistic } from "../../controller/viewHooks/TrainingApplication/trainingApplication";
+import { STATUS } from "../../enums/Status";
+import { Card } from "@mui/material";
 export const HospitalDashboard=()=>{
+  const hospital=JSON.parse(String(localStorage.getItem("hospital")));
+ const {triValueDto,responseReady}=useHospitalTrainingApprovalStatusStatistic(Number(hospital.id),"");
+  const chartSetting = {
+    yAxis: [
+      {
+        label: 'Ncnm Training Approval Status',
+      },
+    ],
+    width: 500,
+    height: 300,
+    sx: {
+      [`.${axisClasses.left} .${axisClasses.label}`]: {
+        transform: 'translate(-10px, 0)',
+      },
+    },
+  };
+
+// Extracting the array from the jsonData
+const statusArray = triValueDto;
+
+// Initialize an object to store grouped data
+const groupedData:any = {};
+
+// Iterate through the array to group data by axisLabel
+statusArray.forEach((status:any) => {
+    const { value, label, axisLabel } = status;
+    if (!groupedData[axisLabel]) {
+        groupedData[axisLabel] = {};
+    }
+    if (!groupedData[axisLabel][label]) {
+        groupedData[axisLabel][label] = value;
+    } else {
+        groupedData[axisLabel][label] += value;
+    }
+});
+
+// Convert groupedData object to an array
+const groupedArray = Object.entries(groupedData).map(([axisLabel, labels]) => ({
+    ...labels as any,
+    axisLabel
+}));
+
+
     return(
     <Navigation items={HospitalMenu}>
-     <main className="row m-auto col-sm-10 mt-4 float-end">
-            <section className="col-sm-6">
-              <Card className="border" elevation={3}>
-                <div className="p-2">
-                  <Person className="float-end fs-1" style={{}} />
-                  <span className="fw-bolder">Total Student </span>
-                  <div>
-                    Total Student <span className="badge bg-primary">12</span>
-                  </div>
-                </div>
-                <div className="modal-footer border-top p-2 border-2">
-                  <a className="mx-2">
-                    <Visibility />
-                  </a>
-                  <a className="mx-3">
-                    <PersonAddAlt />
-                  </a>
-                </div>
-              </Card>
-            </section>
-            <section className="col-sm-6">
-              <Card className="border" elevation={3}>
-                <div className="p-2">
-                  <SchoolOutlined className="float-end fs-1" style={{}} />
-                  <span className="fw-bolder">Graduate Students </span>
-                  <div>
-                    Total Graduates <span className="badge bg-primary">12</span>
-                  </div>
-                </div>
-                <div className="modal-footer border-top p-2 border-2">
-                  <a className="mx-2">
-                    <Visibility/>
-                  </a>
-                  <a className="mx-3">
-                    <PersonAddAlt />
-                  </a>
-                </div>
-              </Card>
-             
-            </section>
-            
-          </main>
-          <MuiCharts/>
+    <Card className="p-1">
+      <div className="fw-bold mb-2">Ncnm Training Approval status </div>
+    {responseReady&&<BarChart
+      dataset={groupedArray}
+      xAxis={[{ scaleType: 'band', dataKey: 'axisLabel' }]}
+      series={[
+        { dataKey: STATUS.APPENDING, label:STATUS.APPENDING },
+        { dataKey: STATUS.APPROVE, label:STATUS.APPROVE },
+        { dataKey: STATUS.CANCEL, label:STATUS.CANCEL },
+      ]}
+      {...chartSetting}
+    />}
+    </Card>
     </Navigation>)
 }
