@@ -1,8 +1,10 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect, useState } from "react";
 import { PaginationInput } from "../../../typeDefs/PaginationInput";
 import { useQuery } from "@apollo/client";
 import { GET_CERTIFIED_STUDENT_BY_ADMIN_APPROVAL_STATUS, GET_LIST_OF_TRAINING_APPLICANT_BY_TRAINING_ID, GET_STUDENT_TRAINING_APPLICATION_PAGE, GET_TRAINING_APPLICANT_PAGE_BY__HOSPITAL_APPROVAL_STATUS } from "../../../graphQl/queries/TrainingApplicationQueries";
+import { HOSPITAL_TRAINING_APPROVAL_STATUS_STATISTIC } from "../../../graphQl/queries/TrainingQueries";
 export const useGetTrainingApplicantPage = (status: string, trainingId: number, input: PaginationInput) => {
     const { data, refetch } = useQuery(GET_TRAINING_APPLICANT_PAGE_BY__HOSPITAL_APPROVAL_STATUS, { variables: { status: status, trainingId: trainingId, input: input } });
     const [trainingApplicants, setTrainingApplicants] = useState<any>([]);
@@ -80,4 +82,18 @@ export const useGetStudentAppliedForTraining= (trainingId: number) => {
         }
     )
     return { refetch, isLoading, studentList }
+}
+export const useHospitalTrainingApprovalStatusStatistic=(hospitalId:number,queryBy:string)=>{
+const [triValueDto,setTriValueDto]=useState<any>([]);
+const [responseReady,setResponseReady]=useState(false);
+const {data,refetch}=useQuery(HOSPITAL_TRAINING_APPROVAL_STATUS_STATISTIC,{variables:{hospitalId:hospitalId,queryBy:queryBy}});
+useEffect(
+    ()=>{
+        if(data){
+            setTriValueDto(data.hospitalTrainingApprovalStatusStat);
+            setResponseReady(true)
+        }
+    }
+)
+return {responseReady,refetch,triValueDto}
 }
