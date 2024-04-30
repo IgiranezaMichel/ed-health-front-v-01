@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BusinessCenterOutlined, DataSaverOn, DoNotDisturb, Edit, HdrStrongOutlined, ListAltOutlined, Sort, Visibility } from "@mui/icons-material"
-import { Button, Card, Divider, Pagination, Skeleton, Stack, Tooltip } from "@mui/material"
+import { BusinessCenterOutlined, DataSaverOn, DoNotDisturb, Edit, HdrStrongOutlined, ListAltOutlined, SwapVert, Visibility } from "@mui/icons-material"
+import { Button, Card, Divider, NativeSelect, Pagination, Skeleton, Stack, Tooltip } from "@mui/material"
 import { TimeIcon } from "@mui/x-date-pickers"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
@@ -68,30 +68,30 @@ export const Job = () => {
             </Card>
             <JobModal />
             <Divider className="mt-4" />
-            <Stack spacing={6} className="mb-4">
+            {jobTotalPage!=0&&<Stack spacing={6} className="mb-4">
               <div>  Page {jobPageNumber + 1} out of {jobTotalPage}  <span>
-                <select onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
+                <NativeSelect onChange={(e) => setPage({ ...page, pageSize: Number(e.target.value) })} className="p-1 mx-2"
                 >
                   <option value="8">8</option>
                   <option value="16">16</option>
                   <option value="24">24</option>
                   <option value="32">32</option>
-                </select>
+                </NativeSelect>
               </span>
-                <span className="float-end"> Sort by<select onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
+                <span className="float-end"> Sort by <SwapVert /><NativeSelect onChange={e => setPage({ ...page, sort: e.target.value })} className="custom-select p-1" name="" id="">
                   <option selected={page.sort == 'title' ? true : false} value={"title"}>Title</option>
                   <option selected={page.sort == 'description' ? true : false} value="description">Description</option>
                   <option selected={page.sort == 'deadline' ? true : false} value="deadline">Deadline</option>
                   <option selected={page.sort == 'location' ? true : false} value="location">Location</option>
                   <option selected={page.sort == 'location' ? true : false} value="numberOfEmployee">Number of employee</option>
-                </select><Sort /></span>
+                </NativeSelect></span>
                 <Pagination
                   count={jobTotalPage}
                   page={jobPageNumber + 1}
                   onChange={handleChange}
                 />
               </div>
-            </Stack>
+            </Stack>}
             <div className="row col-12 m-auto justify-content-center">
               {
                 listOfPostedJob.map((data: any, index) => {
