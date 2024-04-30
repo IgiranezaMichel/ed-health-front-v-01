@@ -74,6 +74,7 @@ query($id:Long){
       name
       phoneNumber
       profilePicture
+      signature
     }
     applicantList{
       hospitalApprovalStatus
@@ -154,4 +155,12 @@ query($input:PaginationInput,$status:String){
     }
   }
 }
+`
+export const HOSPITAL_TRAINING_APPROVAL_STATUS_STATISTIC=gql`
+query($hospitalId:Long,$queryBy:String){
+ hospitalTrainingApprovalStatusStat(hospitalId:$hospitalId,queryBy:$queryBy){
+  value
+  label
+  axisLabel
+}}
 `
