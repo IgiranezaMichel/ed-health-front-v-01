@@ -63,10 +63,12 @@ query($id:Long){
 export const GET_SCHOOL_DETAIL_BY_ID = gql`
 query($id:Long){findSchoolById(id:$id){
   name
+  logo
   facultyList{
     name
     departmentList{
       id
+      name
     }
   }
   location{
