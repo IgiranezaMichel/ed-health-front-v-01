@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AccountBoxRounded, Cancel, CheckCircle,Description, FolderSpecial, KeyboardArrowDown, KeyboardArrowUp,ListAlt, Phone, School, Sort, Wc } from "@mui/icons-material";
-import {  Button, Card, Divider, Pagination, Tooltip, Zoom } from "@mui/material";
+import { Cancel, CheckCircle,Description, Email, KeyboardArrowDown, KeyboardArrowUp,ListAlt, Phone, School, Sort, Wc } from "@mui/icons-material";
+import {  Avatar, Button, Card, Divider, Pagination, Tooltip, Zoom } from "@mui/material";
 import { TimeIcon } from "@mui/x-date-pickers";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
@@ -122,28 +122,36 @@ export const JobDetail = () => {
           <>
             {showApplicant&&jobApplication.jobApplication.content.map((data: any, index:number) => {
               return <Card key={index} className="p-3 rounded-0 row mt-3 m-auto" elevation={4}>
-                <section className="col-sm-3 text-center">
-                  <img style={{ objectFit: 'contain' }} width={'100%'} src={data.student.user.profilePicture} alt="" />
+                <section className="col-sm-3">
+                  <div className="d-flex">
+                  <Tooltip title={<img  height={'100vh'} src={data.student.user.profilePicture} alt="" />}>
+                    <span><Avatar className='bg-dark' src={data.student.user.profilePicture}/></span>
+                    </Tooltip>
+                    <div className="mb-2 card d-flex justify-content-center border-0 mx-2">{data.student.user.name}</div>
+                  </div>
+                  <div className="mb-2 mx-2"><Wc />{data.student.user.gender}</div>
                 </section>
-                <section className="card-body col-sm-5">
-                  <div className="mb-2"><AccountBoxRounded />{data.student.user.name}</div>
-                  <div className="mb-2"><Wc />{data.student.user.gender}</div>
-                  <div className="mb-2"><AccountBoxRounded />{data.student.user.email}</div>
+                <section className="card-body col-sm-4">
+                  <div className="mb-2"><Email />{data.student.user.email}</div>
                   <div className="mb-2"><Phone />{data.student.user.phoneNumber}</div>
+                  <div className="mb-2"><Phone />{data.student.user.dob}</div>
                 </section>
                 <section className="col-sm-4">
                   <div className="mb-2"><School /> {data.student.school.name}</div>
-                  <div className="mb-2"><FolderSpecial /> {data.student.department.name}</div>
+                  <div className="mb-2"><b>Department </b> {data.student.department.name}</div>
                   <div className="mb-2"><School /> {data.student.status}</div>
                 </section>
-                <Divider className="border border-2 border-black" />
-                <div className="modal-footer pt-3">
+                <div className="col-sm-1 pt-3 text-center">
+                  <div>
                   <Tooltip placement="top" TransitionComponent={Zoom} title="Reject Application">
                     <Cancel onClick={()=>setApplicationStatus(STATUS.CANCEL)} data-bs-toggle="modal" data-bs-target="#applicationModal" className="text-danger mx-1 mb-2" />
                   </Tooltip>
+                  </div>
+                  <div>
                   <Tooltip placement="top" TransitionComponent={Zoom} title="Approve Application">
                     <CheckCircle onClick={()=>setApplicationStatus(STATUS.APPROVE)} data-bs-toggle="modal" data-bs-target="#applicationModal" className="text-success mx-1 mb-2" />
                   </Tooltip>
+                  </div>
                   <Tooltip placement="top" TransitionComponent={Zoom} title="Application Detail">
                     <ListAlt  className="mx-1 mb-2" />
                   </Tooltip>
