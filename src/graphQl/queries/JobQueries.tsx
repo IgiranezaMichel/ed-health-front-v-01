@@ -47,7 +47,7 @@ query($id:Long){
 `
 export const FIND_POSTED_JOBS_PAGE=gql`
 query($input:PaginationInput,$status:String){
-  findJobsPostedPage(input:$input,status:$status){
+  findActivePostedJobsPage(input:$input,status:$status){
     content{
       id
       title
